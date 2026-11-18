@@ -35,7 +35,6 @@ import SimulatorPage, { makeNewSimulation } from "../components/SimulatorPage";
 import ComparePage from "../components/ComparePage";
 import RecommendationsPage from "../components/RecommendationsPage";
 import { listAutomaticBackups, saveAutomaticBackup, type AutomaticBackup } from "../lib/fileStore";
-import { firebaseConfigured, loginWithGoogle, logoutCloud, readCloudWorkspace, watchCloudAuth, writeCloudWorkspace } from "../lib/firebase";
 import type { User } from "firebase/auth";
 
 export type PageKey = "inicio" | "simulador" | "clientes" | "catalogo" | "importar" | "comparar" | "recomendacoes" | "configuracoes";
@@ -61,7 +60,7 @@ function Logo() {
   );
 }
 
-function AppSidebar({ page, setPage, compact, onClose }: { page: PageKey; setPage: (page: PageKey) => void; compact?: boolean; onClose?: () => void }) {
+function AppSidebar({ page, setPage, compact, onClose, cloudUser }: { page: PageKey; setPage: (page: PageKey) => void; compact?: boolean; onClose?: () => void; cloudUser: User | null }) {
   return (
     <aside className={`app-sidebar ${compact ? "compact" : ""}`}>
       <div className="sidebar-top"><Logo /><button className="icon-button sidebar-close" aria-label="Fechar menu" onClick={onClose}><X size={18} /></button></div>
@@ -88,7 +87,7 @@ function AppSidebar({ page, setPage, compact, onClose }: { page: PageKey; setPag
   );
 }
 
-function SettingsPage({ workspace, setWorkspace, cloudUser, cloudStatus }: { workspace: WorkspaceData; setWorkspace: React.Dispatch<React.SetStateAction<WorkspaceData>>; cloudUser: User | null; cloudStatus: "off" | "loading" | "syncing" | "synced" | "error" }) {
+function SettingsPage({ workspace, setWorkspace, cloudUser, cloudStatus, firebaseConfigured, onLogin, onLogout }: { workspace: WorkspaceData; setWorkspace: React.Dispatch<React.SetStateAction<WorkspaceData>>; cloudUser: User | null; cloudStatus: "off" | "loading" | "syncing" | "synced" | "error"; firebaseConfigured: boolean; onLogin: () => void; onLogout: () => void }) {
   const [status, setStatus] = useState("");
   const [restoreBusy, setRestoreBusy] = useState(false);
   const [backups, setBackups] = useState<AutomaticBackup[]>([]);
@@ -125,7 +124,7 @@ function SettingsPage({ workspace, setWorkspace, cloudUser, cloudStatus }: { wor
   return (
     <div className="page-stack settings-page">
       <div className="page-heading"><div><div className="eyebrow">PREFERÊNCIAS E PORTABILIDADE</div><h1>Seus dados, sob seu controle.</h1><p>{cloudUser ? "Seu espaço de trabalho está associado à sua conta Google e protegido por regras individuais de acesso." : "Conecte sua conta Google para sincronizar o espaço de trabalho privado entre dispositivos."}</p></div></div>
-      <section className="panel settings-panel"><div className="settings-icon"><Cloud size={20} /></div><div className="settings-copy"><h2>Sincronização privada entre dispositivos</h2><p>O Firestore armazena um espaço de trabalho por conta Google. Só a pessoa autenticada nessa conta pode ler ou alterar esses dados.</p><span className="privacy-note">{!firebaseConfigured ? "Aguardando configuração do Firebase do projeto." : cloudUser ? `Conectado como ${cloudUser.email ?? "conta Google"} · ${cloudStatus === "synced" ? "sincronizado" : cloudStatus === "error" ? "erro de sincronização" : cloudStatus === "loading" ? "carregando dados" : cloudStatus === "syncing" ? "sincronizando…" : "pronto"}` : "Entre com Google para ativar a sincronização."}</span></div>{cloudUser ? <button className="button button-quiet" onClick={() => void logoutCloud()}>Sair da conta</button> : <button className="button button-primary" disabled={!firebaseConfigured} title={!firebaseConfigured ? "Configure o Firebase para habilitar esta opção" : "Entrar com Google"} onClick={() => void loginWithGoogle().catch((error) => window.alert(error instanceof Error ? error.message : "Não foi possível entrar com Google."))}><Cloud size={16} /> Conectar Google</button>}</section>
+      <section className="panel settings-panel"><div className="settings-icon"><Cloud size={20} /></div><div className="settings-copy"><h2>Sincronização privada entre dispositivos</h2><p>O Firestore armazena um espaço de trabalho por conta Google. Só a pessoa autenticada nessa conta pode ler ou alterar esses dados.</p><span className="privacy-note">{!firebaseConfigured ? "Aguardando configuração do Firebase do projeto." : cloudUser ? `Conectado como ${cloudUser.email ?? "conta Google"} · ${cloudStatus === "synced" ? "sincronizado" : cloudStatus === "error" ? "erro de sincronização" : cloudStatus === "loading" ? "carregando dados" : cloudStatus === "syncing" ? "sincronizando…" : "pronto"}` : "Entre com Google para ativar a sincronização."}</span></div>{cloudUser ? <button className="button button-quiet" onClick={onLogout}>Sair da conta</button> : <button className="button button-primary" disabled={!firebaseConfigured} title={!firebaseConfigured ? "Configure o Firebase para habilitar esta opção" : "Entrar com Google"} onClick={onLogin}><Cloud size={16} /> Conectar Google</button>}</section>
       <section className="panel settings-panel">
         <div className="settings-icon"><ShieldCheck size={20} /></div>
         <div className="settings-copy"><h2>Armazenamento local</h2><p>Clientes, unidades, simulações e rascunhos importados ficam no armazenamento deste dispositivo. Limpar os dados do navegador pode removê-los.</p><span className="privacy-note">Nenhum dado é enviado a um servidor pelo simulador.</span></div>
@@ -158,14 +157,21 @@ export default function Home() {
   const [dark, setDark] = useState(() => window.localStorage.getItem("cury-fluxo-theme") === "dark");
   const [cloudUser, setCloudUser] = useState<User | null>(null);
   const [cloudReady, setCloudReady] = useState(false);
+  const [firebaseConfigured, setFirebaseConfigured] = useState(false);
   const [cloudStatus, setCloudStatus] = useState<"off" | "loading" | "syncing" | "synced" | "error">("off");
   const workspaceRef = useRef(workspace);
   workspaceRef.current = workspace;
-  useEffect(() => watchCloudAuth((user) => {
-    setCloudUser(user);
-    if (!user) { setCloudReady(false); setCloudStatus("off"); return; }
-    setCloudReady(false); setCloudStatus("loading");
-    void readCloudWorkspace(user.uid).then(async (remote) => {
+  useEffect(() => {
+    let active = true;
+    let unsubscribe: (() => void) | undefined;
+    void import("../lib/firebase").then((firebase) => {
+      if (!active) return;
+      setFirebaseConfigured(firebase.firebaseConfigured);
+      unsubscribe = firebase.watchCloudAuth((user) => {
+        setCloudUser(user);
+        if (!user) { setCloudReady(false); setCloudStatus("off"); return; }
+        setCloudReady(false); setCloudStatus("loading");
+        void firebase.readCloudWorkspace(user.uid).then(async (remote) => {
       const local = workspaceRef.current;
       const hasLocalData = local.clients.length > 0 || local.simulations.length > 0 || local.documents.length > 0;
       if (remote) {
@@ -176,20 +182,23 @@ export default function Home() {
         } else if (window.confirm("Enviar os dados locais para esta conta Google e substituir os dados que já estão na nuvem?")) {
           setCloudReady(true); setCloudStatus("syncing");
         } else {
-          setCloudReady(false); setCloudStatus("off"); await logoutCloud();
+          setCloudReady(false); setCloudStatus("off"); await firebase.logoutCloud();
         }
       } else if (hasLocalData && !window.confirm("Esta conta ainda não tem dados. Enviar o espaço de trabalho deste navegador para a nuvem privada?")) {
-        setCloudReady(false); setCloudStatus("off"); await logoutCloud();
+        setCloudReady(false); setCloudStatus("off"); await firebase.logoutCloud();
       } else {
         setCloudReady(true); setCloudStatus("synced");
       }
-    }).catch((error) => { console.error("Falha ao carregar dados da nuvem", error); setCloudStatus("error"); });
-  }), []);
+        }).catch((error) => { console.error("Falha ao carregar dados da nuvem", error); setCloudStatus("error"); });
+      });
+    }).catch((error) => { console.error("Firebase indisponível; o app continuará no armazenamento local.", error); setCloudStatus("error"); });
+    return () => { active = false; unsubscribe?.(); };
+  }, []);
   useEffect(() => {
     if (!cloudUser || !cloudReady) return;
     setCloudStatus("syncing");
     const timer = window.setTimeout(() => {
-      void writeCloudWorkspace(cloudUser.uid, workspace)
+      void import("../lib/firebase").then((firebase) => firebase.writeCloudWorkspace(cloudUser.uid, workspace))
         .then(() => setCloudStatus("synced")).catch((error) => { console.error("Falha ao sincronizar dados", error); setCloudStatus("error"); });
     }, 900);
     return () => window.clearTimeout(timer);
@@ -241,6 +250,12 @@ export default function Home() {
     setActiveSimulation(simulation);
   };
 
+  const connectGoogle = () => {
+    void import("../lib/firebase").then((firebase) => firebase.loginWithGoogle())
+      .catch((error) => window.alert(error instanceof Error ? error.message : "Não foi possível entrar com Google."));
+  };
+  const disconnectGoogle = () => { void import("../lib/firebase").then((firebase) => firebase.logoutCloud()); };
+
   const pageTitle = NAVIGATION.find((item) => item.id === page)?.title ?? "Dados e backup";
   const latestUpdate = useMemo(() => {
     const date = new Date();
@@ -249,8 +264,8 @@ export default function Home() {
 
   return (
     <div className="app-shell">
-      <AppSidebar page={page} setPage={(next) => { setPage(next); setMobileNav(false); }} />
-      {mobileNav && <div className="mobile-scrim" onClick={() => setMobileNav(false)}><AppSidebar page={page} setPage={(next) => { setPage(next); setMobileNav(false); }} onClose={() => setMobileNav(false)} compact /></div>}
+      <AppSidebar page={page} cloudUser={cloudUser} setPage={(next) => { setPage(next); setMobileNav(false); }} />
+      {mobileNav && <div className="mobile-scrim" onClick={() => setMobileNav(false)}><AppSidebar page={page} cloudUser={cloudUser} setPage={(next) => { setPage(next); setMobileNav(false); }} onClose={() => setMobileNav(false)} compact /></div>}
       <main className="app-main">
         <header className="topbar">
           <div className="topbar-left"><button className="icon-button mobile-menu" aria-label="Abrir menu" onClick={() => setMobileNav(true)}><Menu size={20} /></button><span className="breadcrumb-root">Cury Fluxo</span><ChevronRight size={14} /><span>{pageTitle}</span></div>
@@ -264,7 +279,7 @@ export default function Home() {
           {page === "importar" && <ImportPage workspace={workspace} setWorkspace={setWorkspace} />}
           {page === "recomendacoes" && <RecommendationsPage workspace={workspace} onLoadSimulation={loadSimulation} />}
           {page === "comparar" && <ComparePage workspace={workspace} onLoadSimulation={loadSimulation} />}
-          {page === "configuracoes" && <SettingsPage workspace={workspace} setWorkspace={setWorkspace} cloudUser={cloudUser} cloudStatus={cloudStatus} />}
+          {page === "configuracoes" && <SettingsPage workspace={workspace} setWorkspace={setWorkspace} cloudUser={cloudUser} cloudStatus={cloudStatus} firebaseConfigured={firebaseConfigured} onLogin={connectGoogle} onLogout={disconnectGoogle} />}
         </div>
         <footer className="app-footer"><span>CURY FLUXO <i>·</i> Ferramenta de apoio à simulação</span><span>Base de catálogo: referência fornecida em nov/2026</span></footer>
       </main>
