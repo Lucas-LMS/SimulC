@@ -25,23 +25,15 @@ Uma mesa de trabalho para transformar dados de clientes e referências de empree
 
 Sem conexão com Firebase, o espaço de trabalho permanece no armazenamento local do navegador. Ao conectar uma conta Google em uma implantação configurada, os dados são gravados no Cloud Firestore sob `users/{uid}/workspaces/main`. As regras de [Firestore](firestore.rules) permitem leitura e gravação somente quando o UID autenticado corresponde ao UID do documento. O catálogo e os arquivos de código são públicos; os dados dos clientes não são publicados no repositório.
 
-A configuração do Firebase é opcional e não contém chave de servidor. Os quatro valores `VITE_FIREBASE_*` são configuração do cliente Web. Restrinja a chave de API ao domínio do app no Google Cloud e mantenha as regras publicadas. O Firestore tem limites por documento; esta aplicação interrompe a sincronização quando o espaço de trabalho ultrapassa 900 KB. PDFs e imagens originais não são enviados nem guardados no Firestore.
+A configuração do Firebase está no cliente Web (`client/src/lib/firebase.ts`); os valores usados ali são próprios para apps Web e não são chaves de servidor. As regras do Firestore, e não a ocultação desses valores, protegem os dados. Restrinja a chave de API ao domínio do app no Google Cloud e mantenha as regras publicadas. O Firestore tem limites por documento; esta aplicação interrompe a sincronização quando o espaço de trabalho ultrapassa 900 KB. PDFs e imagens originais não são enviados nem guardados no Firestore.
 
 ## Configurar a sincronização Firebase
 
 1. Crie um projeto Firebase e registre um app Web.
 2. Ative **Authentication → Google** e inclua `lucas-lms.github.io` nos domínios autorizados do Authentication.
 3. Crie um banco **Cloud Firestore**. Publique as regras deste repositório (`firestore.rules`) no banco antes de gravar qualquer dado.
-4. Em **Settings → Secrets and variables → Actions → Variables** no GitHub, crie estas variáveis com os valores do app Web Firebase:
-
-   | Variável | Campo Firebase |
-   | --- | --- |
-   | `FIREBASE_API_KEY` | `apiKey` |
-   | `FIREBASE_AUTH_DOMAIN` | `authDomain` |
-   | `FIREBASE_PROJECT_ID` | `projectId` |
-   | `FIREBASE_APP_ID` | `appId` |
-
-5. Execute novamente o workflow **Deploy to GitHub Pages** em **Actions**. Depois, no simulador, abra **Dados e backup** e conecte a conta Google.
+4. A configuração do app Web já está vinculada no código. Se trocar de projeto, atualize os valores em `client/src/lib/firebase.ts`; alternativamente, o workflow aceita os valores equivalentes em variáveis `VITE_FIREBASE_*` do GitHub Actions.
+5. No simulador, abra **Dados e backup** e conecte a conta Google. Na primeira conexão, confirme se deseja enviar os dados locais ou carregar/substituir os dados da nuvem.
 
 Para desenvolvimento local, copie `.env.example` para `.env.local`, preencha as mesmas quatro variáveis e execute `pnpm dev`. O arquivo `.env.local` não deve ser commitado. Uma nova conta começa usando os dados deste navegador; quando já houver dados na nuvem, o app pergunta antes de substituir o espaço local.
 
