@@ -38,6 +38,7 @@ import { listAutomaticBackups, saveAutomaticBackup, type AutomaticBackup } from 
 import type { User } from "firebase/auth";
 
 export type PageKey = "inicio" | "simulador" | "clientes" | "catalogo" | "importar" | "comparar" | "recomendacoes" | "configuracoes";
+const CLOUD_CHOICE_KEY = "cury-cloud-first-choice-v1";
 
 const NAVIGATION = [
   { id: "inicio" as const, title: "Visão geral", icon: HomeIcon },
@@ -174,20 +175,25 @@ export default function Home() {
         void firebase.readCloudWorkspace(user.uid).then(async (remote) => {
       const local = workspaceRef.current;
       const hasLocalData = local.clients.length > 0 || local.simulations.length > 0 || local.documents.length > 0;
+      const choiceKey = `${CLOUD_CHOICE_KEY}:${user.uid}`;
+      const hasChosenCloudSource = window.localStorage.getItem(choiceKey) === "done";
       if (remote) {
-        if (window.confirm("Encontramos dados nesta conta Google. Carregar a nuvem e substituir o espaço de trabalho local?")) {
+        if (hasChosenCloudSource || !hasLocalData || window.confirm("Encontramos dados nesta conta Google. Carregar a nuvem e substituir o espaço de trabalho local?")) {
           setWorkspace(remote);
           window.setTimeout(() => setCloudReady(true), 150);
           setCloudStatus("synced");
+          window.localStorage.setItem(choiceKey, "done");
         } else if (window.confirm("Enviar os dados locais para esta conta Google e substituir os dados que já estão na nuvem?")) {
           setCloudReady(true); setCloudStatus("syncing");
+          window.localStorage.setItem(choiceKey, "done");
         } else {
           setCloudReady(false); setCloudStatus("off"); await firebase.logoutCloud();
         }
-      } else if (hasLocalData && !window.confirm("Esta conta ainda não tem dados. Enviar o espaço de trabalho deste navegador para a nuvem privada?")) {
+      } else if (hasLocalData && !hasChosenCloudSource && !window.confirm("Esta conta ainda não tem dados. Enviar o espaço de trabalho deste navegador para a nuvem privada?")) {
         setCloudReady(false); setCloudStatus("off"); await firebase.logoutCloud();
       } else {
         setCloudReady(true); setCloudStatus("synced");
+        window.localStorage.setItem(choiceKey, "done");
       }
         }).catch((error) => { console.error("Falha ao carregar dados da nuvem", error); setCloudStatus("error"); });
       });

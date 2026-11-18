@@ -14,6 +14,7 @@ import { countMonthlyPayments, isShortOrImmediateDelivery, listMonthlyDates, mon
 import { buildInternalSummary, generateWhatsAppMessage } from "../lib/whatsapp";
 import { parseTableFile, type ImportProgress } from "../lib/importFiles";
 import { parseGpmText, type GpmSuggestions } from "../lib/gpm";
+import { getImageFromClipboardData, readClipboardImage } from "../lib/clipboard";
 import { recommendUnitsForLead } from "../lib/leads";
 import { clientPriceProfileToSimulation, projectClientPriceProfile } from "../lib/clientPriceProfile";
 import CurrencyInput from "./CurrencyInput";
@@ -293,10 +294,19 @@ export default function SimulatorPage({ workspace, setWorkspace, activeSimulatio
       if (gpmFileRef.current) gpmFileRef.current.value = "";
     }
   };
-  const pasteGpmImage = (event: React.ClipboardEvent<HTMLElement>) => {
-    const item = [...event.clipboardData.items].find((entry) => entry.type.startsWith("image/"));
-    const image = item?.getAsFile();
+  const handleGpmPaste = (event: React.ClipboardEvent<HTMLElement>) => {
+    const image = getImageFromClipboardData(event.clipboardData);
     if (image) { event.preventDefault(); void importGpmFile(new File([image], "imagem-colada.png", { type: image.type || "image/png" })); }
+  };
+  const pasteGpmFromClipboard = async () => {
+    setGpmError("");
+    try {
+      const image = await readClipboardImage();
+      if (!image) { setGpmNotice("Não encontrei imagem na área de transferência. Copie uma imagem e tente novamente, ou use Ctrl+V no botão."); return; }
+      await importGpmFile(image);
+    } catch {
+      setGpmNotice("O navegador não liberou a leitura direta. Copie a imagem, clique neste botão e use Ctrl+V.");
+    }
   };
   const updateGpmValue = <K extends GpmFieldKey>(key: K, value: GpmSuggestions[K]) => {
     setGpmReview((current) => current ? { ...current, values: { ...current.values, [key]: value } } : current);
@@ -554,7 +564,7 @@ export default function SimulatorPage({ workspace, setWorkspace, activeSimulatio
           </section>
 
           <section className="panel sim-section">
-              <div className="sim-section-title"><span className="section-number">02</span><div><h2>Caixa · GPM / PRICE</h2><p>Transcreva a simulação bancária; o site não calcula aprovação.</p></div><input ref={gpmFileRef} type="file" accept="application/pdf,image/*,.pdf" hidden onChange={(event) => void importGpmFile(event.target.files?.[0])} /><div className="sim-section-actions"><button className="button button-quiet button-small" disabled={!client || priceCents <= 0 || !hasPriceProfileData || gpmReview !== null} title={!client ? "Selecione um cliente primeiro" : gpmReview ? "Aplique ou descarte a revisão OCR primeiro" : "Salva os dados atuais no perfil do cliente"} onClick={savePriceProfileToClient}><Save size={14} /> Salvar PRICE no perfil</button><button className="button button-quiet button-small" disabled={gpmBusy} onClick={() => gpmFileRef.current?.click()}>{gpmBusy ? <LoaderCircle size={14} className="spin" /> : <Upload size={14} />}{gpmBusy ? "Lendo arquivo…" : "Importar imagem / PDF"}</button><button type="button" className="button button-quiet button-small paste-image-button" onPaste={pasteGpmImage} onClick={(event) => { event.currentTarget.focus(); setGpmNotice("Cole a imagem copiada aqui com Ctrl+V."); }} onKeyDown={(event) => { if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "v") event.currentTarget.focus(); }} title="Clique e cole uma imagem copiada com Ctrl+V"><ClipboardPaste size={14} /> Colar imagem</button></div></div>
+              <div className="sim-section-title"><span className="section-number">02</span><div><h2>Caixa · GPM / PRICE</h2><p>Transcreva a simulação bancária; o site não calcula aprovação.</p></div><input ref={gpmFileRef} type="file" accept="application/pdf,image/*,.pdf" hidden onChange={(event) => void importGpmFile(event.target.files?.[0])} /><div className="sim-section-actions"><button className="button button-quiet button-small" disabled={!client || priceCents <= 0 || !hasPriceProfileData || gpmReview !== null} title={!client ? "Selecione um cliente primeiro" : gpmReview ? "Aplique ou descarte a revisão OCR primeiro" : "Salva os dados atuais no perfil do cliente"} onClick={savePriceProfileToClient}><Save size={14} /> Salvar PRICE no perfil</button><button className="button button-quiet button-small" disabled={gpmBusy} onClick={() => gpmFileRef.current?.click()}>{gpmBusy ? <LoaderCircle size={14} className="spin" /> : <Upload size={14} />}{gpmBusy ? "Lendo arquivo…" : "Importar imagem / PDF"}</button><button type="button" className="button button-quiet button-small paste-image-button" onPaste={handleGpmPaste} onClick={() => void pasteGpmFromClipboard()} disabled={gpmBusy} title="Clique para ler a imagem copiada; se o navegador bloquear, use Ctrl+V"><ClipboardPaste size={14} /> Colar imagem</button></div></div>
             {gpmProgress && <div className="upload-progress"><div><span>{gpmProgress.detail}</span><strong>{Math.round(gpmProgress.progress * 100)}%</strong></div><div className="progress-track"><span style={{ width: `${Math.max(5, gpmProgress.progress * 100)}%` }} /></div></div>}
             {gpmError && <div className="flow-alert"><AlertCircle size={15} />{gpmError}</div>}
             {gpmNotice && <div className="field-note"><Info size={14} /><span>{gpmNotice}</span></div>}
