@@ -1,4 +1,626 @@
-YªçŠx-®éÜj×¢ëiºÚ+Š§j[h‘éÜ¢éíÛŞôñ:-jZ.¶›­–)Ş³V–×÷'B²W6TÖVÖòÂW6U&VbÂW6U7FFRÒg&öÒ'&V7B#°¦–×÷'B°¢ÆW'D6—&6ÆRÂ'&÷tF÷vâÂ'&÷u&–v‡BÂ6ÆVæF$F—2Â6†V6²Â6†Wg&öäF÷vâÂ6÷’Âf–ÆUFW‡BÀ¢–æfòÂÆöFW$6—&6ÆRÂÇW2Â&÷FFT67rÂ6fRÂ6VæBÂ6†–VÆD6†V6²ÂG&6ƒ"ÂWÆöBÂW6W%ÇW2Â‚À§Òg&öÒ&ÇV6–FR×&V7B#°¦–×÷'BG—R²F—7F6‚Â6WE7FFT7F–öâÒg&öÒ'&V7B#°¦–×÷'BG—R²æçVÅ–ÖVçBÂ6Æ–VçE&–6U&öf–ÆRÂ6Æ–VçE&öf–ÆRÂ–ÖVçDFFRÂ6–×VÆF–öå&V6÷&BÂv÷&·76TFFÒg&öÒ"ââöÆ–"öÖöFVÇ2#°¦–×÷'BG—R²÷'FföÆ–õVæ—BÒg&öÒ"ââöFF÷÷'FföÆ–ò#°¦–×÷'B²6Æ7VÆFTÆÂÂ7VvvW7E&ö'W7D7BÂG—RfÆ÷u66Væ&–òÂG—RgVÆÄ6Æ7VÆF–öâÒg&öÒ"ââöÆ–"ö6Æ7VÆF÷"#°¦–×÷'B²f÷&ÖD%$ÂÂf÷&ÖDçVÖ&W"Òg&öÒ"ââöÆ–"öÖöæW’#°¦–×÷'B²&V6÷&E6–×VÆF–öäFVÆ—fW'’Òg&öÒ"ââöÆ–"öFVÆ—fW'’#°¦–×÷'B²7&VFT–BÒg&öÒ"ââöÆ–"÷7F÷&vR#°¦–×÷'B²6÷VçDÖöçF†Ç•–ÖVçG2Â—56†÷'D÷$–ÖÖVF–FTFVÆ—fW'’ÂÆ—7DÖöçF†Ç”FFW2ÂÖöçF„¶W’ÂÖöçF„Æ&VÄ6—FÆ—¦VBÂ'6TÖöçF„¶W’Â7VvvW7DæçVÄFFW2Òg&öÒ"ââöÆ–"÷66†VGVÆR#°¦–×÷'B²'V–ÆD–çFW&æÅ7VÖÖ'’ÂvVæW&FUv†G4ÖW76vRÒg&öÒ"ââöÆ–"÷v†G6#°¦–×÷'B²'6UF&ÆTf–ÆRÂG—R–×÷'E&öw&W72Òg&öÒ"ââöÆ–"ö–×÷'Df–ÆW2#°¦–×÷'B²'6TwÕFW‡BÂG—RwÕ7VvvW7F–öç2Òg&öÒ"ââöÆ–"öwÒ#°¦–×÷'B²&V6öÖÖVæEVæ—G4f÷$ÆVBÒg&öÒ"ââöÆ–"öÆVG2#°¦–×÷'B²6Æ–VçE&–6U&öf–ÆUFõ6–×VÆF–öâÂ&ö¦V7D6Æ–VçE&–6U&öf–ÆRÒg&öÒ"ââöÆ–"ö6Æ–VçE&–6U&öf–ÆR#°¦–×÷'B7W'&Væ7”–çWBg&öÒ"âô7W'&Væ7”–çWB#°¦–×÷'B6V&6†&ÆUVæ—E6VÆV7Bg&öÒ"âõ6V&6†&ÆUVæ—E6VÆV7B#° ¦–çFW&f6R&÷2°¢v÷&·76S¢v÷&·76TFF°¢6WEv÷&·76S¢F—7F6ƒÅ6WE7FFT7F–öãÅv÷&·76TFFãã°¢7F—fU6–×VÆF–öã¢6–×VÆF–öå&V6÷&BÂçVÆÃ°¢6WD7F—fU6–×VÆF–öã¢F—7F6ƒÅ6WE7FFT7F–öãÅ6–×VÆF–öå&V6÷&BÂçVÆÃãã°¢öå6fS¢‡6–×VÆF–öã¢6–×VÆF–öå&V6÷&B’Óâfö–C°¢öäFE6–×VÆF–öã¢†6Æ–VçD–C¢7G&–ærÂ&÷W'G”–C¢7G&–ærÂ6ö×&—6öäw&÷W–Có¢7G&–ær’Óâfö–C°¢öä7&VFT6Æ–VçC¢†6Æ–VçC¢6Æ–VçE&öf–ÆR’Óâfö–C°§Ğ ¦6öç7BFöF”ÖöçF‚Ò‚“¢–ÖVçDFFRÓâ‡²–V#¢æWrFFR‚’ævWDgVÆÅ–V"‚’ÂÖöçFƒ¢æWrFFR‚’ævWDÖöçF‚‚’²Ò“°¦6öç7BæçVÄ–BÒ‡²–V"ÂÖöçF‚Ó¢–ÖVçDFFR’ÓâæçVÂÒG·–V'ÒÒGµ7G&–ær†ÖöçF‚’çE7F'Bƒ"Â#"—Ö° ¦6öç7B&V6öÖÖVæFF–öåF–W$FWF–Ç2Ò°¢'&VfW'&VB×&Vv–öâ#¢²F—FÆS¢#+¢+r&Vvœ:6òFR–çFW&W76R"Âæ÷FS¢%FöF22÷:|;VW2FW7F&Vvœ:6òÂ6VÒf–ÇG&òFRV'F÷2÷Rfvâ"ÒÀ¢'&VfW'&VB×G—öÆöw’#¢²F—FÆS¢#,+¢+rF—öÆöv–FW6V¦F"Âæ÷FS¢$f÷&F&Vvœ:6ò&–æ6—ÂÂ6öÖVçFRF—öÆöv–W†F–æf÷&ÖFâ"ÒÀ¢&÷F†W"×&VÆWfçB#¢²F—FÆS¢$÷WG&2&VfW,:¦æ6–2"Âæ÷FS¢%6VÒ&Vvœ:6ò÷V'F÷2FVf–æ–F÷3²÷&FVæF2VÆ2FVÖ—2&VfW,:¦æ6–2â"ÒÀ§Ò26öç7C° ¦W‡÷'B6öç7BÖ¶TæWu6–×VÆF–öâÒ†6Æ–VçD–C¢7G&–ærÂ&÷W'G”–C¢7G&–ærÂ6ö×&—6öäw&÷W–Có¢7G&–ærÂçVÆÂ“¢6–×VÆF–öå&V6÷&BÓâ‡°¢–C¢7&VFT–B‚'6–Ò"’Â7&VFVDC¢æWrFFR‚’çFô•4õ7G&–ær‚’ÂWFFVDC¢æWrFFR‚’çFô•4õ7G&–ær‚’À¢6Æ–VçD–BÂ&÷W'G”–BÂ6ö×&—6öäw&÷W–C¢6ö×&—6öäw&÷W–BóòçVÆÂÂ&–6T÷fW'&–FT6VçG3¢çVÆÂÂ7DFFS¢FöF”ÖöçF‚‚’ÂFVÆ—fW'”÷fW'&–FS¢çVÆÂÀ¢f–ææ6–ætÖ÷VçD6VçG3¢çVÆÂÂwÕ&W÷'FVDf–ææ6–ætÖ÷VçD6VçG3¢çVÆÂÂwÕ&W÷'FVE&–6U&VfW&Væ6T6VçG3¢çVÆÂÂf–ææ6–ætÖçVÄ÷fW'&–FS¢fÇ6RÀ¢f—'7E&–6T–ç7FÆÆÖVçD6VçG3¢çVÆÂÂf–ææ6–æuFW&ÔÖöçF‡3¢çVÆÂÀ¢f–ææ6–ætÆ–æS¢""Âf–ææ6–æu7—7FVÓ¢%$”4R"Âf–ææ6–æu&FS¢""Âf–ææ6–ætæ÷FW3¢""À¢wÕ&W÷'FVE7V'6–G”6VçG3¢çVÆÂÂwÕ&W÷'FVDfVW3¢""ÂwÕ&W÷'FVEV÷FW&6VçC¢çVÆÂÂwÕ&W÷'FVD–æ6öÖT6öÖÖ—FÖVçEW&6VçC¢çVÆÂÀ¢æçVÄf7F÷#¢2ÂÖöçF†Ç”6÷VçD÷fW'&–FS¢çVÆÂÂæçVÄFFW4÷fW'&–FS¢çVÆÂÀ¢&ö'W7D7D6VçG3¢çVÆÂÂF—&V7E&UW&6VçC¢SRÂF—&V7DÖöçF†Ç”6÷VçD÷fW'&–FS¢çVÆÂÀ¢F—&V7DæçVÄFFW4÷fW'&–FS¢çVÆÂÂÖçVÄÖ÷VçG3¢·ÒÂ–æ6ÇVFTF—&V7C¢G'VRÀ¢fwG5W6TWF†÷&—¦VC¢fÇ6RÂ7GVÅ6†÷'DfÆ÷t6öæf—&ÖVC¢fÇ6RÂ–çFW&æÄæ÷FW3¢""À§Ò“° ¦6öç7BÖöæW”Æ&VÂÒ†6VçG3¢çVÖ&W"ÂçVÆÂÂVæFVf–æVBÂfÆÆ&6²Ò.(	B"’Óâ6VçG2ÓÓÒçVÆÂÇÂ6VçG2ÓÓÒVæFVf–æVBòfÆÆ&6²¢f÷&ÖD%$Â†6VçG2“°¦6öç7BÖöçF…fÇVRÒ†FFS¢–ÖVçDFFRÂçVÆÂ“¢7G&–ærÓâFFRòÖöçF„¶W’†FFR’¢"#°¦6öç7B'6TçVÆÆ&ÆTÖöçF‚Ò‡fÇVS¢7G&–ær“¢–ÖVçDFFRÂçVÆÂÓâfÇVRò'6TÖöçF„¶W’‡fÇVR’¢çVÆÃ°¦6öç7BVæ—VU6÷'FVDFFW2Ò†FFW3¢–ÖVçDFFUµÒ“¢æçVÅ–ÖVçEµÒÓâFFW0¢ç6÷'B‚†Â"’Óâç–V"Ò"ç–V"ÇÂæÖöçF‚Ò"æÖöçF‚¢æÖ‚†FFR’Óâ‡²ââæFFRÂ–C¢æçVÄ–B†FFR’ÂÖ÷VçD6VçG3¢çVÆÂÒ’“° ¦–çFW&f6R6ö×&—6öäVçG'’°¢6–×VÆF–öã¢6–×VÆF–öå&V6÷&C°¢Væ—C¢÷'FföÆ–õVæ—BÂçVÆÃ°¢&–6T6VçG3¢çVÖ&W#°¢FVÆ—fW'”FFS¢–ÖVçDFFRÂçVÆÃ°¢6Æ7VÆF–öã¢gVÆÄ6Æ7VÆF–öâÂçVÆÃ°§Ğ ¦6öç7B6Æ7VÆFT6ö×&—6öäVçG'’Ò‡6–×VÆF–öã¢6–×VÆF–öå&V6÷&BÂv÷&·76S¢v÷&·76TFF“¢6ö×&—6öäVçG'’Óâ°¢6öç7BVæ—BÒv÷&·76Rç÷'FföÆ–òæf–æB‚†—FVÒ’Óâ—FVÒæ–BÓÓÒ6–×VÆF–öâç&÷W'G”–B’óòçVÆÃ°¢6öç7B6Æ–VçBÒv÷&·76Ræ6Æ–VçG2æf–æB‚†—FVÒ’Óâ—FVÒæ–BÓÓÒ6–×VÆF–öâæ6Æ–VçD–B’óòçVÆÃ°¢6öç7B&–6T6VçG2Ò6–×VÆF–öâç&–6T÷fW'&–FT6VçG2óòVæ—Còç&–6T6VçG2óòVæ—Còç&–6TÆ÷t6VçG2óò°¢6öç7BFVÆ—fW'”FFRÒ6–×VÆF–öâæFVÆ—fW'”÷fW'&–FRóò‡Væ—CòæFVÆ—fW'•–V"bbVæ—BæFVÆ—fW'”ÖöçF‚ò²–V#¢Væ—BæFVÆ—fW'•–V"ÂÖöçFƒ¢Væ—BæFVÆ—fW'”ÖöçF‚Ò¢çVÆÂ“°¢–b‚Væ—B’&WGW&â²6–×VÆF–öâÂVæ—BÂ&–6T6VçG2ÂFVÆ—fW'”FFRÂ6Æ7VÆF–öã¢çVÆÂÓ° ¢6öç7BFVÆ—fW'•FW‡Df÷$6Æ7VÆF–öâÒVæ—BæFVÆ—fW'”FFU6÷W&6Rò""¢Væ—BæFVÆ—fW'•FW‡C°¢6öç7B6†÷'DfÆ÷rÒ—56†÷'D÷$–ÖÖVF–FTFVÆ—fW'’†FVÆ—fW'”FFRÂFVÆ—fW'•FW‡Df÷$6Æ7VÆF–öâ“°¢6öç7BÖöçF†Ç”6÷VçBÒ6†÷'DfÆ÷p¢ò6–×VÆF–öâæ7GVÅ6†÷'DfÆ÷t6öæf—&ÖVBò6–×VÆF–öâæÖöçF†Ç”6÷VçD÷fW'&–FR¢çVÆÀ¢¢6–×VÆF–öâæÖöçF†Ç”6÷VçD÷fW'&–FRóò†FVÆ—fW'”FFRò6÷VçDÖöçF†Ç•–ÖVçG2‡6–×VÆF–öâæ7DFFRÂFVÆ—fW'”FFR’¢çVÆÂ“°¢6öç7BF—&V7DÖöçF†Ç”6÷VçBÒ6†÷'DfÆ÷p¢ò6–×VÆF–öâæ7GVÅ6†÷'DfÆ÷t6öæf—&ÖVBò6–×VÆF–öâæF—&V7DÖöçF†Ç”6÷VçD÷fW'&–FR¢çVÆÀ¢¢6–×VÆF–öâæF—&V7DÖöçF†Ç”6÷VçD÷fW'&–FRóòÖöçF†Ç”6÷VçC°¢6öç7BæçVÅ–ÖVçG2Ò6–×VÆF–öâææçVÄFFW4÷fW'&–FSòç6Æ–6R‚’óò†FVÆ—fW'”FFRòVæ—VU6÷'FVDFFW2‡7VvvW7DæçVÄFFW2‡6–×VÆF–öâæ7DFFRÂFVÆ—fW'”FFR’’¢µÒ“°¢6öç7BF—&V7DæçVÅ–ÖVçG2Ò6–×VÆF–öâæF—&V7DæçVÄFFW4÷fW'&–FSòç6Æ–6R‚’óòæçVÅ–ÖVçG3°¢6öç7B&ö'W7D7D6VçG2Ò6–×VÆF–öâç&ö'W7D7D6VçG2óò7VvvW7E&ö'W7D7B‡&–6T6VçG2Â6Æ–VçCòæf–Æ&ÆT7D6VçG2óòçVÆÂ“°¢6öç7B6Æ7VÆF–öâÒ6Æ7VÆFTÆÂ‡°¢&–6T6VçG2À¢–æ6öÖT6VçG3¢6Æ–VçCòæ–æ6öÖTfÖ–Ç”6VçG2óòçVÆÂÀ¢f–ææ6–ætÖ÷VçD6VçG3¢6–×VÆF–öâæf–ææ6–ætÖ÷VçD6VçG2À¢f–ææ6–ætÖçVÄ÷fW'&–FS¢6–×VÆF–öâæf–ææ6–ætÖçVÄ÷fW'&–FRÀ¢f—'7E&–6T–ç7FÆÆÖVçD6VçG3¢6–×VÆF–öâæf—'7E&–6T–ç7FÆÆÖVçD6VçG2À¢7DFFS¢6–×VÆF–öâæ7DFFRÀ¢FVÆ—fW'”FFRÀ¢&VG•FW‡C¢FVÆ—fW'•FW‡Df÷$6Æ7VÆF–öâÀ¢ÖöçF†Ç”6÷VçBÀ¢æçVÅ–ÖVçG2À¢æçVÄf7F÷#¢6–×VÆF–öâææçVÄf7F÷"À¢&ö'W7D7D6VçG2À¢f–Æ&ÆT7D6VçG3¢6Æ–VçCòæf–Æ&ÆT7D6VçG2óòçVÆÂÀ¢6—†ÖçVÄÖöçF†Ç”6VçG3¢6–×VÆF–öâæÖçVÄÖ÷VçG2æ6—†ÖöçF†Ç”6VçG2À¢6—†ÖçVÄæçVÄ6VçG3¢6–×VÆF–öâæÖçVÄÖ÷VçG2æ6—†æçVÄ6VçG2À¢F—&V7DÖçVÄÖöçF†Ç”6VçG3¢6–×VÆF–öâæÖçVÄÖ÷VçG2æF—&V7DÖöçF†Ç”6VçG2À¢F—&V7DÖçVÄæçVÄ6VçG3¢6–×VÆF–öâæÖçVÄÖ÷VçG2æF—&V7DæçVÄ6VçG2À¢F—&V7E&UW&6VçC¢6–×VÆF–öâæF—&V7E&UW&6VçBÀ¢F—&V7DÖöçF†Ç”6÷VçBÀ¢F—&V7DæçVÅ–ÖVçG2À¢–æ6ÇVFTF—&V7C¢6–×VÆF–öâæ–æ6ÇVFTF—&V7BÀ¢7GVÅ6†÷'DfÆ÷t6öæf—&ÖVC¢6–×VÆF–öâæ7GVÅ6†÷'DfÆ÷t6öæf—&ÖVBÀ¢Ò“°¢&WGW&â²6–×VÆF–öâÂVæ—BÂ&–6T6VçG2ÂFVÆ—fW'”FFRÂ6Æ7VÆF–öâÓ°§Ó° §G—RwÔf–VÆD¶W’Ò¶W–öbwÕ7VvvW7F–öç3°§G—RwÕ&Wf–WrÒ²fÇVW3¢wÕ7VvvW7F–öç3²6VÆV7FVC¢&V6÷&CÄwÔf–VÆD¶W’Â&ööÆVãâÓ° ¦gVæ7F–öâÖöæW”f–VÆB‡²Æ&VÂÂfÇVRÂöä6†ævRÂ†–çBÂF—6&ÆVBÓ¢²Æ&VÃ¢7G&–æs²fÇVS¢çVÖ&W"ÂçVÆÂÂVæFVf–æVC²öä6†ævS¢‡fÇVS¢çVÖ&W"ÂçVÆÂ’Óâfö–C²†–çCó¢7G&–æs²F—6&ÆVCó¢&ööÆVâÒ’°¢&WGW&âÆÆ&VÂ6Æ74æÖSÒ&f÷&ÒÖf–VÆB#ãÇ7ãç¶Æ&VÇÓÂ÷7ããÆF—b6Æ74æÖS×¶ÖöæW’Ö6öçG&öÂG¶F—6&ÆVBò&F—6&ÆVB"¢"'ÖÓãÇ7ãå"CÂ÷7ããÄ7W'&Væ7”–çWBF—6&ÆVC×¶F—6&ÆVGÒÖ–ãÒ#"fÇVS×·fÇVWÒöä6†ævS×¶öä6†ævWÒÆ6V†öÆFW#Ò#Ã"óãÂöF—cç¶†–çBbbÇ6ÖÆÃç¶†–çGÓÂ÷6ÖÆÃçÓÂöÆ&VÃã°§Ğ ¦gVæ7F–öâFFTf–VÆB‡²Æ&VÂÂfÇVRÂöä6†ævRÂ†–çBÓ¢²Æ&VÃ¢7G&–æs²fÇVS¢–ÖVçDFFRÂçVÆÃ²öä6†ævS¢‡fÇVS¢–ÖVçDFFRÂçVÆÂ’Óâfö–C²†–çCó¢7G&–ærÒ’°¢&WGW&âÆÆ&VÂ6Æ74æÖSÒ&f÷&ÒÖf–VÆB#ãÇ7ãç¶Æ&VÇÓÂ÷7ããÆF—b6Æ74æÖSÒ&FFRÖ6öçG&öÂ#ãÄ6ÆVæF$F—26—¦S×³WÒóãÆ–çWBG—SÒ&ÖöçF‚"fÇVS×¶ÖöçF…fÇVR‡fÇVR—Òöä6†ævS×²†WfVçB’Óâöä6†ævR‡'6TçVÆÆ&ÆTÖöçF‚†WfVçBçF&vWBçfÇVR’—ÒóãÂöF—cç¶†–çBbbÇ6ÖÆÃç¶†–çGÓÂ÷6ÖÆÃçÓÂöÆ&VÃã°§Ğ ¦gVæ7F–öâ7FD&Æö6²‡²Æ&VÂÂfÇVRÂ7V"ÂFöæRÒ""Ó¢²Æ&VÃ¢7G&–æs²fÇVS¢7G&–æs²7V#ó¢7G&–æs²FöæSó¢7G&–ærÒ’°¢&WGW&âÆF—b6Æ74æÖS×¶7FBÖ&Æö6²G·FöæWÖÓãÇ6ÖÆÃç¶Æ&VÇÓÂ÷6ÖÆÃãÇ7G&öæsç·fÇVWÓÂ÷7G&öæsç·7V"bbÇ7ãç·7V'ÓÂ÷7ãçÓÂöF—cã°§Ğ ¦gVæ7F–öâfÆ÷uæVÂ‡²F—FÆRÂ66Væ&–òÂF&vWBÂ¶–æBÂ7DFFRÂW‡æFVBÒfÇ6RÓ¢²F—FÆS¢7G&–æs²66Væ&–ó¢fÆ÷u66Væ&–òÂçVÆÃ²F&vWC¢çVÖ&W"ÂçVÆÃ²¶–æC¢&6—†"Â&F—&WF#²7DFFS¢–ÖVçDFFS²W‡æFVCó¢&ööÆVâÒ’°¢6öç7B·6†÷t6ÆVæF"Â6WE6†÷t6ÆVæF%ÒÒW6U7FFR†W‡æFVB“°¢–b‚66Væ&–ò’&WGW&âÆF—b6Æ74æÖSÒ&fÆ÷rÖV×G’#ãÄÆW'D6—&6ÆR6—¦S×³wÒóãÇ7G&öæsç¶¶–æBÓÓÒ&6—†"ò$–æf÷&ÖR6–×VÆ:|:6ò$”4RôuÒ"¢$F—fRÖöFÆ–FFRF&VÆF—&WF'ÓÂ÷7G&öæsãÇäòfÇW†ò<;26W,:6Æ7VÆFò6öÒ÷2FF÷26÷'&W7öæFVçFW2ãÂ÷ãÂöF—cã°¢6öç7BÖöçF„FFW2Ò66Væ&–òæÖöçF†Ç”6÷VçBòÆ—7DÖöçF†Ç”FFW2†7DFFRÂ66Væ&–òæÖöçF†Ç”6÷VçB’¢µÓ°¢6öç7B&Ææ6VBÒ66Væ&–òæ—4&Ææ6VC°¢6öç7BÆ7E&VwVÆ$ÖöçF‚Ò66Væ&–òæÖöçF†Ç”6÷VçBbb66Væ&–òæf–æÄÖöçF†Ç”6VçG2ÓÒçVÆÂbb66Væ&–òæf–æÄÖöçF†Ç”6VçG2ÓÒ66Væ&–òç&VwVÆ$ÖöçF†Ç”6VçG3°¢&WGW&â€¢ÆF—b6Æ74æÖS×¶fÆ÷r×æVÂG¶&Ææ6VBò&fÆ÷rÖ&Ææ6VB"¢&fÆ÷r×Væ&Ææ6VB'ÖÓà¢ÆF—b6Æ74æÖSÒ&fÆ÷r×æVÂÖ†VB#ãÆF—cãÇ7â6Æ74æÖSÒ&W–V'&÷r#ç¶¶–æBÓÓÒ&6—†"ò%tò85U%’L8’24„dU2"¢%,8’Ô4„dU2+rD$TÄD•$UD'ÓÂ÷7ããÆƒ3ç·F—FÆWÓÂöƒ3ãÂöF—cãÇ7â6Æ74æÖS×¶VF—BÖ6†—G¶&Ææ6VBò&ö²"¢'&Wf–Wr'ÖÓç¶&Ææ6VBòÃãÄ6†V6²6—¦S×³'ÒóâdT4„Âóâ¢ÃãÄÆW'D6—&6ÆR6—¦S×³'Òóâ$Ud•4#ÂóçÓÂ÷7ããÂöF—cà¢ÆF—b6Æ74æÖSÒ&fÆ÷rÖÖ÷VçB×&÷r#ãÇ7ãç¶¶–æBÓÓÒ&6—†"ò%&V7W'6÷2,;7&–÷2Çfò"¢%W&6VçGVÂ,:’Ö6†fW2'ÓÂ÷7ããÇ7G&öæsç¶¶–æBÓÓÒ&6—†"òÖöæW”Æ&VÂ‡F&vWB’¢G·F&vWBòf÷&ÖD%$Â‡F&vWB’¢.(	B'ÖÓÂ÷7G&öæsãÂöF—cà¢ÆF—b6Æ74æÖSÒ&fÆ÷rÖ—FV×2#à¢ÆF—b6Æ74æÖSÒ&fÆ÷rÖ—FVÒ#ãÇ7â6Æ74æÖSÒ&fÆ÷rÖ–æFW‚7BÖ–æFW‚#äÂ÷7ããÇ7ããÇ7G&öæsäFóÂ÷7G&öæsãÇ6ÖÆÃç·66Væ&–òæ7EW&6VçBÓÒçVÆÂòG¶f÷&ÖDçVÖ&W"‡66Væ&–òæ7EW&6VçBÂ—ÒRFò&\:vòF÷FÆ¢$Fò6W&FòF2ÖVç6—2'ÓÂ÷6ÖÆÃãÂ÷7ããÆ#ç¶f÷&ÖD%$Â‡66Væ&–òæ7D6VçG2—ÓÂö#ãÂöF—cà¢ÆF—b6Æ74æÖSÒ&fÆ÷rÖ—FVÒ#ãÇ7â6Æ74æÖSÒ&fÆ÷rÖ–æFW‚ÖöçF†Ç’Ö–æFW‚#äÓÂ÷7ããÇ7ããÇ7G&öæsç·66Væ&–òæÖöçF†Ç”6÷VçBóò.(	B'ÒÖVç6—3Â÷7G&öæsãÇ6ÖÆÃç·66Væ&–òæÖöçF†Ç”–æ6öÖUW&6VçBÓÒçVÆÂòG¶f÷&ÖDçVÖ&W"‡66Væ&–òæÖöçF†Ç”–æ6öÖUW&6VçBÂ—ÒRF&VæFfÖ–Æ–&¢%W&6VçGVÂFR&VæF6öæf—&Ö"'ÓÂ÷6ÖÆÃãÂ÷7ããÆ#ç¶ÖöæW”Æ&VÂ‡66Væ&–òç&VwVÆ$ÖöçF†Ç”6VçG2Â%VæFVçFR"—ÓÂö#ãÂöF—cà¢·66Væ&–òææçVÅ–ÖVçG2æÖ‚†æçVÂ’ÓâÆF—b6Æ74æÖSÒ&fÆ÷rÖ—FVÒ"¶W“×¶æçVÂæ–GÓãÇ7â6Æ74æÖSÒ&fÆ÷rÖ–æFW‚æçVÂÖ–æFW‚#ä“Â÷7ããÇ7ããÇ7G&öæsäçVÂ+r¶ÖöçF„Æ&VÄ6—FÆ—¦VB†æçVÂ—ÓÂ÷7G&öæsãÇ6ÖÆÃç·66Væ&–òç&VwVÆ$ÖöçF†Ç”6VçG2òG¶f÷&ÖDçVÖ&W"‚†æçVÂæÖ÷VçD6VçG2óò’ò66Væ&–òç&VwVÆ$ÖöçF†Ç”6VçG2Â—Ü9rÖVç6Æ¢$FFçFW&–÷":26†fW2'ÓÂ÷6ÖÆÃãÂ÷7ããÆ#ç¶ÖöæW”Æ&VÂ†æçVÂæÖ÷VçD6VçG2Â%VæFVçFR"—ÓÂö#ãÂöF—câ—Ğ¢¶Æ7E&VwVÆ$ÖöçF‚bbÆF—b6Æ74æÖSÒ&fÆ÷rÖ—FVÒ&÷VæF–ær×&÷r#ãÇ7â6Æ74æÖSÒ&fÆ÷rÖ–æFW‚#î(k3Â÷7ããÇ7ããÇ7G&öæsì9¦ÇF–ÖÖVç6ÃÂ÷7G&öæsãÇ6ÖÆÃä§W7FR&W6–GVÂFR'&VFöæFÖVçFò–æf÷&ÖFóÂ÷6ÖÆÃãÂ÷7ããÆ#ç¶f÷&ÖD%$Â‡66Væ&–òæf–æÄÖöçF†Ç”6VçG2—ÓÂö#ãÂöF—cçĞ¢ÂöF—cà¢ÆF—b6Æ74æÖSÒ&fÆ÷r×F÷FÂ#ãÇ7ãåF÷FÂF—7G&–'\:ÖFòÇ6ÖÆÃäF–fW&Vì:vg2Çfó¢¶ÖöæW”Æ&VÂ‡66Væ&–òæF–ffW&Væ6T6VçG2—ÓÂ÷6ÖÆÃãÂ÷7ããÇ7G&öæsç¶ÖöæW”Æ&VÂ‡66Væ&–òç66†VGVÆVEF÷FÄ6VçG2—ÓÂ÷7G&öæsãÂöF—cà¢·66Væ&–òçF–Ö–ætW'&÷'2æÆVæwF‚âbbÆF—b6Æ74æÖSÒ&fÆ÷rÖÆW'BFævW"ÖÆW'B#ç·66Væ&–òçF–Ö–ætW'&÷'2æÖ‚†—FVÒ’ÓâÇ¶W“×¶—FV×Óç¶—FV×ÓÂ÷â—ÓÂöF—cçĞ¢·66Væ&–òçv&æ–æw2æÆVæwF‚âbbÆF—b6Æ74æÖSÒ&fÆ÷rÖÆW'B#ç·66Væ&–òçv&æ–æw2ç6Æ–6RƒÂB’æÖ‚†—FVÒ’ÓâÇ¶W“×¶—FV×Óç¶—FV×ÓÂ÷â—ÓÂöF—cçĞ¢·66Væ&–òæÖöçF†Ç”6÷VçBÓÒçVÆÂbb66Væ&–òæÖöçF†Ç”6÷VçBâbbÃãÆ'WGFöâ6Æ74æÖSÒ&fÆ÷rÖ6ÆVæF"×FövvÆR"öä6Æ–6³×²‚’Óâ6WE6†÷t6ÆVæF"‚6†÷t6ÆVæF"—Óç·6†÷t6ÆVæF"ò$ö7VÇF""¢%fW"'Ò6ÆVæL:&–òF2ÖVç6—2Ä6†Wg&öäF÷vâ6—¦S×³GÒ6Æ74æÖS×·6†÷t6ÆVæF"ò'&÷FFR"¢"'ÒóãÂö'WGFöãç·6†÷t6ÆVæF"bbÆF—b6Æ74æÖSÒ&ÖöçF†Ç’Ö6ÆVæF"#ãÆF—b6Æ74æÖSÒ&6ÆVæF"Ö†VFW"#ãÇ7ãå$4TÄÂ÷7ããÇ7ãådTä4”ÔTåDóÂ÷7ããÇ7ãådÄõ#Â÷7ããÂöF—cç¶ÖöçF„FFW2æÖ‚†GVTFFRÂ–æFW‚’ÓâÆF—b6Æ74æÖSÒ&6ÆVæF"×&÷r"¶W“×¶–æFW‡ÓãÇ7ãçµ7G&–ær†–æFW‚²’çE7F'Bƒ"Â#"—ÓÂ÷7ããÇ7ãç¶ÖöçF„Æ&VÄ6—FÆ—¦VB†GVTFFR—ÓÂ÷7ããÇ7ãç¶–æFW‚ÓÓÒ66Væ&–òæÖöçF†Ç”6÷VçBÒbb66Væ&–òæf–æÄÖöçF†Ç”6VçG2ÓÒ66Væ&–òç&VwVÆ$ÖöçF†Ç”6VçG2òf÷&ÖD%$Â‡66Væ&–òæf–æÄÖöçF†Ç”6VçG2’¢ÖöæW”Æ&VÂ‡66Væ&–òç&VwVÆ$ÖöçF†Ç”6VçG2—ÓÂ÷7ããÂöF—câ—ÓÂöF—cçÓÂóçĞ¢ÂöF—cà¢“°§Ğ ¦W‡÷'BFVfVÇBgVæ7F–öâ6–×VÆF÷%vR‡²v÷&·76RÂ6WEv÷&·76RÂ7F—fU6–×VÆF–öâÂ6WD7F—fU6–×VÆF–öâÂöå6fRÂöäFE6–×VÆF–öâÂöä7&VFT6Æ–VçBÓ¢&÷2’°¢6öç7B–æ—F–ÂÒ7F—fU6–×VÆF–öâóòÖ¶TæWu6–×VÆF–öâ‚""Âv÷&·76Rç÷'FföÆ–õ³Óòæ–Bóò""“°¢6öç7B¶G&gBÂ6WDG&gEÒÒW6U7FFSÅ6–×VÆF–öå&V6÷&Câ†–æ—F–Â“°¢6öç7B·f–WrÂ6WEf–WuÒÒW6U7FFSÂ&–çFW&æò"Â'v†G6#â‚&–çFW&æò"“°¢6öç7B·Fö7BÂ6WEFö7EÒÒW6U7FFR‚""“°¢6öç7B¶æWt6Æ–VçD÷VâÂ6WDæWt6Æ–VçD÷VåÒÒW6U7FFR†fÇ6R“°¢6öç7B¶æWt6Æ–VçDæÖRÂ6WDæWt6Æ–VçDæÖUÒÒW6U7FFR‚""“°¢6öç7B¶æWt6Æ–VçD–æ6öÖRÂ6WDæWt6Æ–VçD–æ6öÖUÒÒW6U7FFSÆçVÖ&W"ÂçVÆÃâ†çVÆÂ“°¢6öç7B¶æ÷F–6RÂ6WDæ÷F–6UÒÒW6U7FFR‚""“°¢6öç7BwÔf–ÆU&VbÒW6U&VcÄ…DÔÄ–çWDVÆVÖVçCâ†çVÆÂ“°¢6öç7B¶wÔ'W7’Â6WDwÔ'W7•ÒÒW6U7FFR†fÇ6R“°¢6öç7B¶wÕ&öw&W72Â6WDwÕ&öw&W75ÒÒW6U7FFSÄ–×÷'E&öw&W72ÂçVÆÃâ†çVÆÂ“°¢6öç7B¶wÕ&Wf–WrÂ6WDwÕ&Wf–WuÒÒW6U7FFSÄwÕ&Wf–WrÂçVÆÃâ†çVÆÂ“°¢6öç7B¶wÔW'&÷"Â6WDwÔW'&÷%ÒÒW6U7FFR‚""“°¢6öç7B¶wÔæ÷F–6RÂ6WDwÔæ÷F–6UÒÒW6U7FFR‚""“°¢6öç7B¶wÕ6÷W&6TæÖRÂ6WDwÕ6÷W&6TæÖUÒÒW6U7FFR‚$–æf÷&ÖFòÖçVÆÖVçFRæò6–×VÆF÷""“°¢6öç7B¶æW‡E&÷W'G”–BÂ6WDæW‡E&÷W'G”–EÒÒW6U7FFR‚""“° ¢òòæWrÆöFVB6–×VÆF–öâ¶W’7F'G2g&W6‚G&gC²VF—G2&VÖ–âÆö6ÂVçF–ÂF†RW6W"6fW2à¢6öç7B7F—fT–BÒ7F—fU6–×VÆF–öãòæ–Bóò"#°¢6öç7B¶Æ7DÆöFVD–BÂ6WDÆ7DÆöFVD–EÒÒW6U7FFR†7F—fT–B“°¢–b†7F—fT–Bbb7F—fT–BÓÒÆ7DÆöFVD–B’²6WDG&gB†7F—fU6–×VÆF–öâ“²6WDÆ7DÆöFVD–B†7F—fT–B“²Ğ¢6öç7B6Æ–VçBÒv÷&·76Ræ6Æ–VçG2æf–æB‚†—FVÒ’Óâ—FVÒæ–BÓÓÒG&gBæ6Æ–VçD–B’óòçVÆÃ°¢6öç7B&÷W'G’Òv÷&·76Rç÷'FföÆ–òæf–æB‚†—FVÒ’Óâ—FVÒæ–BÓÓÒG&gBç&÷W'G”–B’óòv÷&·76Rç÷'FföÆ–õ³Ó°¢6öç7B&–6T6VçG2ÒG&gBç&–6T÷fW'&–FT6VçG2óò&÷W'G“òç&–6T6VçG2óò&÷W'G“òç&–6TÆ÷t6VçG2óò°¢6öç7B6Æ–VçE&V6öÖÖVæFF–öç2ÒW6TÖVÖò‚‚’Óâ°¢6öç7B&VfW&Væ6W2Ò6Æ–VçCòç&VfW&Væ6W3°¢–b‚6Æ–VçBÇÂ&VfW&Væ6W2ÇÂ€¢&VfW&Væ6W2æFW6—&VD&V2çG&–Ò‚’ÇÂ&VfW&Væ6W2æ&VG&öö×2ÓÒçVÆÂÇÀ¢&VfW&Væ6W2ç&¶–ærÓÒçVÆÂÇÂ&VfW&Væ6W2æFVÆ—fW'•–V"ÓÒçVÆÀ¢’’&WGW&âµÓ°¢&WGW&â&V6öÖÖVæEVæ—G4f÷$ÆVB†6Æ–VçBÂv÷&·76Rç÷'FföÆ–ò’æf–ÇFW"‚†—FVÒ’Óâ—FVÒç&V6öç2æÆVæwF‚â“°¢ÒÂ¶6Æ–VçBÂv÷&·76Rç÷'FföÆ–õÒ“°¢6öç7B&V6öÖÖVæFF–öåF–W$6÷VçG2ÒW6TÖVÖò‚‚’Óâ‡°¢'&VfW'&VB×&Vv–öí}ïO-¢G§²ÚîÆ­yÒase da simulaÃ§Ã£o" /><StatBlock label="COTA CAIXA USADA" value={calculation.financingPercent !== null ? `${formatNumber(calculation.financingPercent, 1)}%` : "A informar"} sub={calculation.financingUsedCents !== null ? formatBRL(calculation.financingUsedCents) : "transcreva o GPM"} tone="teal" /></div>
+import { useMemo, useRef, useState } from "react";
+import {
+  AlertCircle, ArrowDown, ArrowRight, CalendarDays, Check, ChevronDown, Copy, FileText,
+  Info, LoaderCircle, Plus, RotateCcw, Save, Send, ShieldCheck, Trash2, Upload, UserPlus, X,
+} from "lucide-react";
+import type { Dispatch, SetStateAction } from "react";
+import type { AnnualPayment, ClientPriceProfile, ClientProfile, PaymentDate, SimulationRecord, WorkspaceData } from "../lib/models";
+import type { PortfolioUnit } from "../data/portfolio";
+import { calculateAll, suggestRobustAct, type FlowScenario, type FullCalculation } from "../lib/calculator";
+import { formatBRL, formatNumber } from "../lib/money";
+import { recordSimulationDelivery } from "../lib/delivery";
+import { createId } from "../lib/storage";
+import { countMonthlyPayments, isShortOrImmediateDelivery, listMonthlyDates, monthKey, monthLabelCapitalized, parseMonthKey, suggestAnnualDates } from "../lib/schedule";
+import { buildInternalSummary, generateWhatsAppMessage } from "../lib/whatsapp";
+import { parseTableFile, type ImportProgress } from "../lib/importFiles";
+import { parseGpmText, type GpmSuggestions } from "../lib/gpm";
+import { recommendUnitsForLead } from "../lib/leads";
+import { clientPriceProfileToSimulation, projectClientPriceProfile } from "../lib/clientPriceProfile";
+import CurrencyInput from "./CurrencyInput";
+import SearchableUnitSelect from "./SearchableUnitSelect";
+
+interface Props {
+  workspace: WorkspaceData;
+  setWorkspace: Dispatch<SetStateAction<WorkspaceData>>;
+  activeSimulation: SimulationRecord | null;
+  setActiveSimulation: Dispatch<SetStateAction<SimulationRecord | null>>;
+  onSave: (simulation: SimulationRecord) => void;
+  onAddSimulation: (clientId: string, propertyId: string, comparisonGroupId?: string) => void;
+  onCreateClient: (client: ClientProfile) => void;
+}
+
+const todayMonth = (): PaymentDate => ({ year: new Date().getFullYear(), month: new Date().getMonth() + 1 });
+const annualId = ({ year, month }: PaymentDate) => `annual-${year}-${String(month).padStart(2, "0")}`;
+
+const recommendationTierDetails = {
+  "preferred-region": { title: "1Âº Â· RegiÃ£o de interesse", note: "Todas as opÃ§Ãµes desta regiÃ£o, sem filtro de quartos ou vaga." },
+  "preferred-typology": { title: "2Âº Â· Tipologia desejada", note: "Fora da regiÃ£o principal, somente a tipologia exata informada." },
+  "other-relevant": { title: "Outras preferÃªncias", note: "Sem regiÃ£o/quartos definidos; ordenadas pelas demais preferÃªncias." },
+} as const;
+
+export const makeNewSimulation = (clientId: string, propertyId: string, comparisonGroupId?: string | null): SimulationRecord => ({
+  id: createId("sim"), createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(),
+  clientId, propertyId, comparisonGroupId: comparisonGroupId ?? null, priceOverrideCents: null, actDate: todayMonth(), deliveryOverride: null,
+  financingAmountCents: null, gpmReportedFinancingAmountCents: null, gpmReportedPriceReferenceCents: null, financingManualOverride: false,
+  firstPriceInstallmentCents: null, financingTermMonths: null,
+  financingLine: "", financingSystem: "PRICE", financingRate: "", financingNotes: "",
+  gpmReportedSubsidyCents: null, gpmReportedFees: "", gpmReportedQuotaPercent: null, gpmReportedIncomeCommitmentPercent: null,
+  annualFactor: 3, monthlyCountOverride: null, annualDatesOverride: null,
+  robustActCents: null, directPrePercent: 55, directMonthlyCountOverride: null,
+  directAnnualDatesOverride: null, manualAmounts: {}, includeDirect: true,
+  fgtsUseAuthorized: false, actualShortFlowConfirmed: false, internalNotes: "",
+});
+
+const moneyLabel = (cents: number | null | undefined, fallback = "â€”") => cents === null || cents === undefined ? fallback : formatBRL(cents);
+const monthValue = (date: PaymentDate | null): string => date ? monthKey(date) : "";
+const parseNullableMonth = (value: string): PaymentDate | null => value ? parseMonthKey(value) : null;
+const uniqueSortedDates = (dates: PaymentDate[]): AnnualPayment[] => dates
+  .sort((a, b) => a.year - b.year || a.month - b.month)
+  .map((date) => ({ ...date, id: annualId(date), amountCents: null }));
+
+interface ComparisonEntry {
+  simulation: SimulationRecord;
+  unit: PortfolioUnit | null;
+  priceCents: number;
+  deliveryDate: PaymentDate | null;
+  calculation: FullCalculation | null;
+}
+
+const calculateComparisonEntry = (simulation: SimulationRecord, workspace: WorkspaceData): ComparisonEntry => {
+  const unit = workspace.portfolio.find((item) => item.id === simulation.propertyId) ?? null;
+  const client = workspace.clients.find((item) => item.id === simulation.clientId) ?? null;
+  const priceCents = simulation.priceOverrideCents ?? unit?.priceCents ?? unit?.priceLowCents ?? 0;
+  const deliveryDate = simulation.deliveryOverride ?? (unit?.deliveryYear && unit.deliveryMonth ? { year: unit.deliveryYear, month: unit.deliveryMonth } : null);
+  if (!unit) return { simulation, unit, priceCents, deliveryDate, calculation: null };
+
+  const deliveryTextForCalculation = unit.deliveryDateSource ? "" : unit.deliveryText;
+  const shortFlow = isShortOrImmediateDelivery(deliveryDate, deliveryTextForCalculation);
+  const monthlyCount = shortFlow
+    ? simulation.actualShortFlowConfirmed ? simulation.monthlyCountOverride : null
+    : simulation.monthlyCountOverride ?? (deliveryDate ? countMonthlyPayments(simulation.actDate, deliveryDate) : null);
+  const directMonthlyCount = shortFlow
+    ? simulation.actualShortFlowConfirmed ? simulation.directMonthlyCountOverride : null
+    : simulation.directMonthlyCountOverride ?? monthlyCount;
+  const annualPayments = simulation.annualDatesOverride?.slice() ?? (deliveryDate ? uniqueSortedDates(suggestAnnualDates(simulation.actDate, deliveryDate)) : []);
+  const directAnnualPayments = simulation.directAnnualDatesOverride?.slice() ?? annualPayments;
+  const robustActCents = simulation.robustActCents ?? suggestRobustAct(priceCents, client?.availableActCents ?? null);
+  const calculation = calculateAll({
+    priceCents,
+    incomeCents: client?.incomeFamilyCents ?? null,
+    financingAmountCents: simulation.financingAmountCents,
+    financingManualOverride: simulation.financingManualOverride,
+    firstPriceInstallmentCents: simulation.firstPriceInstallmentCents,
+    actDate: simulation.actDate,
+    deliveryDate,
+    readyText: deliveryTextForCalculation,
+    monthlyCount,
+    annualPayments,
+    annualFactor: simulation.annualFactor,
+    robustActCents,
+    availableActCents: client?.availableActCents ?? null,
+    caixaManualMonthlyCents: simulation.manualAmounts.caixaMonthlyCents,
+    caixaManualAnnualCents: simulation.manualAmounts.caixaAnnualCents,
+    directManualMonthlyCents: simulation.manualAmounts.directMonthlyCents,
+    directManualAnnualCents: simulation.manualAmounts.directAnnualCents,
+    directPrePercent: simulation.directPrePercent,
+    directMonthlyCount,
+    directAnnualPayments,
+    includeDirect: simulation.includeDirect,
+    actualShortFlowConfirmed: simulation.actualShortFlowConfirmed,
+  });
+  return { simulation, unit, priceCents, deliveryDate, calculation };
+};
+
+type GpmFieldKey = keyof GpmSuggestions;
+type GpmReview = { values: GpmSuggestions; selected: Record<GpmFieldKey, boolean> };
+
+function MoneyField({ label, value, onChange, hint, disabled }: { label: string; value: number | null | undefined; onChange: (value: number | null) => void; hint?: string; disabled?: boolean }) {
+  return <label className="form-field"><span>{label}</span><div className={`money-control ${disabled ? "disabled" : ""}`}><span>R$</span><CurrencyInput disabled={disabled} min="0" value={value} onChange={onChange} placeholder="0,00" /></div>{hint && <small>{hint}</small>}</label>;
+}
+
+function DateField({ label, value, onChange, hint }: { label: string; value: PaymentDate | null; onChange: (value: PaymentDate | null) => void; hint?: string }) {
+  return <label className="form-field"><span>{label}</span><div className="date-control"><CalendarDays size={15} /><input type="month" value={monthValue(value)} onChange={(event) => onChange(parseNullableMonth(event.target.value))} /></div>{hint && <small>{hint}</small>}</label>;
+}
+
+function StatBlock({ label, value, sub, tone = "" }: { label: string; value: string; sub?: string; tone?: string }) {
+  return <div className={`stat-block ${tone}`}><small>{label}</small><strong>{value}</strong>{sub && <span>{sub}</span>}</div>;
+}
+
+function FlowPanel({ title, scenario, target, kind, actDate, expanded = false }: { title: string; scenario: FlowScenario | null; target: number | null; kind: "caixa" | "direta"; actDate: PaymentDate; expanded?: boolean }) {
+  const [showCalendar, setShowCalendar] = useState(expanded);
+  if (!scenario) return <div className="flow-empty"><AlertCircle size={17} /><strong>{kind === "caixa" ? "Informe a simulaÃ§Ã£o PRICE/GPM" : "Ative a modalidade Tabela Direta"}</strong><p>O fluxo sÃ³ serÃ¡ calculado com os dados correspondentes.</p></div>;
+  const monthDates = scenario.monthlyCount ? listMonthlyDates(actDate, scenario.monthlyCount) : [];
+  const balanced = scenario.isBalanced;
+  const lastRegularMonth = scenario.monthlyCount && scenario.finalMonthlyCents !== null && scenario.finalMonthlyCents !== scenario.regularMonthlyCents;
+  return (
+    <div className={`flow-panel ${balanced ? "flow-balanced" : "flow-unbalanced"}`}>
+      <div className="flow-panel-head"><div><span className="eyebrow">{kind === "caixa" ? "PAGO Ã€ CURY ATÃ‰ AS CHAVES" : "PRÃ‰-CHAVES Â· TABELA DIRETA"}</span><h3>{title}</h3></div><span className={`audit-chip ${balanced ? "ok" : "review"}`}>{balanced ? <><Check size={12} /> FECHA</> : <><AlertCircle size={12} /> REVISAR</>}</span></div>
+      <div className="flow-amount-row"><span>{kind === "caixa" ? "Recursos prÃ³prios alvo" : "Percentual prÃ©-chaves"}</span><strong>{kind === "caixa" ? moneyLabel(target) : `${target ? formatBRL(target) : "â€”"}`}</strong></div>
+      <div className="flow-items">
+        <div className="flow-item"><span className="flow-index act-index">A</span><span><strong>Ato</strong><small>{scenario.actPercent !== null ? `${formatNumber(scenario.actPercent, 1)}% do preÃ§o total` : "Ato separado das mensais"}</small></span><b>{formatBRL(scenario.actCents)}</b></div>
+        <div className="flow-item"><span className="flow-index monthly-index">M</span><span><strong>{scenario.monthlyCount ?? "â€”"} mensais</strong><small>{scenario.monthlyIncomePercent !== null ? `${formatNumber(scenario.monthlyIncomePercent, 1)}% da renda familiar` : "Percentual de renda a confirmar"}</small></span><b>{moneyLabel(scenario.regularMonthlyCents, "Pendente")}</b></div>
+        {scenario.annualPayments.map((annual) => <div className="flow-item" key={annual.id}><span className="flow-index annual-index">I</span><span><strong>Anual Â· {monthLabelCapitalized(annual)}</strong><small>{scenario.regularMonthlyCents ? `${formatNumber((annual.amountCents ?? 0) / scenario.regularMonthlyCents, 1)}Ã— a mensal` : "Data anterior Ã s chaves"}</small></span><b>{moneyLabel(annual.amountCents, "Pendente")}</b></div>)}
+        {lastRegularMonth && <div className="flow-item rounding-row"><span className="flow-index">â†³</span><span><strong>Ãšltima mensal</strong><small>Ajuste residual de arredondamento informado</small></span><b>{formatBRL(scenario.finalMonthlyCents)}</b></div>}
+      </div>
+      <div className="flow-total"><span>Total distribuÃ­do <small>DiferenÃ§a vs alvo: {moneyLabel(scenario.differenceCents)}</small></span><strong>{moneyLabel(scenario.scheduledTotalCents)}</strong></div>
+      {scenario.timingErrors.length > 0 && <div className="flow-alert danger-alert">{scenario.timingErrors.map((item) => <p key={item}>{item}</p>)}</div>}
+      {scenario.warnings.length > 0 && <div className="flow-alert">{scenario.warnings.slice(0, 4).map((item) => <p key={item}>{item}</p>)}</div>}
+      {scenario.monthlyCount !== null && scenario.monthlyCount > 0 && <><button className="flow-calendar-toggle" onClick={() => setShowCalendar(!showCalendar)}>{showCalendar ? "Ocultar" : "Ver"} calendÃ¡rio das mensais <ChevronDown size={14} className={showCalendar ? "rotate" : ""} /></button>{showCalendar && <div className="monthly-calendar"><div className="calendar-header"><span>PARCELA</span><span>VENCIMENTO</span><span>VALOR</span></div>{monthDates.map((dueDate, index) => <div className="calendar-row" key={index}><span>{String(index + 1).padStart(2, "0")}</span><span>{monthLabelCapitalized(dueDate)}</span><span>{index === scenario.monthlyCount! - 1 && scenario.finalMonthlyCents !== scenario.regularMonthlyCents ? formatBRL(scenario.finalMonthlyCents) : moneyLabel(scenario.regularMonthlyCents)}</span></div>)}</div>}</>}
+    </div>
+  );
+}
+
+export default function SimulatorPage({ workspace, setWorkspace, activeSimulation, setActiveSimulation, onSave, onAddSimulation, onCreateClient }: Props) {
+  const initial = activeSimulation ?? makeNewSimulation("", workspace.portfolio[0]?.id ?? "");
+  const [draft, setDraft] = useState<SimulationRecord>(initial);
+  const [view, setView] = useState<"interno" | "whatsapp">("interno");
+  const [toast, setToast] = useState("");
+  const [newClientOpen, setNewClientOpen] = useState(false);
+  const [newClientName, setNewClientName] = useState("");
+  const [newClientIncome, setNewClientIncome] = useState<number | null>(null);
+  const [notice, setNotice] = useState("");
+  const gpmFileRef = useRef<HTMLInputElement>(null);
+  const [gpmBusy, setGpmBusy] = useState(false);
+  const [gpmProgress, setGpmProgress] = useState<ImportProgress | null>(null);
+  const [gpmReview, setGpmReview] = useState<GpmReview | null>(null);
+  const [gpmError, setGpmError] = useState("");
+  const [gpmNotice, setGpmNotice] = useState("");
+  const [gpmSourceName, setGpmSourceName] = useState("Informado manualmente no simulador");
+  const [nextPropertyId, setNextPropertyId] = useState("");
+
+  // New loaded simulation key starts a fresh draft; edits remain local until the user saves.
+  const activeId = activeSimulation?.id ?? "";
+  const [lastLoadedId, setLastLoadedId] = useState(activeId);
+  if (activeId && activeId !== lastLoadedId) { setDraft(activeSimulation!); setLastLoadedId(activeId); }
+  const client = workspace.clients.find((item) => item.id === draft.clientId) ?? null;
+  const property = workspace.portfolio.find((item) => item.id === draft.propertyId) ?? workspace.portfolio[0];
+  const priceCents = draft.priceOverrideCents ?? property?.priceCents ?? property?.priceLowCents ?? 0;
+  const clientRecommendations = useMemo(() => {
+    const preferences = client?.preferences;
+    if (!client || !preferences || !(
+      preferences.desiredAreas.trim() || preferences.bedrooms !== null ||
+      preferences.parking !== null || preferences.deliveryYear !== null
+    )) return [];
+    return recommendUnitsForLead(client, workspace.portfolio).filter((item) => item.reasons.length > 0);
+  }, [client, workspace.portfolio]);
+  const recommendationTierCounts = useMemo(() => ({
+    "preferred-region": clientRecommendations.filter((item) => item.tier === "preferred-region").length,
+    "preferred-typology": clientRecommendations.filter((item) => item.tier === "preferred-typology").length,
+    "other-relevant": clientRecommendations.filter((item) => item.tier === "other-relevant").length,
+  }), [clientRecommendations]);
+  const hasPriceProfileData = [draft.financingAmountCents, draft.gpmReportedFinancingAmountCents, draft.firstPriceInstallmentCents, draft.financingTermMonths,
+    draft.gpmReportedSubsidyCents, draft.gpmReportedQuotaPercent, draft.gpmReportedIncomeCommitmentPercent]
+    .some((value) => value !== null && value !== undefined) || Boolean(
+      draft.financingLine.trim() || draft.financingRate.trim() || draft.gpmReportedFees?.trim() || draft.financingNotes.trim(),
+    );
+  const deliveryDate = draft.deliveryOverride ?? (property?.deliveryMonth && property?.deliveryYear ? { year: property.deliveryYear, month: property.deliveryMonth } : null);
+  const deliveryText = property?.deliveryText ?? "Prazo de entrega nÃ£o informado";
+  const actDate = draft.actDate;
+  const familyIncome = client?.incomeFamilyCents ?? null;
+  const availableAct = client?.availableActCents ?? null;
+  const readyText = property?.deliveryDateSource ? "" : property?.deliveryText ?? "";
+  const shortFlow = isShortOrImmediateDelivery(deliveryDate, readyText);
+  const dueDates = useMemo(() => {
+    if (draft.annualDatesOverride) return draft.annualDatesOverride;
+    return deliveryDate ? uniqueSortedDates(suggestAnnualDates(actDate, deliveryDate)) : [];
+  }, [draft.annualDatesOverride, deliveryDate?.year, deliveryDate?.month, actDate.year, actDate.month]);
+  const directDates = draft.directAnnualDatesOverride ?? dueDates;
+  const maxMonths = deliveryDate ? countMonthlyPayments(actDate, deliveryDate) : null;
+  const monthlyCount = shortFlow ? (draft.actualShortFlowConfirmed ? draft.monthlyCountOverride : null) : draft.monthlyCountOverride ?? maxMonths;
+  const directMonthlyCount = shortFlow ? (draft.actualShortFlowConfirmed ? draft.directMonthlyCountOverride : null) : draft.directMonthlyCountOverride ?? monthlyCount;
+  const robustAct = draft.robustActCents ?? suggestRobustAct(priceCents, availableAct);
+  const calculation = useMemo(() => calculateAll({
+    priceCents,
+    incomeCents: familyIncome,
+    financingAmountCents: draft.financingAmountCents,
+    financingManualOverride: draft.financingManualOverride,
+    firstPriceInstallmentCents: draft.firstPriceInstallmentCents,
+    actDate,
+    deliveryDate,
+    readyText,
+    monthlyCount,
+    annualPayments: dueDates,
+    annualFactor: draft.annualFactor,
+    robustActCents: robustAct,
+    availableActCents: availableAct,
+    caixaManualMonthlyCents: draft.manualAmounts.caixaMonthlyCents,
+    caixaManualAnnualCents: draft.manualAmounts.caixaAnnualCents,
+    directManualMonthlyCents: draft.manualAmounts.directMonthlyCents,
+    directManualAnnualCents: draft.manualAmounts.directAnnualCents,
+    directPrePercent: draft.directPrePercent,
+    directMonthlyCount,
+    directAnnualPayments: directDates,
+    includeDirect: draft.includeDirect,
+    actualShortFlowConfirmed: draft.actualShortFlowConfirmed,
+  }), [priceCents, familyIncome, draft, actDate.year, actDate.month, deliveryDate?.year, deliveryDate?.month, readyText, monthlyCount, dueDates, robustAct, availableAct, directMonthlyCount, directDates]);
+  const deliveryIsPremise = draft.deliveryOverride !== null || Boolean(property?.deliveryDateSource) || Boolean(property?.deliveryYear && !property.deliveryMonth);
+  const priceIsPremise = draft.priceOverrideCents !== null || (!property?.priceCents && property?.priceLowCents !== undefined);
+  const messageContext = useMemo(() => property ? ({
+    client, property, priceCents, deliveryDate, deliveryText, monthsCount: monthlyCount, calculation,
+    deliveryIsPremise, priceIsPremise, actDate,
+    financingTermMonths: draft.financingTermMonths, financingLine: draft.financingLine,
+    financingSystem: draft.financingSystem, financingRate: draft.financingRate, firstPriceInstallmentCents: draft.firstPriceInstallmentCents,
+    gpmReportedSubsidyCents: draft.gpmReportedSubsidyCents, gpmReportedFees: draft.gpmReportedFees,
+    gpmReportedQuotaPercent: draft.gpmReportedQuotaPercent, gpmReportedIncomeCommitmentPercent: draft.gpmReportedIncomeCommitmentPercent,
+    incomeCents: familyIncome, includeFGTSNote: (client?.fgtsBalanceCents ?? 0) > 0,
+    mode: "ambas" as const,
+  }) : null, [client, property, priceCents, deliveryDate?.year, deliveryDate?.month, deliveryText, monthlyCount, calculation, deliveryIsPremise, priceIsPremise, draft.financingTermMonths, draft.financingLine, draft.financingSystem, draft.financingRate, draft.firstPriceInstallmentCents, draft.gpmReportedSubsidyCents, draft.gpmReportedFees, draft.gpmReportedQuotaPercent, draft.gpmReportedIncomeCommitmentPercent, familyIncome]);
+  const message = messageContext ? generateWhatsAppMessage(messageContext) : "Selecione uma unidade para montar a mensagem.";
+  const internalSummary = messageContext ? buildInternalSummary(messageContext) : "Selecione uma unidade para conferir os dados.";
+
+  const update = (patch: Partial<SimulationRecord>) => {
+    const next = { ...draft, ...patch, updatedAt: new Date().toISOString() };
+    setDraft(next);
+    setActiveSimulation(next);
+    setNotice("");
+  };
+  const changeClient = (clientId: string) => {
+    const selectedClient = workspace.clients.find((item) => item.id === clientId);
+    update({
+      clientId,
+      ...clientPriceProfileToSimulation(selectedClient?.priceProfile, priceCents),
+      manualAmounts: {}, robustActCents: null, monthlyCountOverride: null, annualDatesOverride: null,
+      directMonthlyCountOverride: null, directAnnualDatesOverride: null, actualShortFlowConfirmed: false,
+    });
+    setGpmSourceName(selectedClient?.priceProfile?.source || "Informado manualmente no simulador");
+    setGpmReview(null);
+    setGpmNotice(selectedClient?.priceProfile
+      ? `PRICE carregada do perfil; os campos sÃ£o editÃ¡veis. ${projectClientPriceProfile(selectedClient.priceProfile, priceCents).message}`
+      : "Este cliente nÃ£o tem PRICE/GPM salvo; os campos financeiros foram limpos para evitar mistura com o perfil anterior.");
+  };
+  const importGpmFile = async (file?: File) => {
+    if (!file) return;
+    setGpmSourceName(file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf")
+      ? "Arquivo PDF importado e revisado no simulador"
+      : "Imagem importada e revisada no simulador");
+    setGpmBusy(true); setGpmError(""); setGpmNotice(""); setGpmReview(null);
+    try {
+      const parsed = await parseTableFile(file, true, setGpmProgress);
+      const values = parseGpmText(parsed.rawText);
+      if (!Object.values(values).some((value) => value !== null)) {
+        setGpmError("NÃ£o identifiquei campos GPM/PRICE com seguranÃ§a. Digite os dados manualmente ou tente um arquivo mais nÃ­tido.");
+      } else {
+        const keys = Object.keys(values) as GpmFieldKey[];
+        const selected = Object.fromEntries(keys.map((key) => [key, values[key] !== null])) as Record<GpmFieldKey, boolean>;
+        setGpmReview({ values, selected });
+        setGpmNotice("ExtraÃ§Ã£o local concluÃ­da. Revise e corrija os campos abaixo; o arquivo e o texto bruto nÃ£o sÃ£o salvos.");
+      }
+    } catch (error) {
+      setGpmError(error instanceof Error ? error.message : "NÃ£o foi possÃ­vel ler esse arquivo.");
+    } finally {
+      setGpmBusy(false); setGpmProgress(null);
+      if (gpmFileRef.current) gpmFileRef.current.value = "";
+    }
+  };
+  const updateGpmValue = <K extends GpmFieldKey>(key: K, value: GpmSuggestions[K]) => {
+    setGpmReview((current) => current ? { ...current, values: { ...current.values, [key]: value } } : current);
+  };
+  const toggleGpmField = (key: GpmFieldKey, checked: boolean) => {
+    setGpmReview((current) => current ? { ...current, selected: { ...current.selected, [key]: checked } } : current);
+  };
+  const applyGpmReview = () => {
+    if (!gpmReview) return;
+    const { values, selected } = gpmReview;
+    const patch: Partial<SimulationRecord> = {};
+    if (selected.propertyPriceCents && values.propertyPriceCents !== null) patch.priceOverrideCents = values.propertyPriceCents;
+    let cappedFromGpm = false;
+    if (selected.financingAmountCents && values.financingAmountCents !== null) {
+      const sourcePrice = selected.propertyPriceCents && values.propertyPriceCents !== null ? values.propertyPriceCents : priceCents;
+      const cap = sourcePrice > 0 ? Math.floor(sourcePrice * 0.8) : null;
+      cappedFromGpm = cap !== null && values.financingAmountCents > cap;
+      patch.financingAmountCents = cappedFromGpm ? cap : values.financingAmountCents;
+      patch.financingManualOverride = false;
+      patch.gpmReportedFinancingAmountCents = values.financingAmountCents;
+      patch.gpmReportedPriceReferenceCents = sourcePrice > 0 ? sourcePrice : null;
+    }
+    if (selected.firstInstallmentCents && values.firstInstallmentCents !== null) {
+      patch.firstPriceInstallmentCents = values.firstInstallmentCents;
+      patch.gpmReportedFirstPriceInstallmentCents = values.firstInstallmentCents;
+      const sourcePrice = selected.propertyPriceCents && values.propertyPriceCents !== null ? values.propertyPriceCents : priceCents;
+      if (sourcePrice > 0) patch.gpmReportedPriceReferenceCents ??= sourcePrice;
+    }
+    if (selected.termMonths && values.termMonths !== null) patch.financingTermMonths = values.termMonths;
+    if (selected.financingLine && values.financingLine !== null) patch.financingLine = values.financingLine;
+    if (selected.financingSystem && values.financingSystem !== null) patch.financingSystem = values.financingSystem;
+    if (selected.rate && values.rate !== null) patch.financingRate = values.rate;
+    if (selected.subsidyCents && values.subsidyCents !== null) patch.gpmReportedSubsidyCents = values.subsidyCents;
+    if (selected.fees && values.fees !== null) patch.gpmReportedFees = values.fees;
+    if (selected.quotaPercent && values.quotaPercent !== null) patch.gpmReportedQuotaPercent = values.quotaPercent;
+    if (selected.incomeCommitmentPercent && values.incomeCommitmentPercent !== null) patch.gpmReportedIncomeCommitmentPercent = values.incomeCommitmentPercent;
+    const applyIncome = selected.familyIncomeCents && values.familyIncomeCents !== null && Boolean(client);
+    if (Object.keys(patch).length === 0 && !applyIncome) {
+      setGpmError(client || !selected.familyIncomeCents ? "Marque ao menos um campo reconhecido para aplicar." : "Selecione um cliente no simulador antes de aplicar a renda reconhecida.");
+      return;
+    }
+    if (Object.keys(patch).length) update(patch);
+    if (applyIncome && client) {
+      setWorkspace((current) => ({ ...current, clients: current.clients.map((item) => item.id === client.id ? { ...item, incomeFamilyCents: values.familyIncomeCents, updatedAt: new Date().toISOString() } : item) }));
+    }
+    const skippedIncome = selected.familyIncomeCents && values.familyIncomeCents !== null && !client;
+    setGpmError("");
+    setGpmNotice(`Campos revisados aplicados Ã  simulaÃ§Ã£o${cappedFromGpm ? `; financiamento ajustado automaticamente de ${formatBRL(values.financingAmountCents!)} para o teto indicativo de 80% (${formatBRL(patch.financingAmountCents!)}).` : ""}${skippedIncome ? "; renda nÃ£o aplicada porque nenhum cliente estÃ¡ selecionado" : ""}. VocÃª pode editar o valor manualmente; salve a simulaÃ§Ã£o para persistir.`);
+    setGpmReview(null);
+  };
+  const savePriceProfileToClient = () => {
+    if (!client || priceCents <= 0 || !hasPriceProfileData) {
+      setNotice("Selecione um cliente, informe o preÃ§o-base e preencha ao menos um dado GPM/PRICE antes de salvar no perfil.");
+      return;
+    }
+    const updatedAt = new Date().toISOString();
+    const source = gpmSourceName.trim() || "Informado manualmente no simulador";
+    const existingProfile = client.priceProfile;
+    const priceProfile: ClientPriceProfile = {
+      priceReferenceCents: draft.gpmReportedPriceReferenceCents ?? priceCents,
+      financingAmountCents: draft.gpmReportedFinancingAmountCents ?? draft.financingAmountCents,
+      gpmReportedFinancingAmountCents: draft.gpmReportedFinancingAmountCents ?? draft.financingAmountCents,
+      firstPriceInstallmentCents: draft.gpmReportedFirstPriceInstallmentCents ?? draft.firstPriceInstallmentCents,
+      gpmReportedFirstPriceInstallmentCents: draft.gpmReportedFirstPriceInstallmentCents ?? draft.firstPriceInstallmentCents,
+      financingTermMonths: draft.financingTermMonths,
+      financingLine: draft.financingLine,
+      financingSystem: draft.financingSystem,
+      financingRate: draft.financingRate,
+      financingNotes: draft.financingNotes,
+      source,
+      sourceDate: existingProfile?.source === source ? existingProfile.sourceDate ?? "" : "",
+      gpmReportedSubsidyCents: draft.gpmReportedSubsidyCents,
+      gpmReportedFees: draft.gpmReportedFees ?? "",
+      gpmReportedQuotaPercent: draft.gpmReportedQuotaPercent ?? null,
+      gpmReportedIncomeCommitmentPercent: draft.gpmReportedIncomeCommitmentPercent ?? null,
+      updatedAt,
+    };
+    setWorkspace((current) => ({
+      ...current,
+      clients: current.clients.map((item) => item.id === client.id ? { ...item, priceProfile, updatedAt } : item),
+    }));
+    setGpmNotice(`PRICE/GPM salva no perfil de ${client.name}. Base: ${formatBRL(priceCents)}; origem: ${priceProfile.source}. A data da tabela nÃ£o foi presumida.`);
+    setNotice("Dados PRICE/GPM salvos no perfil do cliente e disponÃ­veis nas prÃ³ximas recomendaÃ§Ãµes.");
+  };
+  const openRecommendedScenario = (unit: PortfolioUnit) => {
+    if (!client) return;
+    const recommendation = clientRecommendations.find((item) => item.unit.id === unit.id);
+    if (!recommendation) return;
+    const previousRecord = workspace.simulations.find((item) => item.id === draft.id);
+    const serializeWithoutTimestamp = (record: SimulationRecord) => JSON.stringify({ ...record, updatedAt: "" });
+    const hasUnpersistedWork = draft.financingAmountCents !== null || draft.firstPriceInstallmentCents !== null ||
+      draft.deliveryOverride !== null || draft.priceOverrideCents !== null || Object.keys(draft.manualAmounts).length > 0;
+    const changedExistingRecord = previousRecord && serializeWithoutTimestamp(previousRecord) !== serializeWithoutTimestamp(draft);
+    const preserveDraft = changedExistingRecord || (!previousRecord && hasUnpersistedWork);
+    if (preserveDraft && property && priceCents > 0) onSave({ ...draft, updatedAt: new Date().toISOString() });
+    const comparisonGroupId = draft.comparisonGroupId ?? createId("compare");
+    const targetPrice = unit.priceCents ?? unit.priceLowCents ?? null;
+    const projection = projectClientPriceProfile(client.priceProfile, targetPrice);
+    const next: SimulationRecord = {
+      ...makeNewSimulation(client.id, unit.id, comparisonGroupId),
+      ...clientPriceProfileToSimulation(client.priceProfile, targetPrice),
+      origin: "lead_recommendation",
+      recommendation: { score: recommendation.score, reasons: recommendation.reasons, mismatches: recommendation.mismatches },
+      internalNotes: projection.message,
+    };
+    setDraft(next);
+    setActiveSimulation(next);
+    setLastLoadedId(next.id);
+    setGpmSourceName(client.priceProfile?.source || "PRICE/GPM pendente no perfil");
+    setGpmReview(null);
+    setGpmNotice(client.priceProfile ? projection.message : "PRICE/GPM pendente no perfil; os campos financeiros foram deixados vazios.");
+    setNotice(`CenÃ¡rio independente aberto para ${unit.project} Â· ${unit.typology}.${preserveDraft ? " O rascunho anterior com alteraÃ§Ãµes foi salvo localmente para nÃ£o perder seus dados." : " Revise preÃ§o e premissas antes de salvar."}`);
+  };
+  const setAnnualDates = (kind: "caixa" | "directa", rows: AnnualPayment[]) => {
+    if (kind === "caixa") update({ annualDatesOverride: rows });
+    else update({ directAnnualDatesOverride: rows });
+  };
+  const addAnnual = (kind: "caixa" | "directa") => {
+    const rows = kind === "caixa" ? dueDates : directDates;
+    let nextYear = Math.max(2027, actDate.year, ...rows.map((row) => row.year + 1));
+    if (nextYear === actDate.year && actDate.month >= 12) nextYear += 1;
+    const due = { year: nextYear, month: 12, id: annualId({ year: nextYear, month: 12 }), amountCents: null };
+    setAnnualDates(kind, [...rows, due]);
+  };
+  const updateAnnualDate = (kind: "caixa" | "directa", oldId: string, date: PaymentDate | null) => {
+    const rows = kind === "caixa" ? dueDates : directDates;
+    if (!date) return;
+    setAnnualDates(kind, rows.map((row) => row.id === oldId ? { ...date, id: annualId(date), amountCents: null } : row));
+  };
+  const setManualMonthly = (kind: "caixa" | "directa", value: number | null) => {
+    update({ manualAmounts: { ...draft.manualAmounts, [kind === "caixa" ? "caixaMonthlyCents" : "directMonthlyCents"]: value ?? undefined } });
+  };
+  const setManualAnnual = (kind: "caixa" | "directa", rowId: string, value: number | null) => {
+    const scenario = kind === "caixa" ? calculation.robust : calculation.directRobust;
+    const monthlyKey = kind === "caixa" ? "caixaMonthlyCents" : "directMonthlyCents";
+    const annualKey = kind === "caixa" ? "caixaAnnualCents" : "directAnnualCents";
+    const manualAnnuals = { ...(draft.manualAmounts[annualKey] ?? {}), [rowId]: value ?? 0 };
+    update({ manualAmounts: { ...draft.manualAmounts, [monthlyKey]: draft.manualAmounts[monthlyKey] ?? scenario?.regularMonthlyCents ?? 0, [annualKey]: manualAnnuals } });
+  };
+  const resetAuto = () => { update({ manualAmounts: {}, monthlyCountOverride: null, annualDatesOverride: null, directMonthlyCountOverride: null, directAnnualDatesOverride: null }); setNotice("CÃ¡lculo automÃ¡tico restaurado. Ato e percentuais foram mantidos."); };
+  const save = () => {
+    if (!property || priceCents <= 0) { setNotice("Selecione uma unidade com preÃ§o ou informe um valor para esta simulaÃ§Ã£o."); return; }
+    const record = { ...draft, propertyId: property.id, priceOverrideCents: draft.priceOverrideCents, updatedAt: new Date().toISOString() };
+    if (draft.deliveryOverride) {
+      const { year, month } = draft.deliveryOverride;
+      setWorkspace((current) => ({ ...current, portfolio: current.portfolio.map((unit) => unit.id === property.id ? recordSimulationDelivery(unit, { year, month }) : unit) }));
+    }
+    onSave(record); setNotice("SimulaÃ§Ã£o salva neste dispositivo.");
+  };
+  const addScenario = () => {
+    const nextProperty = workspace.portfolio.find((unit) => unit.id === nextPropertyId) ?? workspace.portfolio[0];
+    if (!property || priceCents <= 0) { setNotice("Informe o preÃ§o desta unidade e salve antes de acrescentar outro cenÃ¡rio."); return; }
+    if (!nextProperty) { setNotice("Cadastre um empreendimento no catÃ¡logo antes de adicionar outro cenÃ¡rio."); return; }
+    const comparisonGroupId = draft.comparisonGroupId ?? createId("compare");
+    const record = { ...draft, propertyId: property.id, comparisonGroupId, updatedAt: new Date().toISOString() };
+    if (draft.deliveryOverride) {
+      const { year, month } = draft.deliveryOverride;
+      setWorkspace((current) => ({ ...current, portfolio: current.portfolio.map((unit) => unit.id === property.id ? recordSimulationDelivery(unit, { year, month }) : unit) }));
+    }
+    onSave(record);
+    onAddSimulation(draft.clientId, nextProperty.id, comparisonGroupId);
+  };
+  const createQuickClient = () => {
+    if (!newClientName.trim()) return;
+    const next: ClientProfile = {
+      id: createId("client"), name: newClientName.trim(), phone: "", incomeIndividualCents: null,
+      incomeFamilyCents: newClientIncome, incomeComposition: "", oldestBuyerAge: null,
+      availableActCents: null, monthlyCapacityCents: null, annualCapacityCents: null, desiredTermMonths: null,
+      fgtsBalanceCents: null, fgtsTimeYears: null, notes: "", updatedAt: new Date().toISOString(),
+    };
+    onCreateClient(next); update({ clientId: next.id }); setNewClientOpen(false); setNewClientName(""); setNewClientIncome(null);
+  };
+  const copyMessage = async () => {
+    try { await navigator.clipboard.writeText(message); setToast("Mensagem copiada para a Ã¡rea de transferÃªncia."); }
+    catch { setToast("NÃ£o foi possÃ­vel copiar automaticamente. Selecione e copie o texto abaixo."); }
+    window.setTimeout(() => setToast(""), 3500);
+  };
+  const openWhatsApp = () => {
+    const phone = client?.phone.replace(/\D/g, "") ?? "";
+    const normalized = phone ? (phone.startsWith("55") ? phone : `55${phone}`) : "";
+    const url = normalized ? `https://wa.me/${normalized}?text=${encodeURIComponent(message)}` : `https://wa.me/?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+  const modeCanCopy = calculation.robust?.isBalanced ?? false;
+  const estimatedPriceRange = !property?.priceCents && property?.priceLowCents !== undefined;
+  const comparisonRecords = [
+    ...(draft.comparisonGroupId ? workspace.simulations.filter((item) => item.comparisonGroupId === draft.comparisonGroupId && item.id !== draft.id) : []),
+    draft,
+  ];
+  const comparisonEntries = comparisonRecords.map((item) => calculateComparisonEntry(item, workspace));
+  const minimumAmong = (pick: (entry: ComparisonEntry) => number | null | undefined): number | null => {
+    const values = comparisonEntries.map(pick).filter((value): value is number => value !== null && value !== undefined && Number.isFinite(value));
+    return values.length ? Math.min(...values) : null;
+  };
+  const lowestRobustAct = minimumAmong((entry) => entry.calculation?.robust?.actCents);
+  const lowestMinimumAct = minimumAmong((entry) => entry.calculation?.minimumActCents);
+  const lowestDirectRobustAct = minimumAmong((entry) => entry.calculation?.directRobust?.actCents);
+  const lowestDirectMinimumAct = minimumAmong((entry) => entry.calculation?.directMinimum?.actCents);
+  const lowestCaixaMonthly = minimumAmong((entry) => entry.calculation?.robust?.regularMonthlyCents);
+  const lowestPriceFirstInstallment = minimumAmong((entry) => entry.simulation.firstPriceInstallmentCents);
+  const lowestDirectMonthly = minimumAmong((entry) => entry.calculation?.directRobust?.regularMonthlyCents);
+  const isLowest = (value: number | null | undefined, floor: number | null) => value !== null && value !== undefined && floor !== null && value === floor;
+
+  if (!property) return <div className="panel empty-state"><strong>O catÃ¡logo estÃ¡ vazio.</strong><p>Cadastre uma unidade antes de simular.</p></div>;
+
+  return (
+    <div className="page-stack simulator-page">
+      <div className="page-heading simulator-heading"><div><div className="eyebrow">MOTOR DE FLUXO <span className="eyebrow-dot" /> SIMULAÃ‡ÃƒO EDITÃVEL</div><h1>Uma proposta. Cada parcela conferida.</h1><p>Dados bancÃ¡rios vÃªm da simulaÃ§Ã£o GPM/PRICE que vocÃª informar. Nenhum valor Ã© estimado sem sinalizaÃ§Ã£o.</p></div><button className="button button-primary" onClick={save}><Save size={16} /> Salvar simulaÃ§Ã£o</button></div>
+      {draft.origin === "lead_recommendation" && <div className="reference-alert"><Info size={17} /><div><strong>Rascunho recomendado pelas preferÃªncias do lead.</strong><p>{draft.recommendation?.reasons.join(" ")} A indicaÃ§Ã£o nÃ£o inclui GPM/PRICE, avaliaÃ§Ã£o de crÃ©dito ou disponibilidade. Revise a tabela e preencha os dados financeiros antes de apresentar.</p></div></div>}
+      {notice && <div className="reference-alert"><Info size={17} /><div><strong>AtenÃ§Ã£o Ã  entrega / simulaÃ§Ã£o</strong><p>{notice}</p></div><button className="icon-button" aria-label="Fechar aviso" onClick={() => setNotice("")}><X size={15} /></button></div>}
+      <div className="simulator-topline"><div className="topline-price"><small>PREÃ‡O DA UNIDADE</small><strong>{priceCents > 0 ? formatBRL(priceCents) : "A informar"}</strong><span>{property.project} Â· {property.typology}</span></div><div className="topline-stats"><StatBlock label="REGIÃƒO" value={property.neighborhood || property.region} sub={property.region} /><StatBlock label="ENTREGA INDICADA" value={deliveryDate ? monthLabelCapitalized(deliveryDate) : property.deliveryText} sub={deliveryDate ? `${monthlyCount ?? "â€”"} mensais possÃ­veis antes das chaves` : "MÃªs/ano a confirmar"} /><StatBlock label="FONTE" value={property.source.startsWith("Prompt") ? "ReferÃªncia nov/26" : property.source} sub="Confirme tabela e unidade" /></div></div>
+      {estimatedPriceRange && <div className="reference-alert"><Info size={17} /><div><strong>PreÃ§o informado como faixa.</strong><p>Para esta prÃ©via foi selecionado o menor valor da faixa ({formatBRL(property.priceLowCents)}). Confirme a unidade/andar ou altere o preÃ§o no campo abaixo; a premissa ficarÃ¡ visÃ­vel na conferÃªncia.</p></div></div>}
+      <div className="simulator-layout">
+        <div className="simulator-controls">
+          <section className="panel sim-section">
+            <div className="sim-section-title"><span className="section-number">01</span><div><h2>Cliente e unidade</h2><p>Defina o perfil e a base de preÃ§o da proposta.</p></div></div>
+            <div className="form-grid">
+              {client && <div className="field-note span-2 client-simulation-summary"><Info size={14} /><span><strong>{client.name}</strong> Â· renda familiar {moneyLabel(client.incomeFamilyCents, "nÃ£o informada")} Â· idade {client.oldestBuyerAge ? `${client.oldestBuyerAge} anos` : "nÃ£o informada"}</span></div>}
+              <label className="form-field span-2"><span>Perfil do cliente</span><div className="select-with-action"><select value={draft.clientId} onChange={(e) => changeClient(e.target.value)}><option value="">Selecione ou deixe sem perfil</option>{workspace.clients.map((item) => <option value={item.id} key={item.id}>{item.name}{item.incomeFamilyCents ? ` Â· ${formatBRL(item.incomeFamilyCents)}/mÃªs` : ""}</option>)}</select><button className="icon-button add-inline" title="Cadastrar perfil rÃ¡pido" onClick={() => setNewClientOpen(true)}><UserPlus size={16} /></button></div></label>
+              <SearchableUnitSelect className="span-2" label="Empreendimento / unidade" units={workspace.portfolio} value={property.id} onChange={(propertyId) => { const selected = workspace.portfolio.find((unit) => unit.id === propertyId); const nextPrice = selected?.priceCents ?? selected?.priceLowCents ?? null; update({ propertyId, priceOverrideCents: null, deliveryOverride: null, ...clientPriceProfileToSimulation(client?.priceProfile, nextPrice), manualAmounts: {}, robustActCents: null, monthlyCountOverride: null, annualDatesOverride: null, directMonthlyCountOverride: null, directAnnualDatesOverride: null, actualShortFlowConfirmed: false }); setGpmSourceName(client?.priceProfile?.source || "Informado manualmente no simulador"); setGpmReview(null); setGpmNotice(client?.priceProfile ? projectClientPriceProfile(client.priceProfile, nextPrice).message : "PRICE/GPM pendente para esta unidade."); if (selected && (!selected.deliveryYear || !selected.deliveryMonth)) setNotice(`Entrega incompleta para ${selected.project}: ${selected.deliveryText || "mÃªs/ano nÃ£o informado"}. Informe a premissa antes de calcular o prazo.`); }} />
+              {client && <div className="sim-recommendations span-2" aria-live="polite"><div className="sim-recommendations-heading"><div><span className="eyebrow">RECOMENDAÃ‡Ã•ES PARA ESTE PERFIL</span><h3>OpÃ§Ãµes compatÃ­veis do catÃ¡logo</h3><p>Prioridade: regiÃ£o desejada â†’ tipologia exata â†’ proximidade do ano de entrega. Abra qualquer unidade para criar um cenÃ¡rio independente.</p></div><span className="sim-recommendation-count">{clientRecommendations.length} opÃ§Ãµes</span></div>
+                {!client.preferences || !(client.preferences.desiredAreas.trim() || client.preferences.bedrooms !== null || client.preferences.parking !== null || client.preferences.deliveryYear !== null)
+                  ? <div className="sim-recommendations-empty">Cadastre preferÃªncias de regiÃ£o, quartos, vaga ou ano de entrega no perfil para gerar recomendaÃ§Ãµes.</div>
+                  : clientRecommendations.length === 0
+                    ? <div className="sim-recommendations-empty">Nenhuma unidade ativa do catÃ¡logo corresponde Ã s preferÃªncias informadas. Revise as preferÃªncias ou o catÃ¡logo.</div>
+                    : <div className="sim-recommendation-groups">{clientRecommendations.map((recommendation, index) => {
+                      const unit = recommendation.unit;
+                      const firstInTier = index === 0 || clientRecommendations[index - 1]?.tier !== recommendation.tier;
+                      const tierDetails = recommendationTierDetails[recommendation.tier];
+                      const targetPrice = unit.priceCents ?? unit.priceLowCents ?? null;
+                      const projection = projectClientPriceProfile(client.priceProfile, targetPrice);
+                      const priceText = targetPrice !== null ? formatBRL(targetPrice) : "PreÃ§o a informar";
+                      const priceDetails = !client.priceProfile
+                        ? "PRICE/GPM pendente"
+                        : projection.financingAmountCents !== null
+                          ? `PRICE proporcional ${formatBRL(projection.financingAmountCents)}${projection.firstPriceInstallmentCents !== null ? ` Â· 1Âª PRICE proporcional ${formatBRL(projection.firstPriceInstallmentCents)}` : ""}${projection.financingCapped ? " Â· teto de 80% aplicado" : ""}`
+                          : `PRICE salva; valores a confirmar. ${projection.message}`;
+                      return <div className="sim-recommendation-entry" key={unit.id}>
+                        {firstInTier && <div className="sim-recommendation-tier-heading"><div><strong>{tierDetails.title}</strong><small>{tierDetails.note}</small></div><span>{recommendationTierCounts[recommendation.tier]} opÃ§Ã£o(Ãµes)</span></div>}
+                        <article className="sim-recommendation-card">
+                        <div className="sim-recommendation-copy"><div className="sim-recommendation-meta"><span className="sim-recommendation-rank">{String(index + 1).padStart(2, "0")}</span><span>{unit.region}</span><span>{unit.deliveryYear ? unit.deliveryMonth ? `${String(unit.deliveryMonth).padStart(2, "0")}/${unit.deliveryYear}` : `${unit.deliveryYear} Â· mÃªs pendente` : "Entrega a confirmar"}</span></div><h4>{unit.project}</h4><p>{unit.neighborhood || unit.region} Â· {unit.typology}{unit.parking === "unknown" ? " Â· vaga a confirmar" : unit.parking ? " Â· com vaga" : " Â· sem vaga informada"}</p><small>{recommendation.reasons.slice(0, 2).join(" ") || recommendation.mismatches.slice(0, 1).join(" ")}</small></div>
+                        <div className="sim-recommendation-price"><strong>{priceText}</strong><span>{priceDetails}</span></div>
+                        <button className="button button-quiet button-small" onClick={() => openRecommendedScenario(unit)}>Abrir cenÃ¡rio <ArrowRight size={14} /></button>
+                        </article>
+                      </div>;
+                    })}</div>}
+              </div>}
+              <MoneyField label="PreÃ§o adotado nesta simulaÃ§Ã£o" value={priceCents || null} onChange={(value) => { const nextPrice = value ?? property?.priceCents ?? property?.priceLowCents ?? 0; const cap = Math.floor(nextPrice * 0.8); const autoCap = nextPrice > 0 && draft.financingAmountCents !== null && draft.financingAmountCents > cap; update({ priceOverrideCents: value, ...(autoCap ? { financingAmountCents: cap, financingManualOverride: false, gpmReportedFinancingAmountCents: draft.gpmReportedFinancingAmountCents ?? draft.financingAmountCents, gpmReportedPriceReferenceCents: draft.gpmReportedPriceReferenceCents ?? priceCents } : {}) }); if (autoCap) setGpmNotice(`PreÃ§o alterado; financiamento ajustado automaticamente de ${formatBRL(draft.financingAmountCents!)} para o novo teto de 80% (${formatBRL(cap)}). O valor GPM original permanece preservado para conferÃªncia.`); }} hint="O preÃ§o pode ser alterado sem mudar o cadastro do catÃ¡logo; financiamento importado/projetado Ã© limitado a 80%." />
+              <MoneyField label="Renda familiar mensal" value={familyIncome} onChange={(value) => { if (client) setWorkspace((current) => ({ ...current, clients: current.clients.map((item) => item.id === client.id ? { ...item, incomeFamilyCents: value, updatedAt: new Date().toISOString() } : item) })); }} hint="Editar aqui tambÃ©m atualiza o perfil do cliente." />
+              <MoneyField label="Ato disponÃ­vel informado" value={availableAct} onChange={(value) => { if (client) setWorkspace((current) => ({ ...current, clients: current.clients.map((item) => item.id === client.id ? { ...item, availableActCents: value, updatedAt: new Date().toISOString() } : item) })); }} />
+              <label className="form-field"><span>SimulaÃ§Ã£o iniciada em (ato)</span><div className="date-control"><CalendarDays size={15} /><input type="month" value={monthKey(actDate)} onChange={(event) => { const date = parseMonthKey(event.target.value); if (date) update({ actDate: date, annualDatesOverride: null, directAnnualDatesOverride: null }); }} /></div></label>
+              <DateField label="Entrega / chaves" value={deliveryDate} onChange={(value) => { update({ deliveryOverride: value, annualDatesOverride: null, directAnnualDatesOverride: null, monthlyCountOverride: null, directMonthlyCountOverride: null }); if (value) setWorkspace((current) => ({ ...current, portfolio: current.portfolio.map((unit) => unit.id === property.id ? recordSimulationDelivery(unit, value) : unit) })); }} hint={deliveryDate ? "Ajuste se o mÃªs da tabela estiver pendente; datas vindas do simulador ficam marcadas como premissa." : "O catÃ¡logo sÃ³ informou o ano ou nÃ£o trouxe a data. Escolha um mÃªs apenas como premissa explÃ­cita."} />
+              <div className="field-note span-2"><Info size={14} /><span>{client?.incomeComposition ? `ComposiÃ§Ã£o informada: ${client.incomeComposition}. ` : ""}{property.deliveryDateSource === "simulation" ? `Data salva a partir do simulador como premissa; confirme com a fonte oficial. Texto original: ${property.deliveryText}` : property.deliveryDateSource === "manual" ? `Data informada manualmente no catÃ¡logo; confirme com a fonte oficial. Texto original: ${property.deliveryText}` : property.deliveryMonth ? "MÃªs de entrega veio da referÃªncia do catÃ¡logo." : property.deliveryYear ? `A fonte informa apenas ${property.deliveryYear}; o mÃªs ainda depende de confirmaÃ§Ã£o.` : "Confirme o cronograma oficial antes de apresentar datas."}</span></div>
+            </div>
+          </section>
+
+          <section className="panel sim-section">
+            <div className="sim-section-title"><span className="section-number">02</span><div><h2>Caixa Â· GPM / PRICE</h2><p>Transcreva a simulaÃ§Ã£o bancÃ¡ria; o site nÃ£o calcula aprovaÃ§Ã£o.</p></div><input ref={gpmFileRef} type="file" accept="application/pdf,image/*,.pdf" hidden onChange={(event) => void importGpmFile(event.target.files?.[0])} /><div className="sim-section-actions"><button className="button button-quiet button-small" disabled={!client || priceCents <= 0 || !hasPriceProfileData || gpmReview !== null} title={!client ? "Selecione um cliente primeiro" : gpmReview ? "Aplique ou descarte a revisÃ£o OCR primeiro" : "Salva os dados atuais no perfil do cliente"} onClick={savePriceProfileToClient}><Save size={14} /> Salvar PRICE no perfil</button><button className="button button-quiet button-small" disabled={gpmBusy} onClick={() => gpmFileRef.current?.click()}>{gpmBusy ? <LoaderCircle size={14} className="spin" /> : <Upload size={14} />}{gpmBusy ? "Lendo arquivoâ€¦" : "Importar imagem / PDF"}</button></div></div>
+            {gpmProgress && <div className="upload-progress"><div><span>{gpmProgress.detail}</span><strong>{Math.round(gpmProgress.progress * 100)}%</strong></div><div className="progress-track"><span style={{ width: `${Math.max(5, gpmProgress.progress * 100)}%` }} /></div></div>}
+            {gpmError && <div className="flow-alert"><AlertCircle size={15} />{gpmError}</div>}
+            {gpmNotice && <div className="field-note"><Info size={14} /><span>{gpmNotice}</span></div>}
+            <div className="form-grid">
+              <div className="form-field"><MoneyField label="Financiamento adotado nesta simulaÃ§Ã£o" value={draft.financingAmountCents} onChange={(value) => update({ financingAmountCents: value, financingManualOverride: value !== null && priceCents > 0 && value > Math.floor(priceCents * 0.8) })} hint="ImportaÃ§Ãµes e projeÃ§Ãµes sÃ£o limitadas a 80%; acima disso, o cÃ¡lculo sÃ³ usa o valor se vocÃª o editar manualmente." />{draft.gpmReportedFinancingAmountCents !== null && draft.gpmReportedFinancingAmountCents !== undefined && draft.financingAmountCents !== null && draft.gpmReportedFinancingAmountCents !== draft.financingAmountCents && <div className="field-note price-cap-note"><Info size={14} /><span>GPM reportou {formatBRL(draft.gpmReportedFinancingAmountCents)}{draft.gpmReportedPriceReferenceCents ? ` para base de ${formatBRL(draft.gpmReportedPriceReferenceCents)}` : ""}. Valor informado/adotado no cenÃ¡rio: {formatBRL(draft.financingAmountCents)}; confira a origem e o efeito do teto.</span></div>}{draft.financingAmountCents !== null && priceCents > 0 && draft.financingAmountCents > priceCents * 0.8 && <div className="flow-alert danger-alert"><AlertCircle size={15} /><span>{draft.financingManualOverride ? `Override manual: o cÃ¡lculo usa ${formatBRL(draft.financingAmountCents)}, acima do teto indicativo de 80% (${formatBRL(Math.floor(priceCents * 0.8))}); confirme com a Caixa.` : `Valor salvo acima do teto indicativo de 80% (${formatBRL(Math.floor(priceCents * 0.8))}); atÃ© uma ediÃ§Ã£o manual explÃ­cita, o cÃ¡lculo usa o teto.`}</span><button className="button button-small button-quiet" onClick={() => update({ financingAmountCents: Math.floor(priceCents * 0.8), financingManualOverride: false, gpmReportedFinancingAmountCents: draft.gpmReportedFinancingAmountCents ?? draft.financingAmountCents, gpmReportedPriceReferenceCents: draft.gpmReportedPriceReferenceCents ?? priceCents })}>Aplicar teto de 80%</button></div>}</div>
+              <div className="form-field"><MoneyField label="1Âª parcela PRICE estimada" value={draft.firstPriceInstallmentCents} onChange={(value) => update({ firstPriceInstallmentCents: value })} />{draft.gpmReportedFirstPriceInstallmentCents !== null && draft.gpmReportedFirstPriceInstallmentCents !== undefined && draft.firstPriceInstallmentCents !== null && draft.gpmReportedFirstPriceInstallmentCents !== draft.firstPriceInstallmentCents && <div className="field-note"><Info size={14} /><span>GPM reportou {formatBRL(draft.gpmReportedFirstPriceInstallmentCents)}{draft.gpmReportedPriceReferenceCents ? ` para base de ${formatBRL(draft.gpmReportedPriceReferenceCents)}` : ""}. Valor usado: {formatBRL(draft.firstPriceInstallmentCents)}; projeÃ§Ã£o proporcional ao preÃ§o, nÃ£o novo cÃ¡lculo bancÃ¡rio.</span></div>}</div>
+              <label className="form-field"><span>Prazo da simulaÃ§Ã£o</span><div className="unit-control"><input type="number" min="1" value={draft.financingTermMonths ?? ""} onChange={(e) => update({ financingTermMonths: e.target.value ? Number(e.target.value) : null })} placeholder="â€”" /><span>meses</span></div><small>Use o prazo fornecido pelo GPM/PRICE.</small></label>
+              <label className="form-field"><span>Linha / faixa informada</span><input value={draft.financingLine} onChange={(e) => update({ financingLine: e.target.value })} placeholder="MCMV, SBPE ou conforme documento" /></label>
+              <label className="form-field"><span>Sistema</span><input value={draft.financingSystem} onChange={(e) => update({ financingSystem: e.target.value })} placeholder="PRICE / SAC / nÃ£o informado" /></label>
+              <label className="form-field"><span>Taxa (se constar na simulaÃ§Ã£o)</span><input value={draft.financingRate} onChange={(e) => update({ financingRate: e.target.value })} placeholder="NÃ£o presumir" /></label>
+              <MoneyField label="SubsÃ­dio informado no GPM (nÃ£o aplicado)" value={draft.gpmReportedSubsidyCents} onChange={(value) => update({ gpmReportedSubsidyCents: value })} hint="Apenas transcrito para conferÃªncia; nÃ£o reduz preÃ§o nem implica aprovaÃ§Ã£o." />
+              <label className="form-field"><span>Cota reportada no GPM (informativa)</span><div className="unit-control percent-control"><input type="number" min="0" max="100" step="0.01" value={draft.gpmReportedQuotaPercent ?? ""} onChange={(e) => update({ gpmReportedQuotaPercent: e.target.value ? Number(e.target.value) : null })} /><span>%</span></div></label>
+              <label className="form-field"><span>Comprometimento reportado (informativo)</span><div className="unit-control percent-control"><input type="number" min="0" max="100" step="0.01" value={draft.gpmReportedIncomeCommitmentPercent ?? ""} onChange={(e) => update({ gpmReportedIncomeCommitmentPercent: e.target.value ? Number(e.target.value) : null })} /><span>%</span></div></label>
+              <label className="form-field span-2"><span>Taxas/encargos transcritos e observaÃ§Ãµes da PRICE</span><textarea rows={2} value={draft.gpmReportedFees ?? draft.financingNotes} onChange={(e) => update({ gpmReportedFees: e.target.value, financingNotes: e.target.value })} placeholder="Ex.: seguros, tarifas e encargos conforme documento fornecido." /></label>
+            </div>
+            {gpmReview && <section className="gpm-review-panel" aria-labelledby="gpm-review-title"><div className="section-heading"><div><span className="eyebrow">RASCUNHO DE OCR Â· NÃƒO APLICADO</span><h3 id="gpm-review-title">Revise os dados reconhecidos</h3><p>Corrija valores e desmarque campos que nÃ£o deseja preencher. Os campos manuais acima continuam disponÃ­veis.</p></div><button className="icon-button" aria-label="Descartar reconhecimento" onClick={() => { setGpmReview(null); setGpmNotice(""); }}><X size={15} /></button></div>
+              <div className="form-grid">
+                {gpmReview.values.propertyPriceCents !== null && <div className="gpm-review-field"><label className="check-field"><input type="checkbox" checked={gpmReview.selected.propertyPriceCents} onChange={(event) => toggleGpmField("propertyPriceCents", event.target.checked)} /><span>Aplicar preÃ§o Ã  simulaÃ§Ã£o</span></label><MoneyField label="PreÃ§o do imÃ³vel reconhecido" value={gpmReview.values.propertyPriceCents} onChange={(value) => updateGpmValue("propertyPriceCents", value)} /></div>}
+                {gpmReview.values.familyIncomeCents !== null && <div className="gpm-review-field"><label className="check-field"><input type="checkbox" checked={gpmReview.selected.familyIncomeCents} onChange={(event) => toggleGpmField("familyIncomeCents", event.target.checked)} /><span>Aplicar renda ao perfil selecionado</span></label><MoneyField label="Renda familiar reconhecida" value={gpmReview.values.familyIncomeCents} onChange={(value) => updateGpmValue("familyIncomeCents", value)} />{!client && <small>Selecione um cliente na seÃ§Ã£o 01; a renda nÃ£o serÃ¡ aplicada sem perfil.</small>}</div>}
+                {gpmReview.values.financingAmountCents !== null && <div className="gpm-review-field"><label className="check-field"><input type="checkbox" checked={gpmReview.selected.financingAmountCents} onChange={(event) => toggleGpmField("financingAmountCents", event.target.checked)} /><span>Aplicar valor financiado</span></label><MoneyField label="Financiamento reconhecido" value={gpmReview.values.financingAmountCents} onChange={(value) => updateGpmValue("financingAmountCents", value)} /></div>}
+                {gpmReview.values.firstInstallmentCents !== null && <div className="gpm-review-field"><label className="check-field"><input type="checkbox" checked={gpmReview.selected.firstInstallmentCents} onChange={(event) => toggleGpmField("firstInstallmentCents", event.target.checked)} /><span>Aplicar 1Âª parcela PRICE</span></label><MoneyField label="1Âª parcela reconhecida" value={gpmReview.values.firstInstallmentCents} onChange={(value) => updateGpmValue("firstInstallmentCents", value)} /></div>}
+                {gpmReview.values.termMonths !== null && <div className="gpm-review-field"><label className="check-field"><input type="checkbox" checked={gpmReview.selected.termMonths} onChange={(event) => toggleGpmField("termMonths", event.target.checked)} /><span>Aplicar prazo</span></label><label className="form-field"><span>Prazo em meses reconhecido</span><div className="unit-control"><input type="number" min="1" value={gpmReview.values.termMonths} onChange={(event) => updateGpmValue("termMonths", event.target.value ? Number(event.target.value) : null)} /><span>meses</span></div></label></div>}
+                {gpmReview.values.financingLine !== null && <div className="gpm-review-field"><label className="check-field"><input type="checkbox" checked={gpmReview.selected.financingLine} onChange={(event) => toggleGpmField("financingLine", event.target.checked)} /><span>Aplicar linha/faixa</span></label><label className="form-field"><span>Linha reconhecida</span><input value={gpmReview.values.financingLine} onChange={(event) => updateGpmValue("financingLine", event.target.value)} /></label></div>}
+                {gpmReview.values.financingSystem !== null && <div className="gpm-review-field"><label className="check-field"><input type="checkbox" checked={gpmReview.selected.financingSystem} onChange={(event) => toggleGpmField("financingSystem", event.target.checked)} /><span>Aplicar sistema</span></label><label className="form-field"><span>Sistema reconhecido</span><input value={gpmReview.values.financingSystem} onChange={(event) => updateGpmValue("financingSystem", event.target.value)} /></label></div>}
+                {gpmReview.values.rate !== null && <div className="gpm-review-field"><label className="check-field"><input type="checkbox" checked={gpmReview.selected.rate} onChange={(event) => toggleGpmField("rate", event.target.checked)} /><span>Aplicar taxa</span></label><label className="form-field"><span>Taxa reconhecida</span><input value={gpmReview.values.rate} onChange={(event) => updateGpmValue("rate", event.target.value)} /></label></div>}
+                {gpmReview.values.subsidyCents !== null && <div className="gpm-review-field"><label className="check-field"><input type="checkbox" checked={gpmReview.selected.subsidyCents} onChange={(event) => toggleGpmField("subsidyCents", event.target.checked)} /><span>Aplicar apenas como dado informado</span></label><MoneyField label="SubsÃ­dio reconhecido (nÃ£o aplicado)" value={gpmReview.values.subsidyCents} onChange={(value) => updateGpmValue("subsidyCents", value)} /></div>}
+                {gpmReview.values.fees !== null && <div className="gpm-review-field"><label className="check-field"><input type="checkbox" checked={gpmReview.selected.fees} onChange={(event) => toggleGpmField("fees", event.target.checked)} /><span>Aplicar taxas/encargos como texto</span></label><label className="form-field"><span>Taxas/encargos reconhecidos</span><input value={gpmReview.values.fees} onChange={(event) => updateGpmValue("fees", event.target.value)} /></label></div>}
+                {gpmReview.values.quotaPercent !== null && <div className="gpm-review-field"><label className="check-field"><input type="checkbox" checked={gpmReview.selected.quotaPercent} onChange={(event) => toggleGpmField("quotaPercent", event.target.checked)} /><span>Aplicar cota reportada</span></label><label className="form-field"><span>Cota reconhecida (%)</span><input type="number" min="0" max="100" step="0.01" value={gpmReview.values.quotaPercent} onChange={(event) => updateGpmValue("quotaPercent", event.target.value ? Number(event.target.value) : null)} /></label></div>}
+                {gpmReview.values.incomeCommitmentPercent !== null && <div className="gpm-review-field"><label className="check-field"><input type="checkbox" checked={gpmReview.selected.incomeCommitmentPercent} onChange={(event) => toggleGpmField("incomeCommitmentPercent", event.target.checked)} /><span>Aplicar comprometimento reportado</span></label><label className="form-field"><span>Comprometimento reconhecido (%)</span><input type="number" min="0" max="100" step="0.01" value={gpmReview.values.incomeCommitmentPercent} onChange={(event) => updateGpmValue("incomeCommitmentPercent", event.target.value ? Number(event.target.value) : null)} /></label></div>}
+              </div>
+              <div className="field-note"><ShieldCheck size={14} /><span>O texto OCR bruto e o arquivo original nÃ£o sÃ£o persistidos. CPF e data de nascimento nÃ£o entram no perfil; preÃ§os, juros, subsÃ­dio e aprovaÃ§Ã£o devem ser conferidos no documento.</span></div>
+              <div className="form-footer"><span className="form-privacy">Aplicar Ã© uma confirmaÃ§Ã£o explÃ­cita; salvar a simulaÃ§Ã£o continua sendo uma aÃ§Ã£o separada.</span><button className="button button-primary" onClick={applyGpmReview}><Check size={15} /> Aplicar campos marcados</button></div>
+            </section>}
+            {calculation.financingCapped && <div className="flow-alert danger-alert"><AlertCircle size={15} /> O valor transcrito excede 80% do preÃ§o; o simulador usa atÃ© 80% no cÃ¡lculo de recursos prÃ³prios. Revise o GPM ou a avaliaÃ§Ã£o informada.</div>}
+            {client?.oldestBuyerAge && <div className="field-note"><Info size={14} /><span>Comprador mais velho: {client.oldestBuyerAge} anos. Use o prazo efetivamente aceito na simulaÃ§Ã£o, considerando as regras etÃ¡rias da Caixa (a confirmar no GPM).</span></div>}
+          </section>
+
+          <section className="panel sim-section">
+            <div className="sim-section-title"><span className="section-number">03</span><div><h2>Estruture o ato e as parcelas</h2><p>O sistema calcula uma proposta inicial. VocÃª pode substituir cada valor e data.</p></div></div>
+            <div className="form-grid">
+              <MoneyField label="Ato robusto" value={draft.robustActCents ?? robustAct} onChange={(value) => update({ robustActCents: value })} hint={draft.robustActCents === null ? "SugestÃ£o automÃ¡tica de planejamento, limitada ao ato disponÃ­vel se informado." : "Valor ajustado manualmente."} />
+              <label className="form-field"><span>Fator da anual</span><select value={draft.annualFactor} onChange={(e) => update({ annualFactor: Number(e.target.value) })}><option value={3}>3Ã— a mensal (padrÃ£o)</option><option value={4}>4Ã— a mensal</option></select><small>Entre 3Ã— e 4Ã—; confirme capacidade e vencimento.</small></label>
+              <label className="form-field"><span>Quantidade de mensais Caixa</span><div className="unit-control"><input type="number" min="0" max={maxMonths ?? undefined} value={shortFlow ? draft.monthlyCountOverride ?? "" : draft.monthlyCountOverride ?? maxMonths ?? ""} onChange={(e) => update({ monthlyCountOverride: e.target.value === "" ? null : Number(e.target.value) })} placeholder={shortFlow ? "Informar condiÃ§Ã£o real" : "Informe entrega"} /><span>parcelas</span></div><small>{shortFlow ? "Sem sugestÃ£o automÃ¡tica: transcreva o fluxo recebido da mesa." : maxMonths !== null ? `Pelo calendÃ¡rio: atÃ© ${maxMonths}; Ãºltima antes das chaves.` : "Informe mÃªs e ano para calcular."}</small></label>
+              <label className="form-field"><span>Ano/meses das anuais Caixa</span><div className="field-actions-inline"><span>{dueDates.length ? dueDates.map((row) => `${String(row.month).padStart(2, "0")}/${row.year}`).join(" Â· ") : "Nenhuma sugerida"}</span><button className="text-button" onClick={() => addAnnual("caixa")}><Plus size={13} /> incluir anual</button></div><small>2026 nÃ£o Ã© incluÃ­do. Todas precisam vencer antes das chaves.</small></label>
+              {shortFlow && <label className="check-field span-2"><input type="checkbox" checked={draft.actualShortFlowConfirmed} onChange={(e) => update({ actualShortFlowConfirmed: e.target.checked, annualDatesOverride: e.target.checked ? [] : null, directAnnualDatesOverride: e.target.checked ? [] : null, monthlyCountOverride: e.target.checked ? draft.monthlyCountOverride : null, directMonthlyCountOverride: e.target.checked ? draft.directMonthlyCountOverride : null, manualAmounts: e.target.checked ? draft.manualAmounts : { ...draft.manualAmounts, caixaMonthlyCents: undefined, caixaAnnualCents: undefined, directMonthlyCents: undefined, directAnnualCents: undefined } })} /><span>Tenho uma condiÃ§Ã£o curta/pronta informada pela mesa e vou preenchÃª-la manualmente.<small>Marque somente apÃ³s receber a condiÃ§Ã£o real; quantidade e valores deixam de ser presumidos.</small></span></label>}
+              {deliveryDate && dueDates.map((row) => <div className="annual-editor span-2" key={row.id}><DateField label={`Vencimento da anual ${row.year}`} value={row} onChange={(date) => updateAnnualDate("caixa", row.id, date)} hint="Data precisa ser posterior ao ato e anterior Ã s chaves." /><MoneyField label={`Valor da anual ${row.year} (opcional)`} value={draft.manualAmounts.caixaAnnualCents?.[row.id] ?? calculation.robust?.annualPayments.find((annual) => annual.id === row.id)?.amountCents ?? null} onChange={(value) => setManualAnnual("caixa", row.id, value)} hint="Ao editar, o valor passa a manual." /><button className="icon-button danger-quiet annual-remove" aria-label="Remover anual" onClick={() => setAnnualDates("caixa", dueDates.filter((item) => item.id !== row.id))}><Trash2 size={15} /></button></div>)}
+              <div className="field-note span-2"><ShieldCheck size={14} /><span>Ato mÃ­nimo comparativo: <strong>{formatBRL(calculation.minimumActCents)}</strong> (2,5% do preÃ§o). IntermediÃ¡rias automÃ¡ticas usam o fator selecionado. DiferenÃ§as manuais permanecem visÃ­veis.</span></div>
+              <div className="field-note span-2"><Info size={14} /><span>Premissa comercial informada: 2,5% de ato + atÃ© 17,5% parcelados com a Cury (atÃ© 20% no total da entrada). NÃ£o Ã© condiÃ§Ã£o garantida; confirme a campanha, prazo e forma de pagamento vigentes antes de apresentar.</span></div>
+            </div>
+            <div className="manual-controls"><button className="button button-quiet button-small" onClick={resetAuto}><RotateCcw size={14} /> Restaurar fluxo automÃ¡tico</button><span>O ajuste manual nÃ£o altera a PRICE informada nem os dados originais da tabela.</span></div>
+          </section>
+
+          <section className="panel sim-section direct-section">
+            <div className="sim-section-title"><span className="section-number">04</span><div><h2>Tabela Direta Cury</h2><p>Separada da Caixa; os percentuais incidem sobre o preÃ§o total.</p></div><label className="toggle-switch"><input type="checkbox" checked={draft.includeDirect} onChange={(e) => update({ includeDirect: e.target.checked })} /><span>{draft.includeDirect ? "Incluir" : "Desativada"}</span></label></div>
+            {draft.includeDirect && <>
+              <div className="direct-split-band"><label className="form-field"><span>PrÃ©-chaves</span><div className="unit-control percent-control"><input type="number" min="0" max="100" step="0.1" value={draft.directPrePercent} onChange={(e) => update({ directPrePercent: Number(e.target.value) })} /><span>% do preÃ§o</span></div></label><div className="split-divider"><ArrowRight size={16} /></div><div className="direct-post-value"><small>PÃ“S-CHAVES Â· DIRETO COM A CURY</small><strong>{formatNumber(calculation.directPostPercent, 1)}% <i>Â·</i> {formatBRL(calculation.directPostCents)}</strong><span>Montante; prazo/juros nÃ£o presumidos.</span></div></div>
+              {draft.directPrePercent !== 55 && <div className="flow-alert"><Info size={15} /> Percentual alterado manualmente: esta simulaÃ§Ã£o nÃ£o usa o padrÃ£o 55% prÃ© / 45% pÃ³s. Confira as condiÃ§Ãµes documentadas.</div>}
+              <div className="form-grid direct-settings">
+                <label className="form-field"><span>Quantidade de mensais prÃ©-chaves</span><div className="unit-control"><input type="number" min="0" max={maxMonths ?? undefined} value={shortFlow ? draft.directMonthlyCountOverride ?? "" : draft.directMonthlyCountOverride ?? maxMonths ?? ""} onChange={(e) => update({ directMonthlyCountOverride: e.target.value === "" ? null : Number(e.target.value) })} placeholder={shortFlow ? "Informar condiÃ§Ã£o real" : "AutomÃ¡tico"} /><span>parcelas</span></div><small>{shortFlow ? "Informe separadamente conforme condiÃ§Ã£o documentada da mesa." : "Mensais terminam antes das chaves."}</small></label>
+                <label className="form-field"><span>IntermediÃ¡rias anuais</span><div className="field-actions-inline"><span>{directDates.length ? directDates.map((row) => `${String(row.month).padStart(2, "0")}/${row.year}`).join(" Â· ") : "Nenhuma"}</span><button className="text-button" onClick={() => addAnnual("directa")}><Plus size={13} /> incluir</button></div><small>Sem parcela apÃ³s as chaves.</small></label>
+                {directDates.map((row) => <div className="annual-editor span-2" key={row.id}><DateField label={`Vencimento anual ${row.year}`} value={row} onChange={(date) => updateAnnualDate("directa", row.id, date)} /><MoneyField label={`Valor anual ${row.year}`} value={draft.manualAmounts.directAnnualCents?.[row.id] ?? calculation.directRobust?.annualPayments.find((annual) => annual.id === row.id)?.amountCents ?? null} onChange={(value) => setManualAnnual("directa", row.id, value)} /><button className="icon-button danger-quiet annual-remove" aria-label="Remover anual" onClick={() => setAnnualDates("directa", directDates.filter((item) => item.id !== row.id))}><Trash2 size={15} /></button></div>)}
+              </div>
+              <div className="direct-eligibility"><span className={calculation.directVisible ? "eligibility-check" : "eligibility-pending"}>{calculation.directVisible ? <Check size={14} /> : <AlertCircle size={14} />}</span><div><strong>{calculation.directVisible ? "Fluxo prÃ©-chaves dentro do limite indicativo" : "Tabela Direta ainda nÃ£o pode ser apresentada como viÃ¡vel"}</strong><p>{calculation.directReason}</p></div></div>
+            </>}
+          </section>
+        </div>
+
+        <aside className="simulator-summary">
+          <div className="summary-sticky">
+            <section className="summary-intro"><div className="summary-stamp"><ShieldCheck size={18} /><span>ESPELHO DE<br />CONFERÃŠNCIA</span></div><div><span className="eyebrow">PRÃ‰VIA EM TEMPO REAL</span><h2>Fluxo de pagamento</h2><p>O que entra em cada etapa da compra.</p></div></section>
+            <div className="summary-legend"><span><i className="legend-dot cury-dot" />Cury atÃ© as chaves</span><span><i className="legend-dot bank-dot" />Caixa / PRICE</span><span><i className="legend-dot direct-dot" />Saldo pÃ³s-chaves</span></div>
+            <div className="summary-stat-grid"><StatBlock label="PREÃ‡O TOTAL" value={formatBRL(priceCents)} sub="base da simulaÃ§Ã£o" /><StatBlock label="COTA CAIXA USADA" value={calculation.financingPercent !== null ? `${formatNumber(calculation.financingPercent, 1)}%` : "A informar"} sub={calculation.financingUsedCents !== null ? formatBRL(calculation.financingUsedCents) : "transcreva o GPM"} tone="teal" /></div>
             {calculation.warnings.length > 0 && <div className="summary-warnings"><div><AlertCircle size={15} /><strong>HÃ¡ itens para revisar</strong></div>{calculation.warnings.slice(0, 3).map((warning) => <p key={warning}>{warning}</p>)}</div>}
             <div className="section-heading flow-heading"><div><span className="eyebrow">MODALIDADE A</span><h2>Financiamento Caixa</h2></div></div>
             <FlowPanel title="Ato robusto" scenario={calculation.robust} target={calculation.equityTargetCents} kind="caixa" actDate={actDate} />
