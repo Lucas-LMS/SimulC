@@ -4,10 +4,10 @@ import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
 import type { WorkspaceData } from "./models";
 
 const config = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyCYPUusBYbenK_S6reyA0v_0cfBpyaqvUI",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "simulc.firebaseapp.com",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "simulc",
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:675965001111:web:7ba01e0fc3aab23f1bb8d2",
 };
 export const firebaseConfigured = Object.values(config).every(Boolean);
 const app = firebaseConfigured ? (getApps().length ? getApp() : initializeApp(config)) : null;
