@@ -1,9 +1,15 @@
-node_modules/
-dist/
-.env
-.env.*
-!.env.example
-*.log
-.vite/
-.DS_Store
-Thumbs.db
+# This directory was delivered as a flattened Manus export. Keep only the
+# reconstructed, independently buildable app in this public repository.
+/**
+!/client/
+!/client/**
+!/.github/
+!/.github/**
+!/.gitignore
+!/.nojekyll
+!/LICENSE
+!/README.md
+!/package.json
+!/pnpm-lock.yaml
+!/pnpm-workspace.yaml
+!/vite.config.ts
