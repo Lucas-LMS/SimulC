@@ -888,6 +888,84 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 [data-theme="dark"] .whatsapp-preview { color: #dce8df; background: #1c2c23; border-color: #3c5846; }
 [data-theme="dark"] .whatsapp-preview textarea { color: #e5efe7; background: #142019; border-color: #3b5544; }
 [data-theme="dark"] .button-light-green { color: #e5f4e9; background: #315a3d; border-color: #4b7055; }
+
+/* Lead intake, pasted PRICE documents, and expanded simulator recommendations. */
+.lead-intake-panel { padding: 22px; border: 1px solid #dce7df; background: linear-gradient(145deg, #fff 0%, #f7faf7 100%); }
+.lead-intake-panel > .section-heading { align-items: flex-start; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid #e6ece7; }
+.lead-intake-panel > .section-heading h2 { margin: 4px 0; font: 700 19px Manrope, sans-serif; }
+.lead-intake-panel .form-field textarea { min-height: 150px; padding: 14px; border-radius: 10px; line-height: 1.65; }
+.lead-intake-panel .form-footer { padding-top: 14px; }
+.lead-recommendations { display: grid; gap: 10px; margin-top: 18px; padding: 16px; border: 1px solid #dce7df; border-radius: 12px; background: #f5f8f5; }
+.lead-recommendations .section-heading { margin: 0; }
+.lead-recommendations .section-heading h3 { margin: 4px 0; font: 700 16px Manrope, sans-serif; color: #274b3f; }
+.lead-recommendation-card { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: start; gap: 15px; padding: 15px 16px; border: 1px solid #e0e8e1; border-radius: 10px; background: #fff; box-shadow: 0 2px 8px rgba(26,55,39,.035); }
+.lead-recommendation-card > div:first-child { display: grid; gap: 5px; }
+.lead-recommendation-card strong { color: #294b40; font-size: 13px; }
+.lead-recommendation-card span { color: #536a5e; font-size: 11px; }
+.lead-recommendation-card small { color: #63766a; font-size: 10px; line-height: 1.55; }
+.lead-recommendation-price { display: grid; justify-items: end; gap: 4px; }
+.lead-recommendation-price strong { color: #17635a; font-size: 13px; }
+.lead-recommendation-price span { color: #76857b; font-size: 9px; text-align: right; }
+.price-profile-import { display: flex; align-items: center; gap: 12px; margin-top: 13px; padding: 13px 14px; border: 1px dashed #a9c4b5; border-radius: 10px; background: #f3f8f4; }
+.price-profile-import-icon { display: grid; flex: 0 0 auto; place-items: center; width: 36px; height: 36px; border-radius: 9px; color: #2c6d58; background: #e1eee5; }
+.price-profile-import > div { display: grid; gap: 3px; min-width: 0; flex: 1; }
+.price-profile-import strong { color: #35594a; font-size: 10px; }
+.price-profile-import small { color: #65796d; font-size: 9px; line-height: 1.5; }
+.sim-recommendations { padding: 0; overflow: hidden; }
+.sim-recommendations-toggle { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; border: 0; color: inherit; background: transparent; text-align: left; cursor: pointer; }
+.sim-recommendations-toggle > span:first-child { display: grid; gap: 3px; }
+.sim-recommendations-toggle strong { color: #29443a; font: 700 13px Manrope, sans-serif; }
+.sim-recommendations-toggle small { color: #64766b; font-size: 9px; }
+.sim-recommendations-toggle .sim-recommendation-count { display: flex; align-items: center; gap: 6px; }
+.sim-recommendations-content { display: grid; gap: 10px; padding: 0 13px 13px; }
+.recommendation-finance { display: grid; gap: 5px; margin-top: 10px; padding: 10px 11px; border: 1px solid #dce9df; border-radius: 8px; color: #315c4c; background: #f2f8f3; font-size: 10px; line-height: 1.5; }
+.recommendation-finance small { color: #66796e; font-size: 9px; }
+.recommendation-fit { padding: 5px 8px; border-radius: 30px; font-size: 8px; font-weight: 800; }
+.recommendation-fit.good { color: #216146; background: #e4f2e8; }
+.recommendation-fit.review { color: #8c5134; background: #f8e9df; }
+.recommendation-fit.neutral { color: #586a60; background: #e9eeea; }
+.recommendation-show-more { justify-self: center; min-height: 38px; }
+
+[data-theme="dark"] .direct-split-band, [data-theme="dark"] .direct-eligibility,
+[data-theme="dark"] .price-profile-import, [data-theme="dark"] .lead-intake-panel,
+[data-theme="dark"] .lead-recommendations { color: #e6efea; background: #1b2824; border-color: #43584c; }
+[data-theme="dark"] .direct-split-band .form-field > span,
+[data-theme="dark"] .direct-post-value small, [data-theme="dark"] .direct-post-value span,
+[data-theme="dark"] .direct-eligibility p { color: #c2d0c7; }
+[data-theme="dark"] .direct-post-value strong, [data-theme="dark"] .direct-eligibility strong { color: #c4e8d2; }
+[data-theme="dark"] .lead-intake-panel > .section-heading { border-color: #3c5046; }
+[data-theme="dark"] .lead-recommendations .section-heading h3,
+[data-theme="dark"] .lead-recommendation-card strong,
+[data-theme="dark"] .price-profile-import strong,
+[data-theme="dark"] .sim-recommendations-toggle strong { color: #e6f1e9; }
+[data-theme="dark"] .lead-recommendation-card { background: #202e29; border-color: #42564b; }
+[data-theme="dark"] .lead-recommendation-card span, [data-theme="dark"] .lead-recommendation-card small,
+[data-theme="dark"] .lead-recommendation-price span, [data-theme="dark"] .price-profile-import small,
+[data-theme="dark"] .sim-recommendations-toggle small { color: #c0cec5; }
+[data-theme="dark"] .lead-recommendation-price strong { color: #b9e2ca; }
+[data-theme="dark"] .price-profile-import-icon { color: #c3e8d1; background: #294338; }
+[data-theme="dark"] .recommendation-finance { color: #d8ecdf; background: #20372c; border-color: #3b5946; }
+[data-theme="dark"] .recommendation-finance small { color: #c3d3c9; }
+[data-theme="dark"] .recommendation-fit.good { color: #c8edd4; background: #28523a; }
+[data-theme="dark"] .recommendation-fit.review { color: #f3d5c4; background: #58382d; }
+[data-theme="dark"] .recommendation-fit.neutral { color: #d7e1da; background: #34423b; }
+[data-theme="dark"] .recommendation-show-more { color: #e2ece6; background: #26352f; border-color: #43564b; }
+[data-theme="dark"] .recommendation-group, [data-theme="dark"] .recommendation-option { background: #1a2521; border-color: #3c5046; }
+[data-theme="dark"] .recommendation-group-head { background: #202d27; border-color: #3c5046; }
+[data-theme="dark"] .recommendation-price, [data-theme="dark"] .recommendation-option-footer { border-color: #3c5046; }
+[data-theme="dark"] .recommendation-disclaimer { color: #d1ddd5; background: #202c28; border-color: #42564b; }
+[data-theme="dark"] .recommendation-options { gap: 13px; }
+[data-theme="dark"] .recommendations-hero-stat { color: #e0ece4; }
+[data-theme="dark"] .sim-recommendations-toggle .sim-recommendation-count { color: #dcf0e2; }
+@media (max-width: 680px) {
+  .lead-intake-panel { padding: 15px; }
+  .lead-recommendation-card { grid-template-columns: 1fr; }
+  .lead-recommendation-price { justify-items: start; }
+  .lead-recommendation-price span { text-align: left; }
+  .price-profile-import { align-items: flex-start; flex-wrap: wrap; }
+  .price-profile-import .button { margin-left: 48px; }
+  .recommendation-option-top { flex-wrap: wrap; }
+}
 [data-theme="dark"] .dashboard-welcome { background: #173d3a; }
 [data-theme="dark"] .welcome-copy p { color: #d2e0da; }
 [data-theme="dark"] .quick-card { background: #202d29; }

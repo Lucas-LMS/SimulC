@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState } from "react";
 import {
-  AlertCircle, ArrowDown, ArrowRight, CalendarDays, Check, ChevronDown, Copy, FileText,
+  AlertCircle, ArrowDown, ArrowRight, CalendarDays, Check, ChevronDown, ClipboardPaste, Copy, FileText,
   Info, LoaderCircle, Plus, RotateCcw, Save, Send, ShieldCheck, Trash2, Upload, UserPlus, X,
 } from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";
@@ -166,6 +166,7 @@ export default function SimulatorPage({ workspace, setWorkspace, activeSimulatio
   const [gpmError, setGpmError] = useState("");
   const [gpmNotice, setGpmNotice] = useState("");
   const [gpmSourceName, setGpmSourceName] = useState("Informado manualmente no simulador");
+  const [recommendationsExpanded, setRecommendationsExpanded] = useState(false);
   const [nextPropertyId, setNextPropertyId] = useState("");
 
   // New loaded simulation key starts a fresh draft; edits remain local until the user saves.
@@ -291,6 +292,11 @@ export default function SimulatorPage({ workspace, setWorkspace, activeSimulatio
       setGpmBusy(false); setGpmProgress(null);
       if (gpmFileRef.current) gpmFileRef.current.value = "";
     }
+  };
+  const pasteGpmImage = (event: React.ClipboardEvent<HTMLElement>) => {
+    const item = [...event.clipboardData.items].find((entry) => entry.type.startsWith("image/"));
+    const image = item?.getAsFile();
+    if (image) { event.preventDefault(); void importGpmFile(new File([image], "imagem-colada.png", { type: image.type || "image/png" })); }
   };
   const updateGpmValue = <K extends GpmFieldKey>(key: K, value: GpmSuggestions[K]) => {
     setGpmReview((current) => current ? { ...current, values: { ...current.values, [key]: value } } : current);
@@ -511,7 +517,7 @@ export default function SimulatorPage({ workspace, setWorkspace, activeSimulatio
               {client && <div className="field-note span-2 client-simulation-summary"><Info size={14} /><span><strong>{client.name}</strong> · renda familiar {moneyLabel(client.incomeFamilyCents, "não informada")} · idade {client.oldestBuyerAge ? `${client.oldestBuyerAge} anos` : "não informada"}</span></div>}
               <label className="form-field span-2"><span>Perfil do cliente</span><div className="select-with-action"><select value={draft.clientId} onChange={(e) => changeClient(e.target.value)}><option value="">Selecione ou deixe sem perfil</option>{workspace.clients.map((item) => <option value={item.id} key={item.id}>{item.name}{item.incomeFamilyCents ? ` · ${formatBRL(item.incomeFamilyCents)}/mês` : ""}</option>)}</select><button className="icon-button add-inline" title="Cadastrar perfil rápido" onClick={() => setNewClientOpen(true)}><UserPlus size={16} /></button></div></label>
               <SearchableUnitSelect className="span-2" label="Empreendimento / unidade" units={workspace.portfolio} value={property.id} onChange={(propertyId) => { const selected = workspace.portfolio.find((unit) => unit.id === propertyId); const nextPrice = selected?.priceCents ?? selected?.priceLowCents ?? null; update({ propertyId, priceOverrideCents: null, deliveryOverride: null, ...clientPriceProfileToSimulation(client?.priceProfile, nextPrice), manualAmounts: {}, robustActCents: null, monthlyCountOverride: null, annualDatesOverride: null, directMonthlyCountOverride: null, directAnnualDatesOverride: null, actualShortFlowConfirmed: false }); setGpmSourceName(client?.priceProfile?.source || "Informado manualmente no simulador"); setGpmReview(null); setGpmNotice(client?.priceProfile ? projectClientPriceProfile(client.priceProfile, nextPrice).message : "PRICE/GPM pendente para esta unidade."); if (selected && (!selected.deliveryYear || !selected.deliveryMonth)) setNotice(`Entrega incompleta para ${selected.project}: ${selected.deliveryText || "mês/ano não informado"}. Informe a premissa antes de calcular o prazo.`); }} />
-              {client && <div className="sim-recommendations span-2" aria-live="polite"><div className="sim-recommendations-heading"><div><span className="eyebrow">RECOMENDAÇÕES PARA ESTE PERFIL</span><h3>Opções compatíveis do catálogo</h3><p>Prioridade: região desejada → tipologia exata → proximidade do ano de entrega. Abra qualquer unidade para criar um cenário independente.</p></div><span className="sim-recommendation-count">{clientRecommendations.length} opções</span></div>
+              {client && <div className="sim-recommendations span-2" aria-live="polite"><button className="sim-recommendations-toggle" aria-expanded={recommendationsExpanded} onClick={() => setRecommendationsExpanded((open) => !open)}><span><span className="eyebrow">RECOMENDAÇÕES PARA ESTE PERFIL</span><strong>Opções compatíveis do catálogo</strong><small>Prioridade: região desejada, tipologia e proximidade da entrega.</small></span><span className="sim-recommendation-count">{clientRecommendations.length} opções <ChevronDown size={16} className={recommendationsExpanded ? "rotate" : ""} /></span></button>{recommendationsExpanded && <div className="sim-recommendations-content"><div className="sim-recommendations-heading"><div><p>Abra uma opção para criar um cenário independente.</p></div></div>
                 {!client.preferences || !(client.preferences.desiredAreas.trim() || client.preferences.bedrooms !== null || client.preferences.parking !== null || client.preferences.deliveryYear !== null)
                   ? <div className="sim-recommendations-empty">Cadastre preferências de região, quartos, vaga ou ano de entrega no perfil para gerar recomendações.</div>
                   : clientRecommendations.length === 0
@@ -536,7 +542,7 @@ export default function SimulatorPage({ workspace, setWorkspace, activeSimulatio
                         <button className="button button-quiet button-small" onClick={() => openRecommendedScenario(unit)}>Abrir cenário <ArrowRight size={14} /></button>
                         </article>
                       </div>;
-                    })}</div>}
+                    })}</div>}</div>}
               </div>}
               <MoneyField label="Preço adotado nesta simulação" value={priceCents || null} onChange={(value) => { const nextPrice = value ?? property?.priceCents ?? property?.priceLowCents ?? 0; const cap = Math.floor(nextPrice * 0.8); const autoCap = nextPrice > 0 && draft.financingAmountCents !== null && draft.financingAmountCents > cap; update({ priceOverrideCents: value, ...(autoCap ? { financingAmountCents: cap, financingManualOverride: false, gpmReportedFinancingAmountCents: draft.gpmReportedFinancingAmountCents ?? draft.financingAmountCents, gpmReportedPriceReferenceCents: draft.gpmReportedPriceReferenceCents ?? priceCents } : {}) }); if (autoCap) setGpmNotice(`Preço alterado; financiamento ajustado automaticamente de ${formatBRL(draft.financingAmountCents!)} para o novo teto de 80% (${formatBRL(cap)}). O valor GPM original permanece preservado para conferência.`); }} hint="O preço pode ser alterado sem mudar o cadastro do catálogo; financiamento importado/projetado é limitado a 80%." />
               <MoneyField label="Renda familiar mensal" value={familyIncome} onChange={(value) => { if (client) setWorkspace((current) => ({ ...current, clients: current.clients.map((item) => item.id === client.id ? { ...item, incomeFamilyCents: value, updatedAt: new Date().toISOString() } : item) })); }} hint="Editar aqui também atualiza o perfil do cliente." />
@@ -548,7 +554,7 @@ export default function SimulatorPage({ workspace, setWorkspace, activeSimulatio
           </section>
 
           <section className="panel sim-section">
-            <div className="sim-section-title"><span className="section-number">02</span><div><h2>Caixa · GPM / PRICE</h2><p>Transcreva a simulação bancária; o site não calcula aprovação.</p></div><input ref={gpmFileRef} type="file" accept="application/pdf,image/*,.pdf" hidden onChange={(event) => void importGpmFile(event.target.files?.[0])} /><div className="sim-section-actions"><button className="button button-quiet button-small" disabled={!client || priceCents <= 0 || !hasPriceProfileData || gpmReview !== null} title={!client ? "Selecione um cliente primeiro" : gpmReview ? "Aplique ou descarte a revisão OCR primeiro" : "Salva os dados atuais no perfil do cliente"} onClick={savePriceProfileToClient}><Save size={14} /> Salvar PRICE no perfil</button><button className="button button-quiet button-small" disabled={gpmBusy} onClick={() => gpmFileRef.current?.click()}>{gpmBusy ? <LoaderCircle size={14} className="spin" /> : <Upload size={14} />}{gpmBusy ? "Lendo arquivo…" : "Importar imagem / PDF"}</button></div></div>
+              <div className="sim-section-title"><span className="section-number">02</span><div><h2>Caixa · GPM / PRICE</h2><p>Transcreva a simulação bancária; o site não calcula aprovação.</p></div><input ref={gpmFileRef} type="file" accept="application/pdf,image/*,.pdf" hidden onChange={(event) => void importGpmFile(event.target.files?.[0])} /><div className="sim-section-actions"><button className="button button-quiet button-small" disabled={!client || priceCents <= 0 || !hasPriceProfileData || gpmReview !== null} title={!client ? "Selecione um cliente primeiro" : gpmReview ? "Aplique ou descarte a revisão OCR primeiro" : "Salva os dados atuais no perfil do cliente"} onClick={savePriceProfileToClient}><Save size={14} /> Salvar PRICE no perfil</button><button className="button button-quiet button-small" disabled={gpmBusy} onClick={() => gpmFileRef.current?.click()}>{gpmBusy ? <LoaderCircle size={14} className="spin" /> : <Upload size={14} />}{gpmBusy ? "Lendo arquivo…" : "Importar imagem / PDF"}</button><button type="button" className="button button-quiet button-small paste-image-button" onPaste={pasteGpmImage} onClick={(event) => { event.currentTarget.focus(); setGpmNotice("Cole a imagem copiada aqui com Ctrl+V."); }} onKeyDown={(event) => { if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "v") event.currentTarget.focus(); }} title="Clique e cole uma imagem copiada com Ctrl+V"><ClipboardPaste size={14} /> Colar imagem</button></div></div>
             {gpmProgress && <div className="upload-progress"><div><span>{gpmProgress.detail}</span><strong>{Math.round(gpmProgress.progress * 100)}%</strong></div><div className="progress-track"><span style={{ width: `${Math.max(5, gpmProgress.progress * 100)}%` }} /></div></div>}
             {gpmError && <div className="flow-alert"><AlertCircle size={15} />{gpmError}</div>}
             {gpmNotice && <div className="field-note"><Info size={14} /><span>{gpmNotice}</span></div>}

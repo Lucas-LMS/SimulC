@@ -13,3 +13,6 @@
 !/pnpm-lock.yaml
 !/pnpm-workspace.yaml
 !/vite.config.ts
+!/firebase.json
+!/firestore.rules
+!/.env.example

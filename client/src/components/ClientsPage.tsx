@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { ArrowRight, Check, ClipboardPaste, Plus, Search, UserRound, Users, X } from "lucide-react";
+import { useMemo, useRef, useState } from "react";
+import { ArrowRight, Check, ClipboardPaste, FileImage, Plus, Search, Upload, UserRound, Users, X } from "lucide-react";
 import type { ClientPriceProfile, ClientProfile, WorkspaceData } from "../lib/models";
 import type { Dispatch, SetStateAction } from "react";
 import { formatBRL } from "../lib/money";
@@ -9,6 +9,8 @@ import { parseLeadForm, recommendUnitsForLead, type LeadDraft } from "../lib/lea
 import { makeNewSimulation } from "./SimulatorPage";
 import { clientPriceProfileToSimulation, projectClientPriceProfile } from "../lib/clientPriceProfile";
 import CurrencyInput from "./CurrencyInput";
+import { parseTableFile } from "../lib/importFiles";
+import { parseGpmText } from "../lib/gpm";
 
 interface Props {
   workspace: WorkspaceData;
@@ -47,6 +49,9 @@ export default function ClientsPage({ workspace, setWorkspace, onSimulate }: Pro
   const [leadReview, setLeadReview] = useState<LeadDraft | null>(null);
   const [leadError, setLeadError] = useState("");
   const [leadNotice, setLeadNotice] = useState("");
+  const priceFileRef = useRef<HTMLInputElement>(null);
+  const [priceImportBusy, setPriceImportBusy] = useState(false);
+  const [priceImportNotice, setPriceImportNotice] = useState("");
   const clients = useMemo(() => workspace.clients.filter((client) => `${client.name} ${client.phone}`.toLocaleLowerCase("pt-BR").includes(search.toLocaleLowerCase("pt-BR"))), [workspace.clients, search]);
   const selected = workspace.clients.find((client) => client.id === selectedId);
   const form = draft ?? selected ?? blankClient();
@@ -61,6 +66,36 @@ export default function ClientsPage({ workspace, setWorkspace, onSimulate }: Pro
   };
   const updatePriceProfile = (patch: Partial<ClientPriceProfile>) => {
     update({ priceProfile: { ...(form.priceProfile ?? blankPriceProfile()), ...patch, updatedAt: new Date().toISOString() } });
+  };
+  const importPriceDocument = async (file?: File) => {
+    if (!file) return;
+    setPriceImportBusy(true); setPriceImportNotice("");
+    try {
+      const parsed = await parseTableFile(file, true, () => undefined);
+      const values = parseGpmText(parsed.rawText);
+      if (!Object.values(values).some((value) => value !== null)) throw new Error("Não encontrei campos PRICE/GPM. Confira se o documento está legível.");
+      updatePriceProfile({
+        ...(values.propertyPriceCents !== null ? { priceReferenceCents: values.propertyPriceCents } : {}),
+        ...(values.financingAmountCents !== null ? { financingAmountCents: values.financingAmountCents, gpmReportedFinancingAmountCents: values.financingAmountCents } : {}),
+        ...(values.firstInstallmentCents !== null ? { firstPriceInstallmentCents: values.firstInstallmentCents, gpmReportedFirstPriceInstallmentCents: values.firstInstallmentCents } : {}),
+        ...(values.termMonths !== null ? { financingTermMonths: values.termMonths } : {}),
+        ...(values.financingLine ? { financingLine: values.financingLine } : {}),
+        ...(values.financingSystem ? { financingSystem: values.financingSystem } : {}),
+        ...(values.rate ? { financingRate: values.rate } : {}),
+        ...(values.subsidyCents !== null ? { gpmReportedSubsidyCents: values.subsidyCents } : {}),
+        ...(values.fees ? { gpmReportedFees: values.fees } : {}),
+        ...(values.quotaPercent !== null ? { gpmReportedQuotaPercent: values.quotaPercent } : {}),
+        ...(values.incomeCommitmentPercent !== null ? { gpmReportedIncomeCommitmentPercent: values.incomeCommitmentPercent } : {}),
+        source: file.name || "Imagem colada · PRICE/GPM", sourceDate: new Date().toISOString().slice(0, 10),
+      });
+      setPriceImportNotice("Dados identificados e preenchidos para revisão. Confira cada campo antes de salvar o perfil.");
+    } catch (error) { setPriceImportNotice(error instanceof Error ? error.message : "Não foi possível ler o documento."); }
+    finally { setPriceImportBusy(false); if (priceFileRef.current) priceFileRef.current.value = ""; }
+  };
+  const pastePriceImage = (event: React.ClipboardEvent<HTMLElement>) => {
+    const imageItem = [...event.clipboardData.items].find((item) => item.type.startsWith("image/"));
+    const file = imageItem?.getAsFile();
+    if (file) { event.preventDefault(); void importPriceDocument(new File([file], "imagem-colada.png", { type: file.type || "image/png" })); }
   };
   const startNew = () => { const next = blankClient(); setSelectedId(""); setDraft(next); setSavedNotice(false); };
   const open = (client: ClientProfile) => { setSelectedId(client.id); setDraft(client); setSavedNotice(false); };
@@ -197,7 +232,7 @@ export default function ClientsPage({ workspace, setWorkspace, onSimulate }: Pro
             <label className="form-field"><span>Quartos pretendidos</span><input type="number" min="0" max="10" value={form.preferences?.bedrooms ?? ""} onChange={(event) => update({ preferences: { desiredAreas: form.preferences?.desiredAreas ?? "", bedrooms: event.target.value ? Number(event.target.value) : null, parking: form.preferences?.parking ?? null, deliveryYear: form.preferences?.deliveryYear ?? null } })} /></label>
             <label className="form-field"><span>Vaga pretendida</span><select value={form.preferences?.parking === undefined || form.preferences?.parking === null ? "unknown" : form.preferences.parking ? "yes" : "no"} onChange={(event) => update({ preferences: { desiredAreas: form.preferences?.desiredAreas ?? "", bedrooms: form.preferences?.bedrooms ?? null, parking: event.target.value === "unknown" ? null : event.target.value === "yes", deliveryYear: form.preferences?.deliveryYear ?? null } })}><option value="unknown">Não informado</option><option value="yes">Com vaga</option><option value="no">Sem vaga</option></select></label>
             <label className="form-field"><span>Ano de entrega pretendido</span><input type="number" min="2026" max="2040" value={form.preferences?.deliveryYear ?? ""} onChange={(event) => update({ preferences: { desiredAreas: form.preferences?.desiredAreas ?? "", bedrooms: form.preferences?.bedrooms ?? null, parking: form.preferences?.parking ?? null, deliveryYear: event.target.value ? Number(event.target.value) : null } })} /></label>
-            <section className="client-price-profile span-2" aria-labelledby="client-price-profile-title">
+            <section className="client-price-profile span-2" aria-labelledby="client-price-profile-title" onPaste={pastePriceImage}>
               <div className="client-price-profile-heading"><div><span className="eyebrow">DADOS FINANCEIROS INFORMADOS</span><h3 id="client-price-profile-title">PRICE / GPM de referência</h3><p>Guarde a origem, a data, o preço-base e os valores recebidos. A projeção para outra unidade será identificada como estimativa proporcional.</p></div>{form.priceProfile && <button className="text-button danger-text" onClick={() => update({ priceProfile: undefined })}>Limpar PRICE</button>}</div>
               <div className="form-grid profile-price-grid">
                 <MoneyInput label="Preço-base da simulação PRICE" value={form.priceProfile?.priceReferenceCents ?? null} onChange={(value) => updatePriceProfile({ priceReferenceCents: value })} hint="Necessário para projetar os valores para outro imóvel." />
@@ -211,6 +246,8 @@ export default function ClientsPage({ workspace, setWorkspace, onSimulate }: Pro
                 <label className="form-field"><span>Data da PRICE</span><input type="date" value={form.priceProfile?.sourceDate ?? ""} onChange={(event) => updatePriceProfile({ sourceDate: event.target.value })} /></label>
                 <label className="form-field span-2"><span>Observações do GPM/PRICE</span><textarea rows={2} value={form.priceProfile?.financingNotes ?? ""} onChange={(event) => updatePriceProfile({ financingNotes: event.target.value })} placeholder="Dados transcritos; não representam aprovação." /></label>
               </div>
+              <div className="price-profile-import"><input ref={priceFileRef} type="file" accept="application/pdf,image/*,.pdf" hidden onChange={(event) => void importPriceDocument(event.target.files?.[0])} /><span className="price-profile-import-icon"><FileImage size={18} /></span><div><strong>Preencher a partir de uma imagem ou PDF</strong><small>Extração local no navegador; revise os campos reconhecidos antes de salvar. Você também pode colar uma imagem com Ctrl+V nesta área.</small></div><button type="button" className="button button-quiet button-small" disabled={priceImportBusy} onClick={() => priceFileRef.current?.click()}>{priceImportBusy ? "Lendo…" : <><Upload size={14} /> Importar arquivo</>}</button></div>
+              {priceImportNotice && <div className={`inline-status ${priceImportNotice.startsWith("Não") ? "error-status" : ""}`}>{priceImportNotice}</div>}
               <div className="field-note"><Info size={14} /><span>A simulação de origem permanece salva como informada. Recomendações podem estimar valores proporcionais quando o preço-base estiver preenchido; confirme sempre com um GPM/PRICE atualizado. O financiamento projetado é limitado automaticamente a 80% do preço e pode ser editado na simulação.</span></div>
             </section>
             <label className="form-field span-2"><span>Observações / restrições informadas</span><textarea rows={3} value={form.notes} onChange={(event) => update({ notes: event.target.value })} placeholder="Ex.: cliente pediu cenário para maio/2029; anotar apenas fatos informados." /></label>
