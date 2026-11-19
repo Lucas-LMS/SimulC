@@ -1,19 +1,28 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
-  AlertCircle, ArrowRight, CalendarDays, Check, ChevronDown, ClipboardPaste, Copy, FileText,
-  Info, LoaderCircle, Plus, Printer, RotateCcw, Save, Send, ShieldCheck, Trash2, Upload, UserPlus, X,
+  AlertCircle, ArrowRight, CalendarDays, Check, ChevronDown, ClipboardPaste, Copy, Download, FileText,
+  Gauge, Image as ImageIcon, Info, LoaderCircle, Plus, Presentation, Printer, RotateCcw, Save, Send, ShieldCheck, Trash2, TrendingUp, Upload, UserPlus, X,
 } from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";
-import type { AnnualPayment, ClientPriceProfile, ClientProfile, PaymentDate, SimulationRecord, WorkspaceData } from "../lib/models";
+import type { AnnualPayment, ClientPriceProfile, ClientProfile, PaymentDate, SimulationRecord, SimulationStatus, WorkspaceData } from "../lib/models";
 import type { PortfolioUnit } from "../data/portfolio";
 import type { AppToast } from "../pages/Home";
-import { calculateAll, calculateSimulationEntry, suggestRobustAct, type FlowScenario, type FullCalculation } from "../lib/calculator";
-import { formatBRL, formatNumber } from "../lib/money";
+import { calculateAll, calculateSimulationEntry, minimumActForPrice, suggestRobustAct, type FlowScenario, type FullCalculation } from "../lib/calculator";
+import { formatBRL, formatNumber, roundCents } from "../lib/money";
 import { recordSimulationDelivery } from "../lib/delivery";
 import { createId } from "../lib/storage";
 import { makeNewSimulation } from "../lib/simulations";
 import { countMonthlyPayments, isShortOrImmediateDelivery, listMonthlyDates, monthKey, monthLabelCapitalized, parseMonthKey, suggestAnnualDates } from "../lib/schedule";
 import { buildInternalSummary, generateWhatsAppMessage } from "../lib/whatsapp";
+import {
+  calculateDocumentationEstimate,
+  evaluatePocketThermometer,
+  normalizeSimulationStatus,
+  simulateInccSensitivity,
+  SIMULATION_STATUS_META,
+  SIMULATION_STATUS_ORDER,
+} from "../lib/insights";
+import { copyProposalCardToClipboard, downloadProposalCardPng } from "../lib/proposalCard";
 import { parseTableFile, type ImportProgress } from "../lib/importFiles";
 import { parseGpmText, type GpmSuggestions } from "../lib/gpm";
 import { getImageFromClipboardData, readClipboardImage } from "../lib/clipboard";
@@ -21,6 +30,8 @@ import { recommendUnitsForLead } from "../lib/leads";
 import { clientPriceProfileToSimulation, projectClientPriceProfile } from "../lib/clientPriceProfile";
 import CurrencyInput from "./CurrencyInput";
 import SearchableUnitSelect from "./SearchableUnitSelect";
+import { CashflowTimelineChart, IncomeCommitmentGauge, PriceCompositionBar } from "./SimulationCharts";
+import ProposalPresentation from "./ProposalPresentation";
 
 interface Props {
   workspace: WorkspaceData;
@@ -163,6 +174,12 @@ export default function SimulatorPage({
   const [view, setView] = useState<"interno" | "whatsapp">("interno");
   const [whatsappMode, setWhatsappMode] = useState<"ambas" | "caixa" | "direta">("ambas");
   const [customWhatsappText, setCustomWhatsappText] = useState<string | null>(null);
+  const [presentationOpen, setPresentationOpen] = useState(false);
+  const [chartMode, setChartMode] = useState<"caixa" | "direta">("caixa");
+  const [itbiPercent, setItbiPercent] = useState(3);
+  const [rgiPercent, setRgiPercent] = useState(1.5);
+  const [inccRate, setInccRate] = useState(0.5);
+  const [cardBusy, setCardBusy] = useState(false);
   const [newClientOpen, setNewClientOpen] = useState(false);
   const [newClientName, setNewClientName] = useState("");
   const [newClientPhone, setNewClientPhone] = useState("");
@@ -546,6 +563,64 @@ export default function SimulatorPage({
     const url = normalized ? `https://wa.me/${normalized}?text=${encodeURIComponent(message)}` : `https://wa.me/?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank", "noopener,noreferrer");
   };
+
+  const pocketThermometer = useMemo(
+    () => evaluatePocketThermometer(client, calculation.robust, draft.firstPriceInstallmentCents),
+    [client, calculation.robust, draft.firstPriceInstallmentCents],
+  );
+  const documentationEstimate = useMemo(
+    () => calculateDocumentationEstimate(priceCents, itbiPercent, rgiPercent),
+    [priceCents, itbiPercent, rgiPercent],
+  );
+  const activeChartScenario =
+    chartMode === "direta" && draft.includeDirect && calculation.directRobust
+      ? calculation.directRobust
+      : calculation.robust;
+  const inccProjection = useMemo(
+    () => simulateInccSensitivity(activeChartScenario, inccRate),
+    [activeChartScenario, inccRate],
+  );
+
+  const buildCardPayload = () => ({
+    client,
+    property: property!,
+    priceCents,
+    deliveryDate,
+    deliveryIsPremise,
+    deliveryText,
+    calculation,
+    firstPriceInstallmentCents: draft.firstPriceInstallmentCents,
+    financingTermMonths: draft.financingTermMonths,
+    mode: whatsappMode,
+    brokerProfile: workspace.brokerProfile,
+    documentationTotalCents: documentationEstimate.totalCents > 0 ? documentationEstimate.totalCents : null,
+  });
+
+  const handleDownloadCard = async () => {
+    if (!property) return;
+    setCardBusy(true);
+    try {
+      await downloadProposalCardPng(buildCardPayload());
+      onNotify?.({ kind: "success", text: "Card PNG da proposta baixado!" });
+    } catch (error) {
+      onNotify?.({ kind: "error", text: error instanceof Error ? error.message : "Erro ao gerar card PNG." });
+    } finally {
+      setCardBusy(false);
+    }
+  };
+
+  const handleCopyCard = async () => {
+    if (!property) return;
+    setCardBusy(true);
+    try {
+      await copyProposalCardToClipboard(buildCardPayload());
+      onNotify?.({ kind: "success", text: "Card PNG copiado! Cole direto no WhatsApp Web (Ctrl+V)." });
+    } catch (error) {
+      onNotify?.({ kind: "error", text: error instanceof Error ? error.message : "Não foi possível copiar o card." });
+    } finally {
+      setCardBusy(false);
+    }
+  };
   const modeCanCopy = whatsappMode === "direta"
     ? Boolean(calculation.directVisible && calculation.directRobust?.isBalanced)
     : (calculation.robust?.isBalanced ?? false);
@@ -581,7 +656,8 @@ export default function SimulatorPage({
           <p>Dados bancários vêm da simulação GPM/PRICE que você informar. Nenhum valor é estimado sem sinalização.</p>
         </div>
         <div className="simulator-header-actions no-print">
-          <button type="button" className="button button-quiet button-small" onClick={() => window.print()} title="Imprimir ou salvar proposta em PDF"><Printer size={15} /> Imprimir / PDF</button>
+          <button type="button" className="button button-accent button-small" onClick={() => setPresentationOpen(true)} title="Abrir Modo Apresentação para mostrar ao cliente ou salvar PDF editorial"><Presentation size={15} /> Apresentar ao cliente</button>
+          <button type="button" className="button button-quiet button-small" onClick={() => setPresentationOpen(true)} title="Visualizar e imprimir/salvar proposta em PDF"><Printer size={15} /> PDF</button>
           {onDuplicate && <button type="button" className="button button-quiet button-small" onClick={() => onDuplicate(draft)} title="Duplicar como novo cenário"><Copy size={15} /> Duplicar</button>}
           {savedRecord && onDelete && <button type="button" className="icon-button danger-quiet" aria-label="Excluir simulação" title="Excluir simulação" onClick={() => { if (window.confirm("Excluir esta simulação salva?")) onDelete(draft.id); }}><Trash2 size={15} /></button>}
           <button className="button button-primary" onClick={save}><Save size={16} /> {isDirty ? "Salvar simulação" : "Salva"}</button>
@@ -631,6 +707,8 @@ export default function SimulatorPage({
               <MoneyField label="Ato disponível informado" value={availableAct} onChange={(value) => { if (client) setWorkspace((current) => ({ ...current, clients: current.clients.map((item) => item.id === client.id ? { ...item, availableActCents: value, updatedAt: new Date().toISOString() } : item) })); }} />
               <label className="form-field"><span>Simulação iniciada em (ato)</span><div className="date-control"><CalendarDays size={15} /><input type="month" value={monthKey(actDate)} onChange={(event) => { const date = parseMonthKey(event.target.value); if (date) update({ actDate: date, annualDatesOverride: null, directAnnualDatesOverride: null }); }} /></div></label>
               <DateField label="Entrega / chaves" value={deliveryDate} onChange={(value) => { update({ deliveryOverride: value, annualDatesOverride: null, directAnnualDatesOverride: null, monthlyCountOverride: null, directMonthlyCountOverride: null }); if (value) setWorkspace((current) => ({ ...current, portfolio: current.portfolio.map((unit) => unit.id === property.id ? recordSimulationDelivery(unit, value) : unit) })); }} hint={deliveryDate ? "Ajuste se o mês da tabela estiver pendente; datas vindas do simulador ficam marcadas como premissa." : "O catálogo só informou o ano ou não trouxe a data. Escolha um mês apenas como premissa explícita."} />
+              <label className="form-field"><span>Status da proposta</span><select value={normalizeSimulationStatus(draft.status)} onChange={(event) => update({ status: event.target.value as SimulationStatus })}>{SIMULATION_STATUS_ORDER.map((key) => <option key={key} value={key}>{SIMULATION_STATUS_META[key].label}</option>)}</select></label>
+              <label className="form-field"><span>Próximo passo / follow-up</span><input value={draft.nextStep ?? ""} onChange={(event) => update({ nextStep: event.target.value })} placeholder="Ex.: Aguardando holerite para rodar GPM" /></label>
               <div className="field-note span-2"><Info size={14} /><span>{client?.incomeComposition ? `Composição informada: ${client.incomeComposition}. ` : ""}{property.deliveryDateSource === "simulation" ? `Data salva a partir do simulador como premissa; confirme com a fonte oficial. Texto original: ${property.deliveryText}` : property.deliveryDateSource === "manual" ? `Data informada manualmente no catálogo; confirme com a fonte oficial. Texto original: ${property.deliveryText}` : property.deliveryMonth ? "Mês de entrega veio da referência do catálogo." : property.deliveryYear ? `A fonte informa apenas ${property.deliveryYear}; o mês ainda depende de confirmação.` : "Confirme o cronograma oficial antes de apresentar datas."}</span></div>
             </div>
           </section>
@@ -646,11 +724,16 @@ export default function SimulatorPage({
               <label className="form-field"><span>Prazo da simulação</span><div className="unit-control"><input type="number" min="1" value={draft.financingTermMonths ?? ""} onChange={(e) => update({ financingTermMonths: e.target.value ? Number(e.target.value) : null })} placeholder="—" /><span>meses</span></div><small>Use o prazo fornecido pelo GPM/PRICE.</small></label>
               <label className="form-field"><span>Linha / faixa informada</span><input value={draft.financingLine} onChange={(e) => update({ financingLine: e.target.value })} placeholder="MCMV, SBPE ou conforme documento" /></label>
               <label className="form-field"><span>Sistema</span><input value={draft.financingSystem} onChange={(e) => update({ financingSystem: e.target.value })} placeholder="PRICE / SAC / não informado" /></label>
-              <label className="form-field"><span>Taxa (se constar na simulação)</span><input value={draft.financingRate} onChange={(e) => update({ financingRate: e.target.value })} placeholder="Não presumir" /></label>
-              <MoneyField label="Subsídio informado no GPM (não aplicado)" value={draft.gpmReportedSubsidyCents} onChange={(value) => update({ gpmReportedSubsidyCents: value })} hint="Apenas transcrito para conferência; não reduz preço nem implica aprovação." />
-              <label className="form-field"><span>Cota reportada no GPM (informativa)</span><div className="unit-control percent-control"><input type="number" min="0" max="100" step="0.01" value={draft.gpmReportedQuotaPercent ?? ""} onChange={(e) => update({ gpmReportedQuotaPercent: e.target.value ? Number(e.target.value) : null })} /><span>%</span></div></label>
-              <label className="form-field"><span>Comprometimento reportado (informativo)</span><div className="unit-control percent-control"><input type="number" min="0" max="100" step="0.01" value={draft.gpmReportedIncomeCommitmentPercent ?? ""} onChange={(e) => update({ gpmReportedIncomeCommitmentPercent: e.target.value ? Number(e.target.value) : null })} /><span>%</span></div></label>
-              <label className="form-field span-2"><span>Taxas/encargos transcritos e observações da PRICE</span><textarea rows={2} value={draft.gpmReportedFees ?? draft.financingNotes} onChange={(e) => update({ gpmReportedFees: e.target.value, financingNotes: e.target.value })} placeholder="Ex.: seguros, tarifas e encargos conforme documento fornecido." /></label>
+              <details className="sim-advanced-details span-2" open={Boolean(draft.financingRate || draft.gpmReportedSubsidyCents || draft.gpmReportedQuotaPercent || draft.gpmReportedIncomeCommitmentPercent || draft.gpmReportedFees || draft.financingNotes)}>
+                <summary>Detalhes adicionais do GPM (taxa, subsídio, cota e observações)</summary>
+                <div className="form-grid sim-advanced-grid">
+                  <label className="form-field"><span>Taxa (se constar na simulação)</span><input value={draft.financingRate} onChange={(e) => update({ financingRate: e.target.value })} placeholder="Não presumir" /></label>
+                  <MoneyField label="Subsídio informado no GPM (não aplicado)" value={draft.gpmReportedSubsidyCents} onChange={(value) => update({ gpmReportedSubsidyCents: value })} hint="Apenas transcrito para conferência; não reduz preço nem implica aprovação." />
+                  <label className="form-field"><span>Cota reportada no GPM (informativa)</span><div className="unit-control percent-control"><input type="number" min="0" max="100" step="0.01" value={draft.gpmReportedQuotaPercent ?? ""} onChange={(e) => update({ gpmReportedQuotaPercent: e.target.value ? Number(e.target.value) : null })} /><span>%</span></div></label>
+                  <label className="form-field"><span>Comprometimento reportado (informativo)</span><div className="unit-control percent-control"><input type="number" min="0" max="100" step="0.01" value={draft.gpmReportedIncomeCommitmentPercent ?? ""} onChange={(e) => update({ gpmReportedIncomeCommitmentPercent: e.target.value ? Number(e.target.value) : null })} /><span>%</span></div></label>
+                  <label className="form-field span-2"><span>Taxas/encargos transcritos e observações da PRICE</span><textarea rows={2} value={draft.gpmReportedFees ?? draft.financingNotes} onChange={(e) => update({ gpmReportedFees: e.target.value, financingNotes: e.target.value })} placeholder="Ex.: seguros, tarifas e encargos conforme documento fornecido." /></label>
+                </div>
+              </details>
             </div>
             {gpmReview && <section className="gpm-review-panel" aria-labelledby="gpm-review-title"><div className="section-heading"><div><span className="eyebrow">RASCUNHO DE OCR · NÃO APLICADO</span><h3 id="gpm-review-title">Revise os dados reconhecidos</h3><p>Corrija valores e desmarque campos que não deseja preencher. Os campos manuais acima continuam disponíveis.</p></div><button className="icon-button" aria-label="Descartar reconhecimento" onClick={() => { setGpmReview(null); setGpmNotice(""); }}><X size={15} /></button></div>
               <div className="form-grid">
@@ -677,8 +760,35 @@ export default function SimulatorPage({
           <section className="panel sim-section">
             <div className="sim-section-title"><span className="section-number">03</span><div><h2>Estruture o ato e as parcelas</h2><p>O sistema calcula uma proposta inicial. Você pode substituir cada valor e data.</p></div></div>
             <div className="form-grid">
-              <MoneyField label="Ato robusto" value={draft.robustActCents ?? robustAct} onChange={(value) => update({ robustActCents: value })} hint={draft.robustActCents === null ? "Sugestão automática de planejamento, limitada ao ato disponível se informado." : "Valor ajustado manualmente."} />
-              <label className="form-field"><span>Fator da anual</span><select value={draft.annualFactor} onChange={(e) => update({ annualFactor: Number(e.target.value) })}><option value={3}>3× a mensal (padrão)</option><option value={4}>4× a mensal</option></select><small>Entre 3× e 4×; confirme capacidade e vencimento.</small></label>
+              <div className="form-field">
+                <MoneyField label="Ato robusto" value={draft.robustActCents ?? robustAct} onChange={(value) => update({ robustActCents: value })} hint={draft.robustActCents === null ? "Sugestão automática de planejamento, limitada ao ato disponível se informado." : "Valor ajustado manualmente."} />
+                {priceCents > 0 && (
+                  <div className="preset-chips" role="group" aria-label="Atalhos de valor de ato">
+                    <button type="button" className="preset-chip" onClick={() => update({ robustActCents: minimumActForPrice(priceCents) })}>Mín 2,5%</button>
+                    <button type="button" className="preset-chip" onClick={() => update({ robustActCents: roundCents(priceCents * 0.05) })}>5%</button>
+                    <button type="button" className="preset-chip" onClick={() => update({ robustActCents: roundCents(priceCents * 0.1) })}>10%</button>
+                    {availableAct !== null && availableAct > 0 && (
+                      <button type="button" className="preset-chip accent" onClick={() => update({ robustActCents: availableAct })}>Usar disponível</button>
+                    )}
+                  </div>
+                )}
+              </div>
+              <div className="form-field">
+                <span>Fator da anual</span>
+                <div className="whatsapp-mode-pills">
+                  {[3, 4].map((factor) => (
+                    <button
+                      key={factor}
+                      type="button"
+                      className={`mode-pill ${draft.annualFactor === factor ? "active" : ""}`}
+                      onClick={() => update({ annualFactor: factor })}
+                    >
+                      {factor}× a mensal{factor === 3 ? " (padrão)" : ""}
+                    </button>
+                  ))}
+                </div>
+                <small>Entre 3× e 4×; confirme capacidade e vencimento.</small>
+              </div>
               <label className="form-field"><span>Quantidade de mensais Caixa</span><div className="unit-control"><input type="number" min="0" max={maxMonths ?? undefined} value={shortFlow ? draft.monthlyCountOverride ?? "" : draft.monthlyCountOverride ?? maxMonths ?? ""} onChange={(e) => update({ monthlyCountOverride: e.target.value === "" ? null : Number(e.target.value) })} placeholder={shortFlow ? "Informar condição real" : "Informe entrega"} /><span>parcelas</span></div><small>{shortFlow ? "Sem sugestão automática: transcreva o fluxo recebido da mesa." : maxMonths !== null ? `Pelo calendário: até ${maxMonths}; última antes das chaves.` : "Informe mês e ano para calcular."}</small></label>
               <MoneyField label="Mensal Caixa manual (opcional)" value={draft.manualAmounts.caixaMonthlyCents ?? null} onChange={(value) => setManualMonthly("caixa", value)} hint="Deixe vazio para cálculo automático; ao preencher, substitui a mensal sugerida." />
               <label className="form-field"><span>Ano/meses das anuais Caixa</span><div className="field-actions-inline"><span>{dueDates.length ? dueDates.map((row) => `${String(row.month).padStart(2, "0")}/${row.year}`).join(" · ") : "Nenhuma sugerida"}</span><button className="text-button" onClick={() => addAnnual("caixa")}><Plus size={13} /> incluir anual</button></div><small>O ano do ato ({actDate.year}) não entra. Todas precisam vencer antes das chaves.</small></label>
@@ -693,7 +803,7 @@ export default function SimulatorPage({
           <section className="panel sim-section direct-section">
             <div className="sim-section-title"><span className="section-number">04</span><div><h2>Tabela Direta Cury</h2><p>Separada da Caixa; os percentuais incidem sobre o preço total.</p></div><label className="toggle-switch"><input type="checkbox" checked={draft.includeDirect} onChange={(e) => update({ includeDirect: e.target.checked })} /><span>{draft.includeDirect ? "Incluir" : "Desativada"}</span></label></div>
             {draft.includeDirect && <>
-              <div className="direct-split-band"><label className="form-field"><span>Pré-chaves</span><div className="unit-control percent-control"><input type="number" min="0" max="100" step="0.1" value={draft.directPrePercent} onChange={(e) => update({ directPrePercent: Number(e.target.value) })} /><span>% do preço</span></div></label><div className="split-divider"><ArrowRight size={16} /></div><div className="direct-post-value"><small>PÓS-CHAVES · DIRETO COM A CURY</small><strong>{formatNumber(calculation.directPostPercent, 1)}% <i>·</i> {formatBRL(calculation.directPostCents)}</strong><span>Montante; prazo/juros não presumidos.</span></div></div>
+              <div className="direct-split-band"><div className="form-field"><label className="form-field"><span>Pré-chaves</span><div className="unit-control percent-control"><input type="number" min="0" max="100" step="0.1" value={draft.directPrePercent} onChange={(e) => update({ directPrePercent: Number(e.target.value) })} /><span>% do preço</span></div></label><div className="preset-chips">{[50, 55, 60].map((pct) => <button key={pct} type="button" className={`preset-chip ${draft.directPrePercent === pct ? "accent" : ""}`} onClick={() => update({ directPrePercent: pct })}>{pct}%{pct === 55 ? " padrão" : ""}</button>)}</div></div><div className="split-divider"><ArrowRight size={16} /></div><div className="direct-post-value"><small>PÓS-CHAVES · DIRETO COM A CURY</small><strong>{formatNumber(calculation.directPostPercent, 1)}% <i>·</i> {formatBRL(calculation.directPostCents)}</strong><span>Montante; prazo/juros não presumidos.</span></div></div>
               {draft.directPrePercent !== 55 && <div className="flow-alert"><Info size={15} /> Percentual alterado manualmente: esta simulação não usa o padrão 55% pré / 45% pós. Confira as condições documentadas.</div>}
               <div className="form-grid direct-settings">
                 <label className="form-field"><span>Quantidade de mensais pré-chaves</span><div className="unit-control"><input type="number" min="0" max={maxMonths ?? undefined} value={shortFlow ? draft.directMonthlyCountOverride ?? "" : draft.directMonthlyCountOverride ?? maxMonths ?? ""} onChange={(e) => update({ directMonthlyCountOverride: e.target.value === "" ? null : Number(e.target.value) })} placeholder={shortFlow ? "Informar condição real" : "Automático"} /><span>parcelas</span></div><small>{shortFlow ? "Informe separadamente conforme condição documentada da mesa." : "Mensais terminam antes das chaves."}</small></label>
@@ -710,12 +820,151 @@ export default function SimulatorPage({
             <section className="summary-intro"><div className="summary-stamp"><ShieldCheck size={18} /><span>ESPELHO DE<br />CONFERÊNCIA</span></div><div><span className="eyebrow">PRÉVIA EM TEMPO REAL</span><h2>Fluxo de pagamento</h2><p>O que entra em cada etapa da compra.</p></div></section>
             <div className="summary-legend"><span><i className="legend-dot cury-dot" />Cury até as chaves</span><span><i className="legend-dot bank-dot" />Caixa / PRICE</span><span><i className="legend-dot direct-dot" />Saldo pós-chaves</span></div>
             <div className="summary-stat-grid"><StatBlock label="PREÇO TOTAL" value={formatBRL(priceCents)} sub="base da simulação" /><StatBlock label="COTA CAIXA USADA" value={calculation.financingPercent !== null ? `${formatNumber(calculation.financingPercent, 1)}%` : "A informar"} sub={calculation.financingUsedCents !== null ? formatBRL(calculation.financingUsedCents) : "transcreva o GPM"} tone="teal" /></div>
+
+            {activeChartScenario && activeChartScenario.canCalculate && (() => {
+              const annualSum = activeChartScenario.annualPayments.reduce((s, p) => s + (p.amountCents ?? 0), 0);
+              const monthlySum =
+                activeChartScenario.monthlyCount && activeChartScenario.regularMonthlyCents !== null
+                  ? Math.max(0, activeChartScenario.monthlyCount - 1) * activeChartScenario.regularMonthlyCents +
+                    (activeChartScenario.finalMonthlyCents ?? activeChartScenario.regularMonthlyCents)
+                  : 0;
+              const isDirectChart = chartMode === "direta" && draft.includeDirect && Boolean(calculation.directRobust);
+              return (
+                <div className="summary-visual-stack">
+                  {draft.includeDirect && calculation.directRobust?.canCalculate && (
+                    <div className="whatsapp-mode-pills no-print" role="group" aria-label="Modalidade dos gráficos">
+                      <button type="button" className={`mode-pill ${!isDirectChart ? "active" : ""}`} onClick={() => setChartMode("caixa")}>Gráficos: Caixa</button>
+                      <button type="button" className={`mode-pill ${isDirectChart ? "active" : ""}`} onClick={() => setChartMode("direta")}>Gráficos: Direta</button>
+                    </div>
+                  )}
+                  <PriceCompositionBar
+                    priceCents={priceCents}
+                    actCents={activeChartScenario.actCents}
+                    monthlyTotalCents={monthlySum}
+                    annualTotalCents={annualSum}
+                    postOrFinancingCents={isDirectChart ? calculation.directPostCents : (calculation.financingUsedCents ?? 0)}
+                    postLabel={isDirectChart ? "Pós-chaves Cury" : "Financiamento Caixa"}
+                  />
+                  <IncomeCommitmentGauge
+                    percent={activeChartScenario.monthlyIncomePercent}
+                    monthlyCents={activeChartScenario.regularMonthlyCents}
+                    incomeCents={familyIncome}
+                    priceInstallmentPercent={pocketThermometer.priceIncomePercent}
+                  />
+                  <CashflowTimelineChart actDate={actDate} scenario={activeChartScenario} />
+                </div>
+              );
+            })()}
+
+            {(pocketThermometer.hasAnyClientBudget || (calculation.financingUsedCents !== null && deliveryDate !== null)) && (
+              <section className="insight-card pocket-card">
+                <div className="insight-card-head">
+                  <Gauge size={15} />
+                  <div>
+                    <span className="eyebrow">TERMÔMETRO DE BOLSO & OBRA</span>
+                    <h4>Aderência ao perfil do cliente</h4>
+                  </div>
+                </div>
+                {pocketThermometer.hasAnyClientBudget && (
+                  <div className="pocket-list">
+                    {pocketThermometer.items.map((item) => (
+                      <div className={`pocket-row pocket-${item.status}`} key={item.id}>
+                        <div>
+                          <strong>{item.label}</strong>
+                          <small>{item.detail}</small>
+                        </div>
+                        <div className="pocket-values">
+                          <strong>{formatBRL(item.plannedCents)}</strong>
+                          <small>
+                            {item.id === "price_income"
+                              ? `${formatNumber(item.ratioPercent, 1)}% da renda`
+                              : item.deltaCents !== null && item.deltaCents > 0
+                                ? `+${formatBRL(item.deltaCents)}`
+                                : `limite ${formatBRL(item.limitCents)}`}
+                          </small>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {calculation.financingUsedCents !== null && deliveryDate !== null && (
+                  <div className="obra-alert">
+                    <Info size={14} />
+                    <span>
+                      <strong>Evolução de obra (Juros de Obra):</strong> no crédito associativo Caixa, há cobrança
+                      progressiva da taxa de obra junto à mensal da Cury conforme o avanço físico da construção.
+                      Confirme estimativa no GPM/contrato.
+                    </span>
+                  </div>
+                )}
+              </section>
+            )}
+
             {calculation.warnings.length > 0 && <div className="summary-warnings"><div><AlertCircle size={15} /><strong>Há itens para revisar</strong></div>{calculation.warnings.slice(0, 3).map((warning) => <p key={warning}>{warning}</p>)}</div>}
             <div className="section-heading flow-heading"><div><span className="eyebrow">MODALIDADE A</span><h2>Financiamento Caixa</h2></div></div>
             <FlowPanel title="Ato robusto" scenario={calculation.robust} target={calculation.equityTargetCents} kind="caixa" actDate={actDate} />
             <FlowPanel title="Ato mínimo · comparativo 2,5%" scenario={calculation.minimum} target={calculation.equityTargetCents} kind="caixa" actDate={actDate} />
             {calculation.equityTargetCents !== null && calculation.financingUsedCents !== null && <div className={`audit-footer ${calculation.equityTargetCents + calculation.financingUsedCents === priceCents ? "balanced" : "not-balanced"}`}><span>Recursos próprios + financiamento</span><strong>{formatBRL(calculation.equityTargetCents)} + {formatBRL(calculation.financingUsedCents)} = {formatBRL(calculation.equityTargetCents + calculation.financingUsedCents)}</strong><small>Preço total: {formatBRL(priceCents)} · Diferença: {formatBRL(calculation.equityTargetCents + calculation.financingUsedCents - priceCents)}</small></div>}
             {draft.includeDirect && <><div className="section-heading flow-heading"><div><span className="eyebrow">MODALIDADE B</span><h2>Tabela Direta Cury</h2></div></div><FlowPanel title="Pré-chaves · ato robusto" scenario={calculation.directRobust} target={calculation.directPreCents} kind="direta" actDate={actDate} /><FlowPanel title="Pré-chaves · ato mínimo" scenario={calculation.directMinimum} target={calculation.directPreCents} kind="direta" actDate={actDate} /><div className="direct-total-audit"><div><span>Pré-chaves ({formatNumber(calculation.directPrePercent, 1)}%)</span><strong>{formatBRL(calculation.directPreCents)}</strong></div><div><span>Pós-chaves ({formatNumber(calculation.directPostPercent, 1)}%)</span><strong>{formatBRL(calculation.directPostCents)}</strong></div><div className="sum-line"><span>Soma sobre o preço total</span><strong>{formatBRL(calculation.directPreCents + calculation.directPostCents)} · Δ {formatBRL(calculation.directPreCents + calculation.directPostCents - priceCents)}</strong></div></div></>}
+            <details className="insight-details no-print">
+              <summary>
+                <span><strong>Documentação estimada RJ (ITBI + RGI)</strong> · {documentationEstimate.isExemptCampaign ? "Campanha 0%" : formatBRL(documentationEstimate.totalCents)}</span>
+                <span className="insight-badge">FORA DO PREÇO</span>
+              </summary>
+              <div className="insight-details-body">
+                <div className="preset-chips">
+                  <button type="button" className={`preset-chip ${itbiPercent === 3 && rgiPercent === 1.5 ? "accent" : ""}`} onClick={() => { setItbiPercent(3); setRgiPercent(1.5); }}>Padrão RJ (4,5%)</button>
+                  <button type="button" className={`preset-chip ${documentationEstimate.isExemptCampaign ? "accent" : ""}`} onClick={() => { setItbiPercent(0); setRgiPercent(0); }}>Campanha isento (0%)</button>
+                </div>
+                <div className="doc-percent-grid">
+                  <label className="form-field"><span>ITBI (%)</span><input type="number" min="0" max="10" step="0.1" value={itbiPercent} onChange={(e) => setItbiPercent(Math.max(0, Number(e.target.value) || 0))} /></label>
+                  <label className="form-field"><span>RGI / Cartório (%)</span><input type="number" min="0" max="10" step="0.1" value={rgiPercent} onChange={(e) => setRgiPercent(Math.max(0, Number(e.target.value) || 0))} /></label>
+                </div>
+                <div className="doc-summary-line">
+                  <span>ITBI {formatBRL(documentationEstimate.itbiCents)} + RGI {formatBRL(documentationEstimate.rgiCents)}</span>
+                  <strong>{formatBRL(documentationEstimate.totalCents)}</strong>
+                </div>
+                <small className="small-note">Estimativa separada do preço da unidade. Confirme alíquota municipal e eventual campanha promocional Cury.</small>
+              </div>
+            </details>
+
+            {inccProjection && (
+              <details className="insight-details no-print">
+                <summary>
+                  <span><TrendingUp size={13} /> <strong>Simular impacto do INCC (ilustrativo)</strong></span>
+                  <span className="insight-badge">{formatNumber(inccRate, 1)}% a.m.</span>
+                </summary>
+                <div className="insight-details-body">
+                  <div className="preset-chips">
+                    {[
+                      { rate: 0.4, label: "0,4% · Conservador" },
+                      { rate: 0.5, label: "0,5% · Referência" },
+                      { rate: 0.7, label: "0,7% · Alto" },
+                    ].map((preset) => (
+                      <button
+                        key={preset.rate}
+                        type="button"
+                        className={`preset-chip ${inccRate === preset.rate ? "accent" : ""}`}
+                        onClick={() => setInccRate(preset.rate)}
+                      >
+                        {preset.label}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="incc-grid">
+                    <div><small>1ª MENSAL</small><strong>{formatBRL(inccProjection.firstMonthlyCents)}</strong></div>
+                    <div><small>MEIO DA OBRA</small><strong>{formatBRL(inccProjection.midMonthlyCents)}</strong></div>
+                    <div><small>ÚLTIMA MENSAL</small><strong>{formatBRL(inccProjection.lastMonthlyCents)}</strong></div>
+                  </div>
+                  <div className="doc-summary-line">
+                    <span>Correção estimada no pré-chaves</span>
+                    <strong>+{formatBRL(inccProjection.estimatedDeltaCents)}</strong>
+                  </div>
+                  <small className="small-note">Projeção ilustrativa com taxa fixa hipotética; não altera o fluxo nominal auditado acima. O INCC real (FGV) varia mês a mês.</small>
+                </div>
+              </details>
+            )}
+
             <div className="segmented-tabs no-print"><button className={view === "interno" ? "active" : ""} onClick={() => setView("interno")}><FileText size={14} /> Interno</button><button className={view === "whatsapp" ? "active" : ""} onClick={() => setView("whatsapp")}><MessageCircleIcon /> WhatsApp</button></div>
             {view === "interno" ? (
               <div className="summary-document">
@@ -754,6 +1003,10 @@ export default function SimulatorPage({
                 <div className="whatsapp-actions no-print">
                   <button className="button button-light-green" disabled={!modeCanCopy} onClick={() => void copyMessage()}><Copy size={15} /> Copiar texto</button>
                   <button className="button button-primary" disabled={!modeCanCopy} onClick={openWhatsApp}><Send size={15} /> Abrir WhatsApp</button>
+                </div>
+                <div className="whatsapp-card-actions no-print">
+                  <button type="button" className="button button-quiet button-small" disabled={!modeCanCopy || cardBusy} onClick={() => void handleCopyCard()}><ImageIcon size={14} /> {cardBusy ? "Gerando…" : "Copiar Card PNG"}</button>
+                  <button type="button" className="button button-quiet button-small" disabled={!modeCanCopy || cardBusy} onClick={() => void handleDownloadCard()}><Download size={14} /> Baixar PNG</button>
                 </div>
                 {!modeCanCopy && <p className="send-blocked"><AlertCircle size={13} /> Conclua a conferência antes de copiar ou abrir a mensagem.</p>}
                 <p className="small-note">Texto editável antes do envio. O site não envia mensagens automaticamente.</p>
@@ -801,6 +1054,24 @@ export default function SimulatorPage({
         </div>
         <div className="comparison-premises"><Info size={15} /><span>Ato robusto e mínimo, recursos próprios, mensais, anuais, prestação PRICE e saldo pós-chaves são rubricas diferentes. A comparação exibe valores e pendências; confira o prazo total, condições documentadas e disponibilidade antes de decidir.</span></div>
       </section>
+      <ProposalPresentation
+        open={presentationOpen}
+        onClose={() => setPresentationOpen(false)}
+        client={client}
+        property={property}
+        priceCents={priceCents}
+        actDate={actDate}
+        deliveryDate={deliveryDate}
+        deliveryIsPremise={deliveryIsPremise}
+        calculation={calculation}
+        firstPriceInstallmentCents={draft.firstPriceInstallmentCents}
+        financingTermMonths={draft.financingTermMonths}
+        financingLine={draft.financingLine}
+        financingSystem={draft.financingSystem}
+        brokerProfile={workspace.brokerProfile}
+        documentation={documentationEstimate}
+        initialMode={whatsappMode}
+      />
       {newClientOpen && <div className="modal-scrim" role="presentation" onClick={() => setNewClientOpen(false)}><div className="modal-card" role="dialog" aria-modal="true" aria-labelledby="quick-client-title" onClick={(e) => e.stopPropagation()}><div className="section-heading"><div><span className="eyebrow">CADASTRO RÁPIDO</span><h2 id="quick-client-title">Quem vai comprar?</h2></div><button className="icon-button" onClick={() => setNewClientOpen(false)} aria-label="Fechar"><X size={17} /></button></div><label className="form-field"><span>Nome *</span><input autoFocus value={newClientName} onChange={(e) => setNewClientName(e.target.value)} placeholder="Nome do cliente" /></label><label className="form-field"><span>WhatsApp / telefone</span><input type="tel" value={newClientPhone} onChange={(e) => setNewClientPhone(e.target.value)} placeholder="(21) 99999-0000" /></label><MoneyField label="Renda familiar mensal" value={newClientIncome} onChange={setNewClientIncome} /><div className="form-footer"><button className="button button-quiet" onClick={() => setNewClientOpen(false)}>Cancelar</button><button className="button button-primary" disabled={!newClientName.trim()} onClick={createQuickClient}><Plus size={15} /> Criar perfil</button></div><p className="small-note">Você poderá completar o restante do perfil na seção Clientes.</p></div></div>}
     </div>
   );
