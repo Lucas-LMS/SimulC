@@ -1,12 +1,13 @@
 import { useMemo, useRef, useState } from "react";
-import { ArrowRight, Check, ClipboardPaste, FileImage, Plus, Search, Upload, UserRound, Users, X } from "lucide-react";
-import type { ClientPriceProfile, ClientProfile, WorkspaceData } from "../lib/models";
+import { ArrowRight, Calculator, Check, ClipboardPaste, FileImage, Plus, Search, Upload, UserRound, Users, X } from "lucide-react";
+import type { ClientPriceProfile, ClientProfile, SimulationRecord, WorkspaceData } from "../lib/models";
 import type { Dispatch, SetStateAction } from "react";
+import type { AppToast } from "../pages/Home";
 import { formatBRL } from "../lib/money";
 import { Info } from "lucide-react";
 import { createId } from "../lib/storage";
 import { parseLeadForm, recommendUnitsForLead, type LeadDraft } from "../lib/leads";
-import { makeNewSimulation } from "./SimulatorPage";
+import { makeNewSimulation } from "../lib/simulations";
 import { clientPriceProfileToSimulation, projectClientPriceProfile } from "../lib/clientPriceProfile";
 import CurrencyInput from "./CurrencyInput";
 import { parseTableFile } from "../lib/importFiles";
@@ -17,6 +18,8 @@ interface Props {
   workspace: WorkspaceData;
   setWorkspace: Dispatch<SetStateAction<WorkspaceData>>;
   onSimulate: (clientId: string) => void;
+  onLoadSimulation?: (simulation: SimulationRecord) => void;
+  onNotify?: (toast: AppToast) => void;
 }
 
 const blankClient = (): ClientProfile => ({
@@ -40,7 +43,7 @@ const MoneyInput = ({ label, value, onChange, hint }: { label: string; value: nu
   <label className="form-field"><span>{label}</span><div className="money-control"><span>R$</span><CurrencyInput value={value} onChange={onChange} min="0" placeholder="0,00" /></div>{hint && <small>{hint}</small>}</label>
 );
 
-export default function ClientsPage({ workspace, setWorkspace, onSimulate }: Props) {
+export default function ClientsPage({ workspace, setWorkspace, onSimulate, onLoadSimulation, onNotify }: Props) {
   const [selectedId, setSelectedId] = useState("");
   const [search, setSearch] = useState("");
   const [draft, setDraft] = useState<ClientProfile | null>(null);
@@ -114,11 +117,13 @@ export default function ClientsPage({ workspace, setWorkspace, onSimulate }: Pro
     const next = { ...form, name: form.name.trim(), updatedAt: new Date().toISOString() };
     setWorkspace((current) => ({ ...current, clients: current.clients.some((client) => client.id === next.id) ? current.clients.map((client) => client.id === next.id ? next : client) : [next, ...current.clients] }));
     setSelectedId(next.id); setDraft(next); setSavedNotice(true);
+    onNotify?.({ kind: "success", text: `Perfil de ${next.name} salvo.` });
   };
   const remove = () => {
     if (!selected || !window.confirm(`Excluir o perfil de ${selected.name}? Simulações existentes não serão apagadas.`)) return;
     setWorkspace((current) => ({ ...current, clients: current.clients.filter((client) => client.id !== selected.id) }));
     setSelectedId(""); setDraft(null);
+    onNotify?.({ kind: "info", text: `Perfil de ${selected.name} excluído.` });
   };
   const interpretLead = () => {
     if (!leadText.trim()) { setLeadError("Cole o texto completo do formulário para interpretar."); return; }
@@ -157,7 +162,7 @@ export default function ClientsPage({ workspace, setWorkspace, onSimulate }: Pro
       };
       const recommendations = recommendUnitsForLead(profile, current.portfolio);
       const existingRecommendations = new Set(current.simulations.filter((simulation) => simulation.clientId === profile.id && simulation.origin === "lead_recommendation").map((simulation) => simulation.propertyId));
-      const newDrafts = recommendations.filter((item) => !existingRecommendations.has(item.unit.id)).map((item) => {
+      const newDrafts = recommendations.filter((item) => !existingRecommendations.has(item.unit.id)).slice(0, 5).map((item) => {
         const targetPrice = item.unit.priceCents ?? item.unit.priceLowCents ?? null;
         const priceProjection = projectClientPriceProfile(profile.priceProfile, targetPrice);
         return {
@@ -224,9 +229,11 @@ export default function ClientsPage({ workspace, setWorkspace, onSimulate }: Pro
         <section className="panel client-form-panel">
           <div className="section-heading"><div><span className="eyebrow">DADOS DO CLIENTE</span><h2>{selected ? selected.name : "Novo perfil"}</h2></div>{selected && <button className="icon-button danger-quiet" aria-label="Excluir cliente" onClick={remove}><X size={17} /></button>}</div>
           <div className="form-grid">
+            <div className="form-section-divider span-2"><span className="eyebrow">1 · IDENTIFICAÇÃO E CONTATO</span></div>
             <label className="form-field span-2"><span>Nome do cliente <b>*</b></span><input value={form.name} onChange={(event) => update({ name: event.target.value })} placeholder="Nome e sobrenome" /></label>
             <label className="form-field"><span>WhatsApp / telefone</span><input type="tel" value={form.phone} onChange={(event) => update({ phone: event.target.value })} placeholder="(21) 99999-0000" /></label>
             <label className="form-field"><span>Idade do comprador mais velho</span><div className="unit-control"><input type="number" min="18" max="100" value={form.oldestBuyerAge ?? ""} onChange={(event) => update({ oldestBuyerAge: event.target.value ? Number(event.target.value) : null })} placeholder="—" /><span>anos</span></div><small>Referência para revisar prazo Caixa informado.</small></label>
+            <div className="form-section-divider span-2"><span className="eyebrow">2 · CAPACIDADE FINANCEIRA E FGTS</span></div>
             <MoneyInput label="Renda individual" value={form.incomeIndividualCents} onChange={(value) => update({ incomeIndividualCents: value })} />
             <MoneyInput label="Renda familiar mensal" value={form.incomeFamilyCents} onChange={(value) => update({ incomeFamilyCents: value })} hint="Base para calcular o percentual da mensal." />
             <label className="form-field span-2"><span>Composição da renda</span><input value={form.incomeComposition} onChange={(event) => update({ incomeComposition: event.target.value })} placeholder="Ex.: cliente + cônjuge" /></label>
@@ -238,6 +245,7 @@ export default function ClientsPage({ workspace, setWorkspace, onSimulate }: Pro
             <label className="form-field"><span>Tempo com FGTS informado</span><div className="unit-control"><input type="number" min="0" step="0.5" value={form.fgtsTimeYears ?? ""} onChange={(event) => update({ fgtsTimeYears: event.target.value ? Number(event.target.value) : null })} placeholder="—" /><span>anos</span></div><small>Não confirma elegibilidade para uso.</small></label>
             <label className="form-field"><span>Regime trabalhista informado</span><input value={form.employmentRegime ?? ""} onChange={(event) => update({ employmentRegime: event.target.value })} placeholder="Ex.: CLT, autônomo, aposentado" /></label>
             <label className="form-field"><span>3+ anos de carteira?</span><select value={form.threeYearsWorkHistory === undefined || form.threeYearsWorkHistory === null ? "unknown" : form.threeYearsWorkHistory ? "yes" : "no"} onChange={(event) => update({ threeYearsWorkHistory: event.target.value === "unknown" ? null : event.target.value === "yes" })}><option value="unknown">Não informado</option><option value="yes">Sim</option><option value="no">Não</option></select></label>
+            <div className="form-section-divider span-2"><span className="eyebrow">3 · PREFERÊNCIAS DE IMÓVEL</span></div>
             <label className="form-field"><span>Região/bairros pretendidos</span><input value={form.preferences?.desiredAreas ?? ""} onChange={(event) => update({ preferences: { desiredAreas: event.target.value, bedrooms: form.preferences?.bedrooms ?? null, parking: form.preferences?.parking ?? null, deliveryYear: form.preferences?.deliveryYear ?? null } })} placeholder="Ex.: Barra / Recreio" /></label>
             <label className="form-field"><span>Quartos pretendidos</span><input type="number" min="0" max="10" value={form.preferences?.bedrooms ?? ""} onChange={(event) => update({ preferences: { desiredAreas: form.preferences?.desiredAreas ?? "", bedrooms: event.target.value ? Number(event.target.value) : null, parking: form.preferences?.parking ?? null, deliveryYear: form.preferences?.deliveryYear ?? null } })} /></label>
             <label className="form-field"><span>Vaga pretendida</span><select value={form.preferences?.parking === undefined || form.preferences?.parking === null ? "unknown" : form.preferences.parking ? "yes" : "no"} onChange={(event) => update({ preferences: { desiredAreas: form.preferences?.desiredAreas ?? "", bedrooms: form.preferences?.bedrooms ?? null, parking: event.target.value === "unknown" ? null : event.target.value === "yes", deliveryYear: form.preferences?.deliveryYear ?? null } })}><option value="unknown">Não informado</option><option value="yes">Com vaga</option><option value="no">Sem vaga</option></select></label>
@@ -262,8 +270,47 @@ export default function ClientsPage({ workspace, setWorkspace, onSimulate }: Pro
             </section>
             <label className="form-field span-2"><span>Observações / restrições informadas</span><textarea rows={3} value={form.notes} onChange={(event) => update({ notes: event.target.value })} placeholder="Ex.: cliente pediu cenário para maio/2029; anotar apenas fatos informados." /></label>
           </div>
-          <div className="form-footer"><span className="form-privacy">Dados mantidos neste navegador.</span><div className="form-actions">{selected && <button className="button button-quiet" onClick={() => onSimulate(selected.id)}><CalculatorIcon /> Simular</button>}<button className="button button-primary" disabled={!form.name.trim()} onClick={save}>{savedNotice ? <Check size={16} /> : <Plus size={16} />}{savedNotice ? "Salvo" : "Salvar perfil"}</button></div></div>
-          {savedNotice && <div className="inline-status"><Check size={14} /> Perfil atualizado localmente.</div>}
+          <div className="form-footer"><span className="form-privacy">Dados mantidos neste navegador.</span><div className="form-actions">{selected && <button className="button button-quiet" onClick={() => onSimulate(selected.id)}><CalculatorIcon /> Nova simulação</button>}<button className="button button-primary" disabled={!form.name.trim()} onClick={save}>{savedNotice ? <Check size={16} /> : <Plus size={16} />}{savedNotice ? "Salvo" : "Salvar perfil"}</button></div></div>
+          {selected && (() => {
+            const clientSims = workspace.simulations
+              .filter((sim) => sim.clientId === selected.id)
+              .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+            if (!clientSims.length) return null;
+            return (
+              <div className="client-simulations-section">
+                <div className="section-heading">
+                  <div>
+                    <span className="eyebrow">HISTÓRICO DO CLIENTE</span>
+                    <h3>{clientSims.length} simulação(ões) vinculada(s)</h3>
+                  </div>
+                </div>
+                <div className="recent-list">
+                  {clientSims.slice(0, 6).map((sim) => {
+                    const unit = workspace.portfolio.find((u) => u.id === sim.propertyId);
+                    const simPrice = sim.priceOverrideCents ?? unit?.priceCents ?? unit?.priceLowCents ?? null;
+                    return (
+                      <button
+                        key={sim.id}
+                        type="button"
+                        className="recent-row"
+                        onClick={() => onLoadSimulation?.(sim)}
+                      >
+                        <span className="recent-symbol"><Calculator size={16} /></span>
+                        <span className="recent-main">
+                          <strong>
+                            {unit ? `${unit.project} · ${unit.typology}` : "Imóvel removido"}
+                            {sim.origin === "lead_recommendation" && <span className="doc-status draft">RASCUNHO</span>}
+                          </strong>
+                          <small>{simPrice !== null ? formatBRL(simPrice) : "Preço a informar"}</small>
+                        </span>
+                        <ArrowRight size={15} />
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })()}
         </section>
       </div>
     </div>

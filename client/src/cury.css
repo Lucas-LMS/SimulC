@@ -15,7 +15,7 @@
   --amber-soft: #f7eee2;
   --cream: #f5f5f1;
   --line: #e6e7e1;
-  --muted: #7b8783;
+  --muted: #55625c;
   --white: #fff;
   --red: #ad4c42;
   --green: #3d7963;
@@ -1254,4 +1254,371 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 @media (max-width: 560px) {
   .comparison-scenario-alerts { padding: 8px; }
   .comparison-scenario-alerts p { font-size: 8px; }
+}
+
+
+/* ============================================================================
+   MODERNIZAÇÃO SIMULC — TIPOGRAFIA, CONTRASTE, DARK MODE, COMPONENTES E PRINT
+   ============================================================================ */
+
+/* 1. Escala tipográfica legível e contraste WCAG AA */
+.sidebar-caption, .eyebrow { color: #55625c; font-size: 11px; letter-spacing: .1em; }
+.brand-wordmark small { color: #55625c; font-size: 9px; }
+.small-note, .field-note, .form-privacy, .catalog-note { font-size: 12px; line-height: 1.5; color: #4a5751; }
+.form-field > span { font-size: 12px; color: #30423d; }
+.form-field > small { font-size: 11px; color: #55625c; }
+.form-field input, .form-field select, .form-field textarea,
+.money-control input, .unit-control input, .date-control input,
+.search-field input, .filter-select select, .compare-search-field input {
+  font-size: 13.5px;
+}
+.flow-item strong { font-size: 12.5px; }
+.flow-item small { font-size: 11px; color: #55625c; }
+.flow-item b { font-size: 13px; }
+.flow-alert { font-size: 12px; line-height: 1.45; }
+.calendar-header, .calendar-row { font-size: 11.5px; }
+.whatsapp-preview textarea { font-size: 12.5px; line-height: 1.5; min-height: 290px; }
+.summary-document pre { font-size: 11.5px; line-height: 1.5; }
+.comparison-table th, .comparison-table td { font-size: 12px; line-height: 1.45; }
+.comparison-table td small, .comparison-table thead th small { font-size: 11px; }
+.comparison-scenario-alerts strong { font-size: 12px; }
+.comparison-scenario-alerts p { font-size: 11.5px; }
+.searchable-unit-select .searchable-unit-label { font-size: 12px; }
+
+@media (max-width: 768px) {
+  .form-field input, .form-field select, .form-field textarea,
+  .money-control input, .unit-control input, .date-control input,
+  .search-field input, .filter-select select, .compare-search-field input {
+    font-size: 16px;
+  }
+}
+
+/* 2. Classes anteriormente sem estilo */
+.inline-status.error-status {
+  color: #8f2d24;
+  background: #fdf0ee;
+  border: 1px solid #ecc6c1;
+}
+.client-price-profile {
+  margin-top: 8px;
+  padding: 16px;
+  border: 1px solid #d7e2dc;
+  border-radius: 10px;
+  background: #f8faf8;
+  display: grid;
+  gap: 14px;
+}
+.client-price-profile-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.client-price-profile-heading h3 { margin: 2px 0 4px; font-size: 15px; color: var(--ink); }
+.client-price-profile-heading p { margin: 0; font-size: 12px; color: #4a5751; line-height: 1.45; }
+.profile-price-grid { gap: 12px; }
+.version-review-panel {
+  margin-top: 10px;
+  padding: 12px 14px;
+  border: 1px solid #e1d5c1;
+  border-radius: 8px;
+  background: #fcf8f0;
+  display: grid;
+  gap: 10px;
+}
+.version-compare-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+.version-compare-row > div {
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: #fff;
+  border: 1px solid #e7e1d5;
+  display: grid;
+  gap: 3px;
+}
+.version-compare-row strong { font-size: 12px; color: var(--ink); }
+.version-compare-row span { font-size: 11px; color: #55625c; }
+.version-compare-row b { font-size: 14px; color: var(--teal); }
+
+/* 3. Novos componentes de produtividade e UX */
+.app-toast {
+  position: fixed;
+  z-index: 90;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: min(440px, calc(100vw - 32px));
+  padding: 11px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 12px 32px rgba(17, 44, 43, .18);
+  border: 1px solid #c9dfd2;
+  background: #f1f8f4;
+  color: #194b3a;
+  animation: toast-slide-in .18s ease-out;
+}
+.app-toast-error { background: #fdf0ee; border-color: #eabcb6; color: #8c2a21; }
+.app-toast-info { background: #f2f5f7; border-color: #cfdbe2; color: #24404d; }
+@keyframes toast-slide-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.page-loading-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 48px 20px;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+.consultant-card-button {
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color .15s ease;
+}
+.consultant-card-button:hover { background: rgba(40, 105, 102, .07); border-radius: 8px; }
+
+.broker-profile-grid { margin-top: 12px; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+.broker-profile-actions { margin-top: 12px; display: flex; justify-content: flex-start; }
+.settings-broker-panel { align-items: flex-start; }
+
+.welcome-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 16px; }
+.button-welcome-ghost {
+  background: rgba(255, 255, 255, .12);
+  color: #f4f7f5;
+  border: 1px solid rgba(255, 255, 255, .28);
+}
+.button-welcome-ghost:hover { background: rgba(255, 255, 255, .2); }
+
+.recent-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.recent-controls .search-field { flex: 1 1 220px; }
+.recent-row-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.recent-row-wrap .recent-row { flex: 1; min-width: 0; }
+.recent-meta-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  text-align: right;
+  white-space: nowrap;
+}
+.recent-meta-right strong { font-size: 13px; color: var(--ink); }
+.recent-row-actions { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+.recent-show-more { margin-top: 12px; width: 100%; justify-content: center; }
+
+.simulator-header-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.dirty-pill {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  background: #f9ebd6;
+  color: #8b561b;
+}
+
+.whatsapp-mode-pills {
+  display: flex;
+  gap: 6px;
+  margin: 8px 0;
+}
+.mode-pill {
+  flex: 1;
+  padding: 6px 8px;
+  border-radius: 7px;
+  border: 1px solid #d5ddd8;
+  background: #f7f9f7;
+  color: #3a4c46;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all .15s ease;
+}
+.mode-pill.active {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: #fff;
+}
+
+.form-section-divider {
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.form-section-divider:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+
+.client-simulations-section {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.compare-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.compare-filter-bar .compare-search-field { flex: 1 1 260px; margin: 0; }
+.compare-export-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+
+.recommendations-toolbar { padding: 12px 14px; }
+.recommendation-collapse-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  background: transparent;
+  cursor: pointer;
+}
+.recommendation-collapse-btn .rotate { transform: rotate(180deg); transition: transform .15s ease; }
+
+/* 4. Correção definitiva de Dark Mode (seletor root + vazamentos de fundo claro) */
+:root[data-theme="dark"], :root[data-theme="dark"] body {
+  background: #121a17;
+  color: #dce6e0;
+}
+:root[data-theme="dark"] .eyebrow,
+:root[data-theme="dark"] .sidebar-caption,
+:root[data-theme="dark"] .small-note,
+:root[data-theme="dark"] .field-note,
+:root[data-theme="dark"] .form-privacy,
+:root[data-theme="dark"] .catalog-note,
+:root[data-theme="dark"] .form-field > small,
+:root[data-theme="dark"] .flow-item small {
+  color: #b5c4bc;
+}
+:root[data-theme="dark"] .form-field > span { color: #d6e2db; }
+:root[data-theme="dark"] .annual-editor,
+:root[data-theme="dark"] .field-actions-inline,
+:root[data-theme="dark"] .monthly-calendar,
+:root[data-theme="dark"] .no-candidates,
+:root[data-theme="dark"] .client-price-profile,
+:root[data-theme="dark"] .version-review-panel {
+  background: #1b2621;
+  border-color: #34443c;
+  color: #dce6e0;
+}
+:root[data-theme="dark"] .version-compare-row > div {
+  background: #151f1b;
+  border-color: #34443c;
+}
+:root[data-theme="dark"] .version-compare-row strong { color: #e2ece6; }
+:root[data-theme="dark"] .version-compare-row span { color: #b5c4bc; }
+:root[data-theme="dark"] .version-compare-row b { color: #8ad3bc; }
+:root[data-theme="dark"] .calendar-header {
+  background: #23312b;
+  color: #cfe0d7;
+}
+:root[data-theme="dark"] .rounding-row {
+  background: #28352f;
+}
+:root[data-theme="dark"] .money-control.disabled {
+  background: #1a2320;
+  border-color: #313f38;
+}
+:root[data-theme="dark"] .inline-status {
+  background: #1c3128;
+  border-color: #2f5747;
+  color: #b9e6d0;
+}
+:root[data-theme="dark"] .inline-status.error-status {
+  background: #3a1f1d;
+  border-color: #6b3530;
+  color: #f4b8b1;
+}
+:root[data-theme="dark"] .app-toast {
+  background: #1c3229;
+  border-color: #33614e;
+  color: #c8f0dd;
+}
+:root[data-theme="dark"] .app-toast-error {
+  background: #3d1f1d;
+  border-color: #743934;
+  color: #f8c1ba;
+}
+:root[data-theme="dark"] .app-toast-info {
+  background: #1e2d36;
+  border-color: #385566;
+  color: #c9e1ee;
+}
+:root[data-theme="dark"] .mode-pill {
+  background: #1a2520;
+  border-color: #35473f;
+  color: #cbd8d0;
+}
+:root[data-theme="dark"] .mode-pill.active {
+  background: #2c7873;
+  border-color: #2c7873;
+  color: #fff;
+}
+:root[data-theme="dark"] .dirty-pill {
+  background: #47341b;
+  color: #f5ce93;
+}
+:root[data-theme="dark"] .recent-meta-right strong { color: #e2ece6; }
+:root[data-theme="dark"] .whatsapp-preview textarea {
+  background: #16201c;
+  color: #dce6e0;
+  border-color: #35473f;
+}
+
+/* 5. Modo de Impressão / Salvar PDF limpo */
+@media print {
+  @page { margin: 12mm; }
+  html, body, :root[data-theme="dark"], :root[data-theme="dark"] body {
+    background: #fff !important;
+    color: #172322 !important;
+  }
+  .app-sidebar, .topbar, .app-footer, .mobile-scrim, .app-toast, .no-print,
+  .simulator-controls, .comparison-session, .upload-zone {
+    display: none !important;
+  }
+  .app-main, .main-content {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+  .simulator-layout {
+    display: block !important;
+  }
+  .simulator-summary, .summary-sticky {
+    position: static !important;
+    max-width: 100% !important;
+  }
+  .panel, .flow-panel, .comparison-scenario-card {
+    box-shadow: none !important;
+    border: 1px solid #cfd6d2 !important;
+    break-inside: avoid;
+    background: #fff !important;
+    color: #172322 !important;
+  }
+  .comparison-scroll {
+    overflow: visible !important;
+    max-height: none !important;
+  }
 }
