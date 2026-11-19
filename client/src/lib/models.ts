@@ -59,10 +59,14 @@ export interface AnnualPayment extends PaymentDate {
   amountCents: number | null;
 }
 
+export type SimulationStatus = "rascunho" | "enviada" | "negociacao" | "pasta" | "fechada" | "perdida";
+
 export interface SimulationRecord {
   id: string;
   createdAt: string;
   updatedAt: string;
+  status?: SimulationStatus;
+  nextStep?: string;
   clientId: string;
   propertyId: string;
   comparisonGroupId?: string | null;

@@ -24,7 +24,7 @@ import {
   WalletCards,
   X,
 } from "lucide-react";
-import type { BrokerProfile, ClientProfile, SimulationRecord, WorkspaceData } from "../lib/models";
+import type { BrokerProfile, ClientProfile, SimulationRecord, SimulationStatus, WorkspaceData } from "../lib/models";
 import {
   consumeLoadRecoveryWarning,
   downloadBackup,
@@ -119,6 +119,7 @@ function AppSidebar({
   onClose,
   cloudUser,
   brokerProfile,
+  counts,
 }: {
   page: PageKey;
   setPage: (page: PageKey) => void;
@@ -126,6 +127,7 @@ function AppSidebar({
   onClose?: () => void;
   cloudUser: User | null;
   brokerProfile?: BrokerProfile;
+  counts?: Partial<Record<PageKey, number>>;
 }) {
   const brokerName = brokerProfile?.name?.trim() || "Lucas Silva";
   const brokerSubtitle = brokerProfile?.creci?.trim() || "Consultoria imobiliária";
@@ -143,18 +145,22 @@ function AppSidebar({
       </div>
       <div className="sidebar-caption">ESPAÇO DE TRABALHO</div>
       <nav className="sidebar-nav" aria-label="Navegação principal">
-        {NAVIGATION.map(({ id, title, icon: Icon }) => (
-          <button
-            key={id}
-            className={`nav-item ${page === id ? "active" : ""}`}
-            aria-current={page === id ? "page" : undefined}
-            onClick={() => setPage(id)}
-          >
-            <Icon size={18} strokeWidth={1.8} />
-            <span>{title}</span>
-            {page === id && <span className="nav-current" />}
-          </button>
-        ))}
+        {NAVIGATION.map(({ id, title, icon: Icon }) => {
+          const badge = counts?.[id];
+          return (
+            <button
+              key={id}
+              className={`nav-item ${page === id ? "active" : ""}`}
+              aria-current={page === id ? "page" : undefined}
+              onClick={() => setPage(id)}
+            >
+              <Icon size={18} strokeWidth={1.8} />
+              <span>{title}</span>
+              {badge !== undefined && badge > 0 && <span className="nav-badge">{badge}</span>}
+              {page === id && <span className="nav-current" />}
+            </button>
+          );
+        })}
       </nav>
       <div className="sidebar-bottom">
         <div className="local-status">
@@ -744,6 +750,27 @@ export default function Home() {
     notify({ kind: "info", text: "Simulação excluída." });
   };
 
+  const updateSimulationStatus = (simulationId: string, status: SimulationStatus) => {
+    setWorkspace((current) => ({
+      ...current,
+      simulations: current.simulations.map((item) =>
+        item.id === simulationId ? { ...item, status, updatedAt: new Date().toISOString() } : item,
+      ),
+    }));
+    if (activeSimulation?.id === simulationId) {
+      setActiveSimulation((current) => (current ? { ...current, status } : current));
+    }
+  };
+
+  const sidebarCounts = useMemo(
+    () => ({
+      clientes: workspace.clients.length,
+      catalogo: workspace.portfolio.filter((u) => u.active !== false).length,
+      comparar: workspace.simulations.filter((s) => s.origin !== "lead_recommendation").length,
+    }),
+    [workspace.clients.length, workspace.portfolio, workspace.simulations],
+  );
+
   const connectGoogle = () => {
     setCloudWatchEnabled(true);
     void import("../lib/firebase")
@@ -774,6 +801,7 @@ export default function Home() {
         page={page}
         cloudUser={cloudUser}
         brokerProfile={workspace.brokerProfile}
+        counts={sidebarCounts}
         setPage={(next) => {
           setPage(next);
           setMobileNav(false);
@@ -785,6 +813,7 @@ export default function Home() {
             page={page}
             cloudUser={cloudUser}
             brokerProfile={workspace.brokerProfile}
+            counts={sidebarCounts}
             setPage={(next) => {
               setPage(next);
               setMobileNav(false);
@@ -854,6 +883,7 @@ export default function Home() {
                 onLoadSimulation={loadSimulation}
                 onDuplicateSimulation={duplicateSimulation}
                 onDeleteSimulation={deleteSimulation}
+                onUpdateSimulationStatus={updateSimulationStatus}
               />
             )}
             {page === "simulador" && (

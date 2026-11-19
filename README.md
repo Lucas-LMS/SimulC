@@ -14,10 +14,10 @@ Uma mesa de trabalho para transformar dados de clientes e referências de empree
 
 - **Perfis de clientes organizados**: manter dados pessoais, renda, capacidade, FGTS, preferências e referências de PRICE/GPM com histórico de simulações vinculadas.
 - **Catálogo de empreendimentos**: consultar, filtrar, ordenar (A–Z, preço, entrega), comparar até 5 unidades e versionar tabelas.
-- **Simulador de fluxo completo**: montar fluxos Caixa e Tabela Direta, editar ato, mensais manuais e anuais, revisar datas e conferir totais em tempo real.
+- **Simulador de fluxo visual**: montar fluxos Caixa e Tabela Direta com atalhos rápidos de ato/anuais, gráficos interativos (composição do preço, comprometimento de renda e desembolso mês a mês até as chaves), Termômetro de Bolso & Evolução de Obra, estimativa de documentação RJ (ITBI + RGI) e simulador ilustrativo de sensibilidade ao INCC.
+- **Modo Apresentação, PDF Editorial & Card PNG**: apresentar a proposta em tela limpa (com opção de ocultar a renda do cliente), salvar PDF A4 editorial com sua assinatura/CRECI, ou gerar e copiar um **Card PNG** (1080×1350) direto para o WhatsApp.
 - **Comunicação flexível**: escolher modalidade no WhatsApp (`Ambas`, `Só Caixa` ou `Só Direta`), editar o texto livremente antes de enviar e assinar com seu perfil de corretor configurável (nome, CRECI e telefone).
-- **Comparador acionável e Impressão / PDF**: comparar simulações lado a lado com filtro por cliente, copiar resumo comparativo para WhatsApp e imprimir/salvar proposta limpa em PDF.
-- **Gestão de simulações**: buscar, filtrar rascunhos de lead, duplicar cenários e excluir simulações diretamente no painel.
+- **Funil comercial & gestão de simulações**: acompanhar status (`Rascunho`, `Enviada`, `Negociação`, `Pasta`, `Fechada`), registrar próximo passo, filtrar por estágio, duplicar cenários e excluir simulações diretamente no painel.
 - **Recomendações inteligentes**: cruzar região, tipologia, entrega e dados financeiros informados.
 - **Importação local de tabelas e GPM**: extrair texto/OCR de PDFs e imagens raster no navegador com revisão obrigatória.
 - **Portabilidade e nuvem privada**: exportar/restaurar backups JSON, contar com cópias automáticas locais e sincronizar opcionalmente entre dispositivos com Google e Firebase.
