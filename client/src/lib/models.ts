@@ -139,9 +139,16 @@ export interface ImportedDocument {
   pagesTotal?: number;
 }
 
+export interface BrokerProfile {
+  name: string;
+  phone?: string;
+  creci?: string;
+}
+
 export interface WorkspaceData {
   clients: ClientProfile[];
   portfolio: PortfolioUnit[];
   simulations: SimulationRecord[];
   documents: ImportedDocument[];
+  brokerProfile?: BrokerProfile;
 }

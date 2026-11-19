@@ -1,15 +1,17 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
-  AlertCircle, ArrowDown, ArrowRight, CalendarDays, Check, ChevronDown, ClipboardPaste, Copy, FileText,
-  Info, LoaderCircle, Plus, RotateCcw, Save, Send, ShieldCheck, Trash2, Upload, UserPlus, X,
+  AlertCircle, ArrowRight, CalendarDays, Check, ChevronDown, ClipboardPaste, Copy, FileText,
+  Info, LoaderCircle, Plus, Printer, RotateCcw, Save, Send, ShieldCheck, Trash2, Upload, UserPlus, X,
 } from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";
 import type { AnnualPayment, ClientPriceProfile, ClientProfile, PaymentDate, SimulationRecord, WorkspaceData } from "../lib/models";
 import type { PortfolioUnit } from "../data/portfolio";
-import { calculateAll, suggestRobustAct, type FlowScenario, type FullCalculation } from "../lib/calculator";
+import type { AppToast } from "../pages/Home";
+import { calculateAll, calculateSimulationEntry, suggestRobustAct, type FlowScenario, type FullCalculation } from "../lib/calculator";
 import { formatBRL, formatNumber } from "../lib/money";
 import { recordSimulationDelivery } from "../lib/delivery";
 import { createId } from "../lib/storage";
+import { makeNewSimulation } from "../lib/simulations";
 import { countMonthlyPayments, isShortOrImmediateDelivery, listMonthlyDates, monthKey, monthLabelCapitalized, parseMonthKey, suggestAnnualDates } from "../lib/schedule";
 import { buildInternalSummary, generateWhatsAppMessage } from "../lib/whatsapp";
 import { parseTableFile, type ImportProgress } from "../lib/importFiles";
@@ -26,11 +28,14 @@ interface Props {
   activeSimulation: SimulationRecord | null;
   setActiveSimulation: Dispatch<SetStateAction<SimulationRecord | null>>;
   onSave: (simulation: SimulationRecord) => void;
+  onDuplicate?: (simulation: SimulationRecord) => void;
+  onDelete?: (simulationId: string) => void;
+  onClientSelected?: (clientId: string) => void;
   onAddSimulation: (clientId: string, propertyId: string, comparisonGroupId?: string) => void;
   onCreateClient: (client: ClientProfile) => void;
+  onNotify?: (toast: AppToast) => void;
 }
 
-const todayMonth = (): PaymentDate => ({ year: new Date().getFullYear(), month: new Date().getMonth() + 1 });
 const annualId = ({ year, month }: PaymentDate) => `annual-${year}-${String(month).padStart(2, "0")}`;
 
 const recommendationTierDetails = {
@@ -39,18 +44,7 @@ const recommendationTierDetails = {
   "other-relevant": { title: "Outras preferências", note: "Sem região/quartos definidos; ordenadas pelas demais preferências." },
 } as const;
 
-export const makeNewSimulation = (clientId: string, propertyId: string, comparisonGroupId?: string | null): SimulationRecord => ({
-  id: createId("sim"), createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(),
-  clientId, propertyId, comparisonGroupId: comparisonGroupId ?? null, priceOverrideCents: null, actDate: todayMonth(), deliveryOverride: null,
-  financingAmountCents: null, gpmReportedFinancingAmountCents: null, gpmReportedPriceReferenceCents: null, financingManualOverride: false,
-  firstPriceInstallmentCents: null, financingTermMonths: null,
-  financingLine: "", financingSystem: "PRICE", financingRate: "", financingNotes: "",
-  gpmReportedSubsidyCents: null, gpmReportedFees: "", gpmReportedQuotaPercent: null, gpmReportedIncomeCommitmentPercent: null,
-  annualFactor: 3, monthlyCountOverride: null, annualDatesOverride: null,
-  robustActCents: null, directPrePercent: 55, directMonthlyCountOverride: null,
-  directAnnualDatesOverride: null, manualAmounts: {}, includeDirect: true,
-  fgtsUseAuthorized: false, actualShortFlowConfirmed: false, internalNotes: "",
-});
+export { makeNewSimulation };
 
 const moneyLabel = (cents: number | null | undefined, fallback = "—") => cents === null || cents === undefined ? fallback : formatBRL(cents);
 const monthValue = (date: PaymentDate | null): string => date ? monthKey(date) : "";
@@ -151,13 +145,27 @@ function FlowPanel({ title, scenario, target, kind, actDate, expanded = false }:
   );
 }
 
-export default function SimulatorPage({ workspace, setWorkspace, activeSimulation, setActiveSimulation, onSave, onAddSimulation, onCreateClient }: Props) {
+export default function SimulatorPage({
+  workspace,
+  setWorkspace,
+  activeSimulation,
+  setActiveSimulation,
+  onSave,
+  onDuplicate,
+  onDelete,
+  onClientSelected,
+  onAddSimulation,
+  onCreateClient,
+  onNotify,
+}: Props) {
   const initial = activeSimulation ?? makeNewSimulation("", workspace.portfolio[0]?.id ?? "");
   const [draft, setDraft] = useState<SimulationRecord>(initial);
   const [view, setView] = useState<"interno" | "whatsapp">("interno");
-  const [toast, setToast] = useState("");
+  const [whatsappMode, setWhatsappMode] = useState<"ambas" | "caixa" | "direta">("ambas");
+  const [customWhatsappText, setCustomWhatsappText] = useState<string | null>(null);
   const [newClientOpen, setNewClientOpen] = useState(false);
   const [newClientName, setNewClientName] = useState("");
+  const [newClientPhone, setNewClientPhone] = useState("");
   const [newClientIncome, setNewClientIncome] = useState<number | null>(null);
   const [notice, setNotice] = useState("");
   const gpmFileRef = useRef<HTMLInputElement>(null);
@@ -170,10 +178,25 @@ export default function SimulatorPage({ workspace, setWorkspace, activeSimulatio
   const [recommendationsExpanded, setRecommendationsExpanded] = useState(false);
   const [nextPropertyId, setNextPropertyId] = useState("");
 
+  useEffect(() => {
+    if (!newClientOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setNewClientOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [newClientOpen]);
+
   // New loaded simulation key starts a fresh draft; edits remain local until the user saves.
   const activeId = activeSimulation?.id ?? "";
   const [lastLoadedId, setLastLoadedId] = useState(activeId);
-  if (activeId && activeId !== lastLoadedId) { setDraft(activeSimulation!); setLastLoadedId(activeId); }
+  if (activeId && activeId !== lastLoadedId) {
+    setDraft(activeSimulation!);
+    setLastLoadedId(activeId);
+    setCustomWhatsappText(null);
+  }
+  const savedRecord = workspace.simulations.find((item) => item.id === draft.id);
+  const isDirty = !savedRecord || savedRecord.updatedAt !== draft.updatedAt;
   const client = workspace.clients.find((item) => item.id === draft.clientId) ?? null;
   const property = workspace.portfolio.find((item) => item.id === draft.propertyId) ?? workspace.portfolio[0];
   const priceCents = draft.priceOverrideCents ?? property?.priceCents ?? property?.priceLowCents ?? 0;
@@ -201,7 +224,7 @@ export default function SimulatorPage({ workspace, setWorkspace, activeSimulatio
   const familyIncome = client?.incomeFamilyCents ?? null;
   const availableAct = client?.availableActCents ?? null;
   const readyText = property?.deliveryDateSource ? "" : property?.deliveryText ?? "";
-  const shortFlow = isShortOrImmediateDelivery(deliveryDate, readyText);
+  const shortFlow = isShortOrImmediateDelivery(deliveryDate, readyText, actDate);
   const dueDates = useMemo(() => {
     if (draft.annualDatesOverride) return draft.annualDatesOverride;
     return deliveryDate ? uniqueSortedDates(suggestAnnualDates(actDate, deliveryDate)) : [];
@@ -245,10 +268,25 @@ export default function SimulatorPage({ workspace, setWorkspace, activeSimulatio
     gpmReportedSubsidyCents: draft.gpmReportedSubsidyCents, gpmReportedFees: draft.gpmReportedFees,
     gpmReportedQuotaPercent: draft.gpmReportedQuotaPercent, gpmReportedIncomeCommitmentPercent: draft.gpmReportedIncomeCommitmentPercent,
     incomeCents: familyIncome, includeFGTSNote: (client?.fgtsBalanceCents ?? 0) > 0,
-    mode: "ambas" as const,
-  }) : null, [client, property, priceCents, deliveryDate?.year, deliveryDate?.month, deliveryText, monthlyCount, calculation, deliveryIsPremise, priceIsPremise, draft.financingTermMonths, draft.financingLine, draft.financingSystem, draft.financingRate, draft.firstPriceInstallmentCents, draft.gpmReportedSubsidyCents, draft.gpmReportedFees, draft.gpmReportedQuotaPercent, draft.gpmReportedIncomeCommitmentPercent, familyIncome]);
-  const message = messageContext ? generateWhatsAppMessage(messageContext) : "Selecione uma unidade para montar a mensagem.";
-  const internalSummary = messageContext ? buildInternalSummary(messageContext) : "Selecione uma unidade para conferir os dados.";
+    mode: whatsappMode,
+    brokerProfile: workspace.brokerProfile,
+  }) : null, [
+    client, property, priceCents, deliveryDate?.year, deliveryDate?.month, deliveryText, monthlyCount,
+    calculation, deliveryIsPremise, priceIsPremise, actDate.year, actDate.month,
+    draft.financingTermMonths, draft.financingLine, draft.financingSystem, draft.financingRate,
+    draft.firstPriceInstallmentCents, draft.gpmReportedSubsidyCents, draft.gpmReportedFees,
+    draft.gpmReportedQuotaPercent, draft.gpmReportedIncomeCommitmentPercent, familyIncome,
+    whatsappMode, workspace.brokerProfile,
+  ]);
+  const generatedMessage = useMemo(
+    () => (messageContext ? generateWhatsAppMessage(messageContext) : "Selecione uma unidade para montar a mensagem."),
+    [messageContext],
+  );
+  const message = customWhatsappText ?? generatedMessage;
+  const internalSummary = useMemo(
+    () => (messageContext ? buildInternalSummary(messageContext) : "Selecione uma unidade para conferir os dados."),
+    [messageContext],
+  );
 
   const update = (patch: Partial<SimulationRecord>) => {
     const next = { ...draft, ...patch, updatedAt: new Date().toISOString() };
@@ -257,6 +295,7 @@ export default function SimulatorPage({ workspace, setWorkspace, activeSimulatio
     setNotice("");
   };
   const changeClient = (clientId: string) => {
+    onClientSelected?.(clientId);
     const selectedClient = workspace.clients.find((item) => item.id === clientId);
     update({
       clientId,
@@ -426,8 +465,7 @@ export default function SimulatorPage({ workspace, setWorkspace, activeSimulatio
   };
   const addAnnual = (kind: "caixa" | "directa") => {
     const rows = kind === "caixa" ? dueDates : directDates;
-    let nextYear = Math.max(2027, actDate.year, ...rows.map((row) => row.year + 1));
-    if (nextYear === actDate.year && actDate.month >= 12) nextYear += 1;
+    const nextYear = Math.max(actDate.year + 1, ...rows.map((row) => row.year + 1));
     const due = { year: nextYear, month: 12, id: annualId({ year: nextYear, month: 12 }), amountCents: null };
     setAnnualDates(kind, [...rows, due]);
   };
@@ -454,7 +492,8 @@ export default function SimulatorPage({ workspace, setWorkspace, activeSimulatio
       const { year, month } = draft.deliveryOverride;
       setWorkspace((current) => ({ ...current, portfolio: current.portfolio.map((unit) => unit.id === property.id ? recordSimulationDelivery(unit, { year, month }) : unit) }));
     }
-    onSave(record); setNotice("Simulação salva neste dispositivo.");
+    onSave(record);
+    onNotify?.({ kind: "success", text: "Simulação salva neste dispositivo." });
   };
   const addScenario = () => {
     const nextProperty = workspace.portfolio.find((unit) => unit.id === nextPropertyId) ?? workspace.portfolio[0];
@@ -472,17 +511,34 @@ export default function SimulatorPage({ workspace, setWorkspace, activeSimulatio
   const createQuickClient = () => {
     if (!newClientName.trim()) return;
     const next: ClientProfile = {
-      id: createId("client"), name: newClientName.trim(), phone: "", incomeIndividualCents: null,
+      id: createId("client"), name: newClientName.trim(), phone: newClientPhone.trim(), incomeIndividualCents: null,
       incomeFamilyCents: newClientIncome, incomeComposition: "", oldestBuyerAge: null,
       availableActCents: null, monthlyCapacityCents: null, annualCapacityCents: null, desiredTermMonths: null,
       fgtsBalanceCents: null, fgtsTimeYears: null, notes: "", updatedAt: new Date().toISOString(),
     };
-    onCreateClient(next); update({ clientId: next.id }); setNewClientOpen(false); setNewClientName(""); setNewClientIncome(null);
+    onCreateClient(next);
+    update({ clientId: next.id });
+    setNewClientOpen(false);
+    setNewClientName("");
+    setNewClientPhone("");
+    setNewClientIncome(null);
+    onNotify?.({ kind: "success", text: `Perfil rápido de ${next.name} criado.` });
   };
   const copyMessage = async () => {
-    try { await navigator.clipboard.writeText(message); setToast("Mensagem copiada para a área de transferência."); }
-    catch { setToast("Não foi possível copiar automaticamente. Selecione e copie o texto abaixo."); }
-    window.setTimeout(() => setToast(""), 3500);
+    try {
+      await navigator.clipboard.writeText(message);
+      onNotify?.({ kind: "success", text: "Mensagem copiada para a área de transferência." });
+    } catch {
+      onNotify?.({ kind: "error", text: "Não foi possível copiar automaticamente. Selecione e copie o texto." });
+    }
+  };
+  const copyInternalSummary = async () => {
+    try {
+      await navigator.clipboard.writeText(internalSummary);
+      onNotify?.({ kind: "success", text: "Conferência interna copiada." });
+    } catch {
+      onNotify?.({ kind: "error", text: "Não foi possível copiar a conferência interna." });
+    }
   };
   const openWhatsApp = () => {
     const phone = client?.phone.replace(/\D/g, "") ?? "";
@@ -490,13 +546,17 @@ export default function SimulatorPage({ workspace, setWorkspace, activeSimulatio
     const url = normalized ? `https://wa.me/${normalized}?text=${encodeURIComponent(message)}` : `https://wa.me/?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank", "noopener,noreferrer");
   };
-  const modeCanCopy = calculation.robust?.isBalanced ?? false;
+  const modeCanCopy = whatsappMode === "direta"
+    ? Boolean(calculation.directVisible && calculation.directRobust?.isBalanced)
+    : (calculation.robust?.isBalanced ?? false);
   const estimatedPriceRange = !property?.priceCents && property?.priceLowCents !== undefined;
-  const comparisonRecords = [
-    ...(draft.comparisonGroupId ? workspace.simulations.filter((item) => item.comparisonGroupId === draft.comparisonGroupId && item.id !== draft.id) : []),
-    draft,
-  ];
-  const comparisonEntries = comparisonRecords.map((item) => calculateComparisonEntry(item, workspace));
+  const comparisonEntries = useMemo(() => {
+    const comparisonRecords = [
+      ...(draft.comparisonGroupId ? workspace.simulations.filter((item) => item.comparisonGroupId === draft.comparisonGroupId && item.id !== draft.id) : []),
+      draft,
+    ];
+    return comparisonRecords.map((item) => calculateComparisonEntry(item, workspace));
+  }, [draft, workspace]);
   const minimumAmong = (pick: (entry: ComparisonEntry) => number | null | undefined): number | null => {
     const values = comparisonEntries.map(pick).filter((value): value is number => value !== null && value !== undefined && Number.isFinite(value));
     return values.length ? Math.min(...values) : null;
@@ -514,7 +574,19 @@ export default function SimulatorPage({ workspace, setWorkspace, activeSimulatio
 
   return (
     <div className="page-stack simulator-page">
-      <div className="page-heading simulator-heading"><div><div className="eyebrow">MOTOR DE FLUXO <span className="eyebrow-dot" /> SIMULAÇÃO EDITÁVEL</div><h1>Uma proposta. Cada parcela conferida.</h1><p>Dados bancários vêm da simulação GPM/PRICE que você informar. Nenhum valor é estimado sem sinalização.</p></div><button className="button button-primary" onClick={save}><Save size={16} /> Salvar simulação</button></div>
+      <div className="page-heading simulator-heading">
+        <div>
+          <div className="eyebrow">MOTOR DE FLUXO <span className="eyebrow-dot" /> SIMULAÇÃO EDITÁVEL {isDirty && <span className="dirty-pill">ALTERAÇÕES NÃO SALVAS</span>}</div>
+          <h1>Uma proposta. Cada parcela conferida.</h1>
+          <p>Dados bancários vêm da simulação GPM/PRICE que você informar. Nenhum valor é estimado sem sinalização.</p>
+        </div>
+        <div className="simulator-header-actions no-print">
+          <button type="button" className="button button-quiet button-small" onClick={() => window.print()} title="Imprimir ou salvar proposta em PDF"><Printer size={15} /> Imprimir / PDF</button>
+          {onDuplicate && <button type="button" className="button button-quiet button-small" onClick={() => onDuplicate(draft)} title="Duplicar como novo cenário"><Copy size={15} /> Duplicar</button>}
+          {savedRecord && onDelete && <button type="button" className="icon-button danger-quiet" aria-label="Excluir simulação" title="Excluir simulação" onClick={() => { if (window.confirm("Excluir esta simulação salva?")) onDelete(draft.id); }}><Trash2 size={15} /></button>}
+          <button className="button button-primary" onClick={save}><Save size={16} /> {isDirty ? "Salvar simulação" : "Salva"}</button>
+        </div>
+      </div>
       {draft.origin === "lead_recommendation" && <div className="reference-alert"><Info size={17} /><div><strong>Rascunho recomendado pelas preferências do lead.</strong><p>{draft.recommendation?.reasons.join(" ")} A indicação não inclui GPM/PRICE, avaliação de crédito ou disponibilidade. Revise a tabela e preencha os dados financeiros antes de apresentar.</p></div></div>}
       {notice && <div className="reference-alert"><Info size={17} /><div><strong>Atenção à entrega / simulação</strong><p>{notice}</p></div><button className="icon-button" aria-label="Fechar aviso" onClick={() => setNotice("")}><X size={15} /></button></div>}
       <div className="simulator-topline"><div className="topline-price"><small>PREÇO DA UNIDADE</small><strong>{priceCents > 0 ? formatBRL(priceCents) : "A informar"}</strong><span>{property.project} · {property.typology}</span></div><div className="topline-stats"><StatBlock label="REGIÃO" value={property.neighborhood || property.region} sub={property.region} /><StatBlock label="ENTREGA INDICADA" value={deliveryDate ? monthLabelCapitalized(deliveryDate) : property.deliveryText} sub={deliveryDate ? `${monthlyCount ?? "—"} mensais possíveis antes das chaves` : "Mês/ano a confirmar"} /><StatBlock label="FONTE" value={property.source.startsWith("Prompt") ? "Referência nov/26" : property.source} sub="Confirme tabela e unidade" /></div></div>
@@ -608,7 +680,8 @@ export default function SimulatorPage({ workspace, setWorkspace, activeSimulatio
               <MoneyField label="Ato robusto" value={draft.robustActCents ?? robustAct} onChange={(value) => update({ robustActCents: value })} hint={draft.robustActCents === null ? "Sugestão automática de planejamento, limitada ao ato disponível se informado." : "Valor ajustado manualmente."} />
               <label className="form-field"><span>Fator da anual</span><select value={draft.annualFactor} onChange={(e) => update({ annualFactor: Number(e.target.value) })}><option value={3}>3× a mensal (padrão)</option><option value={4}>4× a mensal</option></select><small>Entre 3× e 4×; confirme capacidade e vencimento.</small></label>
               <label className="form-field"><span>Quantidade de mensais Caixa</span><div className="unit-control"><input type="number" min="0" max={maxMonths ?? undefined} value={shortFlow ? draft.monthlyCountOverride ?? "" : draft.monthlyCountOverride ?? maxMonths ?? ""} onChange={(e) => update({ monthlyCountOverride: e.target.value === "" ? null : Number(e.target.value) })} placeholder={shortFlow ? "Informar condição real" : "Informe entrega"} /><span>parcelas</span></div><small>{shortFlow ? "Sem sugestão automática: transcreva o fluxo recebido da mesa." : maxMonths !== null ? `Pelo calendário: até ${maxMonths}; última antes das chaves.` : "Informe mês e ano para calcular."}</small></label>
-              <label className="form-field"><span>Ano/meses das anuais Caixa</span><div className="field-actions-inline"><span>{dueDates.length ? dueDates.map((row) => `${String(row.month).padStart(2, "0")}/${row.year}`).join(" · ") : "Nenhuma sugerida"}</span><button className="text-button" onClick={() => addAnnual("caixa")}><Plus size={13} /> incluir anual</button></div><small>2026 não é incluído. Todas precisam vencer antes das chaves.</small></label>
+              <MoneyField label="Mensal Caixa manual (opcional)" value={draft.manualAmounts.caixaMonthlyCents ?? null} onChange={(value) => setManualMonthly("caixa", value)} hint="Deixe vazio para cálculo automático; ao preencher, substitui a mensal sugerida." />
+              <label className="form-field"><span>Ano/meses das anuais Caixa</span><div className="field-actions-inline"><span>{dueDates.length ? dueDates.map((row) => `${String(row.month).padStart(2, "0")}/${row.year}`).join(" · ") : "Nenhuma sugerida"}</span><button className="text-button" onClick={() => addAnnual("caixa")}><Plus size={13} /> incluir anual</button></div><small>O ano do ato ({actDate.year}) não entra. Todas precisam vencer antes das chaves.</small></label>
               {shortFlow && <label className="check-field span-2"><input type="checkbox" checked={draft.actualShortFlowConfirmed} onChange={(e) => update({ actualShortFlowConfirmed: e.target.checked, annualDatesOverride: e.target.checked ? [] : null, directAnnualDatesOverride: e.target.checked ? [] : null, monthlyCountOverride: e.target.checked ? draft.monthlyCountOverride : null, directMonthlyCountOverride: e.target.checked ? draft.directMonthlyCountOverride : null, manualAmounts: e.target.checked ? draft.manualAmounts : { ...draft.manualAmounts, caixaMonthlyCents: undefined, caixaAnnualCents: undefined, directMonthlyCents: undefined, directAnnualCents: undefined } })} /><span>Tenho uma condição curta/pronta informada pela mesa e vou preenchê-la manualmente.<small>Marque somente após receber a condição real; quantidade e valores deixam de ser presumidos.</small></span></label>}
               {deliveryDate && dueDates.map((row) => <div className="annual-editor span-2" key={row.id}><DateField label={`Vencimento da anual ${row.year}`} value={row} onChange={(date) => updateAnnualDate("caixa", row.id, date)} hint="Data precisa ser posterior ao ato e anterior às chaves." /><MoneyField label={`Valor da anual ${row.year} (opcional)`} value={draft.manualAmounts.caixaAnnualCents?.[row.id] ?? calculation.robust?.annualPayments.find((annual) => annual.id === row.id)?.amountCents ?? null} onChange={(value) => setManualAnnual("caixa", row.id, value)} hint="Ao editar, o valor passa a manual." /><button className="icon-button danger-quiet annual-remove" aria-label="Remover anual" onClick={() => setAnnualDates("caixa", dueDates.filter((item) => item.id !== row.id))}><Trash2 size={15} /></button></div>)}
               <div className="field-note span-2"><ShieldCheck size={14} /><span>Ato mínimo comparativo: <strong>{formatBRL(calculation.minimumActCents)}</strong> (2,5% do preço). Intermediárias automáticas usam o fator selecionado. Diferenças manuais permanecem visíveis.</span></div>
@@ -643,10 +716,49 @@ export default function SimulatorPage({ workspace, setWorkspace, activeSimulatio
             <FlowPanel title="Ato mínimo · comparativo 2,5%" scenario={calculation.minimum} target={calculation.equityTargetCents} kind="caixa" actDate={actDate} />
             {calculation.equityTargetCents !== null && calculation.financingUsedCents !== null && <div className={`audit-footer ${calculation.equityTargetCents + calculation.financingUsedCents === priceCents ? "balanced" : "not-balanced"}`}><span>Recursos próprios + financiamento</span><strong>{formatBRL(calculation.equityTargetCents)} + {formatBRL(calculation.financingUsedCents)} = {formatBRL(calculation.equityTargetCents + calculation.financingUsedCents)}</strong><small>Preço total: {formatBRL(priceCents)} · Diferença: {formatBRL(calculation.equityTargetCents + calculation.financingUsedCents - priceCents)}</small></div>}
             {draft.includeDirect && <><div className="section-heading flow-heading"><div><span className="eyebrow">MODALIDADE B</span><h2>Tabela Direta Cury</h2></div></div><FlowPanel title="Pré-chaves · ato robusto" scenario={calculation.directRobust} target={calculation.directPreCents} kind="direta" actDate={actDate} /><FlowPanel title="Pré-chaves · ato mínimo" scenario={calculation.directMinimum} target={calculation.directPreCents} kind="direta" actDate={actDate} /><div className="direct-total-audit"><div><span>Pré-chaves ({formatNumber(calculation.directPrePercent, 1)}%)</span><strong>{formatBRL(calculation.directPreCents)}</strong></div><div><span>Pós-chaves ({formatNumber(calculation.directPostPercent, 1)}%)</span><strong>{formatBRL(calculation.directPostCents)}</strong></div><div className="sum-line"><span>Soma sobre o preço total</span><strong>{formatBRL(calculation.directPreCents + calculation.directPostCents)} · Δ {formatBRL(calculation.directPreCents + calculation.directPostCents - priceCents)}</strong></div></div></>}
-            <div className="segmented-tabs"><button className={view === "interno" ? "active" : ""} onClick={() => setView("interno")}><FileText size={14} /> Interno</button><button className={view === "whatsapp" ? "active" : ""} onClick={() => setView("whatsapp")}><MessageCircleIcon /> WhatsApp</button></div>
-            {view === "interno" ? <div className="summary-document"><pre>{internalSummary}</pre><button className="button button-quiet button-full" onClick={async () => { await navigator.clipboard.writeText(internalSummary); setToast("Conferência interna copiada."); window.setTimeout(() => setToast(""), 3000); }}><Copy size={14} /> Copiar conferência interna</button></div> : <div className="whatsapp-preview"><div className="whatsapp-head"><span className="whatsapp-dot" /><strong>Prévia · texto para o cliente</strong></div><textarea value={message} readOnly rows={19} /><div className="whatsapp-actions"><button className="button button-light-green" disabled={!modeCanCopy} onClick={() => void copyMessage()}><Copy size={15} /> Copiar texto</button><button className="button button-primary" disabled={!modeCanCopy} onClick={openWhatsApp}><Send size={15} /> Abrir WhatsApp</button></div>{!modeCanCopy && <p className="send-blocked"><AlertCircle size={13} /> Conclua a conferência antes de copiar ou abrir a mensagem.</p>}<p className="small-note">O site não envia mensagens automaticamente. A abertura do WhatsApp é iniciada por você.</p></div>}
-            {toast && <div className="inline-status"><Check size={14} />{toast}</div>}
-            {notice && <div className="inline-status"><Check size={14} />{notice}</div>}
+            <div className="segmented-tabs no-print"><button className={view === "interno" ? "active" : ""} onClick={() => setView("interno")}><FileText size={14} /> Interno</button><button className={view === "whatsapp" ? "active" : ""} onClick={() => setView("whatsapp")}><MessageCircleIcon /> WhatsApp</button></div>
+            {view === "interno" ? (
+              <div className="summary-document">
+                <pre>{internalSummary}</pre>
+                <button className="button button-quiet button-full no-print" onClick={() => void copyInternalSummary()}><Copy size={14} /> Copiar conferência interna</button>
+              </div>
+            ) : (
+              <div className="whatsapp-preview">
+                <div className="whatsapp-head">
+                  <span className="whatsapp-dot" />
+                  <strong>Prévia · texto para o cliente</strong>
+                  {customWhatsappText !== null && (
+                    <button type="button" className="text-button" onClick={() => setCustomWhatsappText(null)}>
+                      <RotateCcw size={12} /> Restaurar padrão
+                    </button>
+                  )}
+                </div>
+                <div className="whatsapp-mode-pills no-print" role="group" aria-label="Modalidade na mensagem">
+                  {(["ambas", "caixa", "direta"] as const).map((m) => (
+                    <button
+                      key={m}
+                      type="button"
+                      className={`mode-pill ${whatsappMode === m ? "active" : ""}`}
+                      onClick={() => { setWhatsappMode(m); setCustomWhatsappText(null); }}
+                    >
+                      {m === "ambas" ? "Ambas" : m === "caixa" ? "Só Caixa" : "Só Direta"}
+                    </button>
+                  ))}
+                </div>
+                <textarea
+                  value={message}
+                  onChange={(event) => setCustomWhatsappText(event.target.value)}
+                  rows={18}
+                  aria-label="Mensagem editável para WhatsApp"
+                />
+                <div className="whatsapp-actions no-print">
+                  <button className="button button-light-green" disabled={!modeCanCopy} onClick={() => void copyMessage()}><Copy size={15} /> Copiar texto</button>
+                  <button className="button button-primary" disabled={!modeCanCopy} onClick={openWhatsApp}><Send size={15} /> Abrir WhatsApp</button>
+                </div>
+                {!modeCanCopy && <p className="send-blocked"><AlertCircle size={13} /> Conclua a conferência antes de copiar ou abrir a mensagem.</p>}
+                <p className="small-note">Texto editável antes do envio. O site não envia mensagens automaticamente.</p>
+              </div>
+            )}
             <div className="fgts-note"><Info size={14} /><span>FGTS não compõe a entrada. Eventual uso para amortização bancária depende dos requisitos e da análise vigentes.</span></div>
           </div>
         </aside>
@@ -689,7 +801,7 @@ export default function SimulatorPage({ workspace, setWorkspace, activeSimulatio
         </div>
         <div className="comparison-premises"><Info size={15} /><span>Ato robusto e mínimo, recursos próprios, mensais, anuais, prestação PRICE e saldo pós-chaves são rubricas diferentes. A comparação exibe valores e pendências; confira o prazo total, condições documentadas e disponibilidade antes de decidir.</span></div>
       </section>
-      {newClientOpen && <div className="modal-scrim" role="presentation" onClick={() => setNewClientOpen(false)}><div className="modal-card" role="dialog" aria-modal="true" aria-labelledby="quick-client-title" onClick={(e) => e.stopPropagation()}><div className="section-heading"><div><span className="eyebrow">CADASTRO RÁPIDO</span><h2 id="quick-client-title">Quem vai comprar?</h2></div><button className="icon-button" onClick={() => setNewClientOpen(false)} aria-label="Fechar"><X size={17} /></button></div><label className="form-field"><span>Nome</span><input autoFocus value={newClientName} onChange={(e) => setNewClientName(e.target.value)} placeholder="Nome do cliente" /></label><MoneyField label="Renda familiar mensal" value={newClientIncome} onChange={setNewClientIncome} /><div className="form-footer"><button className="button button-quiet" onClick={() => setNewClientOpen(false)}>Cancelar</button><button className="button button-primary" disabled={!newClientName.trim()} onClick={createQuickClient}><Plus size={15} /> Criar perfil</button></div><p className="small-note">Você poderá completar o restante do perfil na seção Clientes.</p></div></div>}
+      {newClientOpen && <div className="modal-scrim" role="presentation" onClick={() => setNewClientOpen(false)}><div className="modal-card" role="dialog" aria-modal="true" aria-labelledby="quick-client-title" onClick={(e) => e.stopPropagation()}><div className="section-heading"><div><span className="eyebrow">CADASTRO RÁPIDO</span><h2 id="quick-client-title">Quem vai comprar?</h2></div><button className="icon-button" onClick={() => setNewClientOpen(false)} aria-label="Fechar"><X size={17} /></button></div><label className="form-field"><span>Nome *</span><input autoFocus value={newClientName} onChange={(e) => setNewClientName(e.target.value)} placeholder="Nome do cliente" /></label><label className="form-field"><span>WhatsApp / telefone</span><input type="tel" value={newClientPhone} onChange={(e) => setNewClientPhone(e.target.value)} placeholder="(21) 99999-0000" /></label><MoneyField label="Renda familiar mensal" value={newClientIncome} onChange={setNewClientIncome} /><div className="form-footer"><button className="button button-quiet" onClick={() => setNewClientOpen(false)}>Cancelar</button><button className="button button-primary" disabled={!newClientName.trim()} onClick={createQuickClient}><Plus size={15} /> Criar perfil</button></div><p className="small-note">Você poderá completar o restante do perfil na seção Clientes.</p></div></div>}
     </div>
   );
 }

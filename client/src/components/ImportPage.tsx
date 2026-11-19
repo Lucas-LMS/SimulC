@@ -8,9 +8,10 @@ import { deleteOriginalFile, getOriginalFile, saveOriginalFile } from "../lib/fi
 import { compareTableDates, findCatalogVersionMatches, normalizeCatalogTypology } from "../lib/catalogVersion";
 import { formatBRL } from "../lib/money";
 import { createId } from "../lib/storage";
+import { CATALOG_REGIONS } from "../lib/catalogFilters";
 import CurrencyInput from "./CurrencyInput";
 
-const REGIONS: PortfolioUnit["region"][] = ["Zona Norte", "Niterói", "Porto/Centro", "Sudoeste/Oeste"];
+const REGIONS: PortfolioUnit["region"][] = [...CATALOG_REGIONS];
 
 interface Props {
   workspace: WorkspaceData;
@@ -155,7 +156,7 @@ export default function ImportPage({ workspace, setWorkspace }: Props) {
         </section>
         <section className="panel document-review">
           {selected ? <>
-            <div className="section-heading"><div><span className="eyebrow">REVISÃO DO RASCUNHO</span><h2>{selected.name}</h2></div><button className="icon-button danger-quiet" title="Remover documento" onClick={() => void removeDocument(selected)}><Trash2 size={16} /></button></div>
+            <div className="section-heading"><div><span className="eyebrow">REVISÃO DO RASCUNHO</span><h2>{selected.name}</h2></div><button className="icon-button danger-quiet" title="Remover documento" aria-label={`Remover documento ${selected.name}`} onClick={() => void removeDocument(selected)}><Trash2 size={16} /></button></div>
             <div className="document-meta"><span>Importado {dateLabel(selected.importedAt)}</span><span>{bytesLabel(selected.sizeBytes)}</span><span>Origem: {selected.source}</span><button className="text-button" onClick={() => void openOriginal(selected)}><ArrowDownToLine size={13} /> Abrir original</button></div>
               <div className="form-grid document-meta-fields"><label className="form-field"><span>Data da tabela / campanha</span><input type="date" value={selected.tableDate} onChange={(event) => patchDocument(selected.id, { tableDate: event.target.value, source: selected.name })} /><small>Não é a data de importação; confirme no documento antes de cadastrar.</small></label><label className="form-field"><span>Nota interna</span><input value={selected.note} onChange={(event) => patchDocument(selected.id, { note: event.target.value })} /></label></div>
             {selected.pagesTotal !== undefined && <div className="field-note"><Info size={14} /><span>{selected.pagesProcessed ?? 0} de {selected.pagesTotal} páginas processadas. {selected.pagesTotal > (selected.pagesProcessed ?? 0) ? "As páginas restantes não foram processadas para controlar o tempo de OCR." : ""}</span></div>}

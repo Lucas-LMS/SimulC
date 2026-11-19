@@ -16,13 +16,26 @@ export interface LeadDraft {
 
 const normalize = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("pt-BR");
 
+const normalizeWithOffsets = (value: string) => {
+  let normalized = "";
+  const sourceOffsets: number[] = [];
+  for (let index = 0; index < value.length; index += 1) {
+    const ch = value[index].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("pt-BR");
+    normalized += ch;
+    for (let offset = 0; offset < ch.length; offset += 1) sourceOffsets.push(index);
+  }
+  return { normalized, sourceOffsets };
+};
+
 const answerFor = (text: string, label: RegExp): string => {
   const lines = text.split(/\r?\n/);
   for (let index = 0; index < lines.length; index += 1) {
-    const normalized = normalize(lines[index]);
+    const { normalized, sourceOffsets } = normalizeWithOffsets(lines[index]);
     const match = label.exec(normalized);
     if (!match) continue;
-    const inline = lines[index].slice(match.index + match[0].length).replace(/^\s*[:?\-–—]*\s*/, "").replace(/^(?:\([^)]*\)\s*)+/, "").trim();
+    const normalizedEnd = match.index + match[0].length;
+    const rawEnd = normalizedEnd < sourceOffsets.length ? sourceOffsets[normalizedEnd] : lines[index].length;
+    const inline = lines[index].slice(rawEnd).replace(/^\s*[:?\-–—]*\s*/, "").replace(/^(?:\([^)]*\)\s*)+/, "").trim();
     if (inline) return inline;
     for (let next = index + 1; next < lines.length; next += 1) {
       const candidate = lines[next].trim();
@@ -123,7 +136,7 @@ const desiredRegionClasses = (areaText: string): Set<CatalogRegion> => {
   // macro-area. Exact Recreio matches are also kept even when a catalog row
   // is classified as Zona Oeste by its neighborhood.
   if (/zona sudoeste|\bbarra\b|\brecreio\b/.test(normalized)) regions.add("Zona Sudoeste");
-  if (/zona oeste/.test(normalized)) regions.add("Zona Oeste");
+  if (/zona oeste|\brecreio\b/.test(normalized)) regions.add("Zona Oeste");
   if (/porto|centro/.test(normalized)) regions.add("Porto Maravilha/Centro");
   if (/niteroi/.test(normalized)) regions.add("Niterói");
   return regions;
@@ -139,7 +152,7 @@ export const recommendUnitsForLead = (lead: Pick<LeadDraft, "preferences"> | Pic
   const hasTypologyPreference = preferences.bedrooms !== null || preferences.parking !== null;
   const candidates: Array<{ unit: PortfolioUnit; tier: LeadRecommendation["tier"]; areaHits: string[] }> = [];
 
-  for (const unit of portfolio.filter((item) => item.active !== false)) {
+  for (const unit of portfolio.filter((item) => item.active !== false && !/\bvaga\s+avulsa\b/i.test(item.typology))) {
     const unitSearch = normalizeForSearch(`${unit.neighborhood} ${unit.project} ${unit.region}`);
     const areaHits = areaParts.filter((part) => unitSearch.includes(part));
     const regionMatch = preferredRegions.has(classifyRegion(unit));
@@ -155,9 +168,8 @@ export const recommendUnitsForLead = (lead: Pick<LeadDraft, "preferences"> | Pic
     else if (!hasAreaPreference && hasTypologyPreference && typologyMatch) tier = "preferred-typology";
     else if (!hasAreaPreference && !hasTypologyPreference) {
       const deliveryYear = unitDeliveryYear(unit);
-      const parkingHit = preferences.parking !== null && unit.parking === preferences.parking;
       const deliveryHit = preferences.deliveryYear !== null && deliveryYear === preferences.deliveryYear;
-      if (parkingHit || deliveryHit) tier = "other-relevant";
+      if (deliveryHit) tier = "other-relevant";
     }
     if (!tier) continue;
     candidates.push({ unit, tier, areaHits });
