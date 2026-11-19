@@ -61,7 +61,7 @@ export default function RecommendationsPage({ workspace, onLoadSimulation }: Pro
           <div className="recommendation-option-top"><span className="recommendation-rank">{String(index + 1).padStart(2, "0")}</span><span className="recommendation-score">{formatNumber(score, 0)}% compatibilidade</span><span className={`recommendation-fit ${item.financeScore >= 70 ? "good" : item.financeScore < 40 ? "review" : "neutral"}`}>{item.financeScore >= 70 ? "Financeiro favorável" : item.financeScore < 40 ? "Revisar capacidade" : "Financeiro a confirmar"}</span></div>
           <div className="recommendation-score-track" aria-label={`${score}% de compatibilidade`}><span style={{ width: `${score}%` }} /></div>
           <div className="recommendation-property-heading"><span className="recommendation-property-icon"><Building2 size={17} /></span><div><span className="eyebrow">OPÇÃO NO CATÁLOGO</span><h3>{unit.project}</h3></div></div>
-          <p className="recommendation-typology">{unit.typology}{unit.bedrooms ? ` · ${unit.bedrooms} quartos` : ""}{unit.parking ? " · vaga" : ""}</p>
+          <p className="recommendation-typology">{unit.typology}{unit.bedrooms ? ` · ${unit.bedrooms} quartos` : ""}{unit.parking === true ? " · com vaga" : ""}</p>
           <div className="recommendation-facts"><span><MapPin size={14} />{unit.neighborhood || unit.region || "Região a confirmar"}</span><span><CalendarDays size={14} />Entrega {delivery}</span></div>
           <div className="recommendation-price"><div><small>PREÇO REFERENCIAL</small><strong>{formatBRL(price)}</strong></div><span>{unit.source ?? "Fonte pendente"}<br />{unit.sourceDate ?? "data não informada"}</span></div>
           <div className="recommendation-finance"><strong>{financeLabel}</strong>{projection.canProjectAmounts && <small>{projection.message}</small>}</div>
@@ -73,4 +73,3 @@ export default function RecommendationsPage({ workspace, onLoadSimulation }: Pro
     <div className="recommendation-disclaimer"><Sparkles size={15} /><span>A classificação cruza preferências com PRICE/GPM e capacidade registrados. Projeção de PRICE/financiamento é proporcional ao preço-base quando disponível; limite de renda de 30% é apenas referência quando não há capacidade mensal declarada. Não é análise bancária, confirmação de disponibilidade nem aprovação.</span></div>
   </div>;
 }
-import { useState } from "react";
