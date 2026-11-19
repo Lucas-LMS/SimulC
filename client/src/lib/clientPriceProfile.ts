@@ -55,7 +55,8 @@ export const projectClientPriceProfile = (
   }
 
   const priceFactor = targetPriceCents / profile.priceReferenceCents;
-  const reportedFinancingCents = profile.gpmReportedFinancingAmountCents ?? profile.financingAmountCents;
+  const rawFinancing = profile.gpmReportedFinancingAmountCents ?? profile.financingAmountCents;
+  const reportedFinancingCents = rawFinancing !== null && Number.isFinite(rawFinancing) && rawFinancing >= 0 ? rawFinancing : null;
   const financingBeforeCapCents = reportedFinancingCents === null
     ? null
     : Math.round(reportedFinancingCents * priceFactor);
@@ -67,13 +68,14 @@ export const projectClientPriceProfile = (
 
   // A primeira parcela é uma estimativa proporcional ao preço, não um recálculo bancário.
   // Não a reduza apenas porque o teto mudou o principal: isso fabricaria uma nova prestação.
-  const reportedInstallmentCents = profile.gpmReportedFirstPriceInstallmentCents ?? profile.firstPriceInstallmentCents;
+  const rawInstallment = profile.gpmReportedFirstPriceInstallmentCents ?? profile.firstPriceInstallmentCents;
+  const reportedInstallmentCents = rawInstallment !== null && Number.isFinite(rawInstallment) && rawInstallment >= 0 ? rawInstallment : null;
   const firstPriceInstallmentCents = reportedInstallmentCents === null
     ? null
     : Math.round(reportedInstallmentCents * priceFactor);
 
   const message = financingCapped
-    ? `Estimativa proporcional ao preço-base ${formatReferencePrice(profile.priceReferenceCents)}; financiamento ajustado automaticamente ao teto indicativo de 80% (${formatReferencePrice(financingCapCents)}). Não é uma nova simulação nem aprovação; revise com novo GPM/PRICE.`
+    ? `Estimativa proporcional ao preço-base ${formatReferencePrice(profile.priceReferenceCents)}; financiamento limitado ao teto indicativo de 80% (${formatReferencePrice(financingCapCents)}). A 1ª parcela estimada segue proporcional ao preço-base sem recálculo bancário; confirme com novo GPM/PRICE.`
     : `Estimativa proporcional ao preço-base ${formatReferencePrice(profile.priceReferenceCents)}; não é uma nova simulação nem aprovação. Confirme com novo GPM/PRICE.`;
 
   return {
@@ -87,8 +89,13 @@ export const projectClientPriceProfile = (
   };
 };
 
+const referencePriceFormatter = new Intl.NumberFormat("pt-BR", {
+  style: "currency",
+  currency: "BRL",
+});
+
 const formatReferencePrice = (cents: number): string =>
-  new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(cents / 100);
+  referencePriceFormatter.format(cents / 100);
 
 /** Maps the saved profile into editable simulation fields without altering the profile values. */
 export const clientPriceProfileToSimulation = (

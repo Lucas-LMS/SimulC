@@ -31,10 +31,27 @@ const valueFor = (text: string, pattern: RegExp): string => {
   return "";
 };
 
-// Accepts Portuguese monetary forms but stops before ordinal labels / month units.
+// Accepts Portuguese monetary forms, prioritizing explicit R$ amounts over leading years/codes.
 const numberFrom = (value: string): number | null => {
-  const match = value.match(/(?:R\$\s*)?-?\s*(?:\d{1,3}(?:\.\d{3})+|\d{1,3}(?: \d{3})+|\d+)(?:,\d{1,2})?/i);
+  const currencyMatch = value.match(/R\$\s*-?\s*(?:\d{1,3}(?:\.\d{3})+|\d{1,3}(?: \d{3})+|\d+)(?:,\d{1,2})?/i);
+  if (currencyMatch) return parseMoneyInput(currencyMatch[0]);
+  const match = value.match(/-?\s*(?:\d{1,3}(?:\.\d{3})+|\d{1,3}(?: \d{3})+|\d+)(?:,\d{1,2})?/i);
   return match ? parseMoneyInput(match[0]) : null;
+};
+
+const parseTermMonths = (termText: string): number | null => {
+  const normalized = normalize(termText);
+  const explicit = normalized.match(/(\d{1,4})\s*(mes(?:es)?|anos?)\b/);
+  if (explicit) {
+    const qty = Number(explicit[1]);
+    if (!Number.isFinite(qty) || qty <= 0) return null;
+    return explicit[2].startsWith("ano") ? qty * 12 : qty;
+  }
+  const fallback = normalized.match(/\d{1,4}/);
+  if (!fallback) return null;
+  const qty = Number(fallback[0]);
+  if (!Number.isFinite(qty) || qty <= 0) return null;
+  return /\bano?s?\b/.test(normalized) && qty <= 50 ? qty * 12 : qty;
 };
 
 const textOrNull = (value: string) => value.trim() || null;
@@ -66,8 +83,7 @@ export const parseGpmText = (text: string): GpmSuggestions => {
   const fees = valueFor(text, /(?:taxas\s+e\s+encargos|encargos\s+totais|tarifas\s+e\s+encargos|tarifas)\b/gi);
   const quota = valueFor(text, /(?:cota\s+(?:de\s+)?financiamento|percentual\s+financiado|cota)\b/gi);
   const commitment = valueFor(text, /(?:comprometimento\s+(?:de\s+renda)?|renda\s+comprometida)\b/gi);
-  const termMatch = normalize(term).match(/\d{1,4}/);
-  const unit = /\bano?s?\b/.test(normalize(term)) ? 12 : 1;
+  const termMonths = parseTermMonths(term);
   const rawLineValue = textOrNull(line);
   const normalizedLine = normalize(rawLineValue ?? "");
   const lineValue = normalizedLine.includes("mcmv") ? "Minha Casa, Minha Vida" : normalizedLine.includes("sbpe") ? "SBPE" : rawLineValue;
@@ -76,7 +92,7 @@ export const parseGpmText = (text: string): GpmSuggestions => {
   return {
     propertyPriceCents: numberFrom(propertyPrice), familyIncomeCents: numberFrom(income),
     financingAmountCents: numberFrom(financing), firstInstallmentCents: numberFrom(firstInstallment),
-    termMonths: termMatch ? Number(termMatch[0]) * unit : null,
+    termMonths,
     financingLine: lineValue ?? (textAll.includes("mcmv") ? "MCMV" : textAll.includes("sbpe") ? "SBPE" : null),
     financingSystem: systemValue ?? (textAll.includes("price") ? "PRICE" : null),
     rate: textOrNull(rate), subsidyCents: numberFrom(subsidy), fees: textOrNull(fees),
