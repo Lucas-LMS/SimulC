@@ -12,20 +12,21 @@ Uma mesa de trabalho para transformar dados de clientes e referências de empree
 
 ## O que você pode fazer
 
-- Manter perfis de clientes, preferências e dados de PRICE/GPM.
-- Consultar e filtrar o catálogo de unidades e empreendimentos.
-- Montar fluxos de pagamento Caixa e Tabela Direta, revisar datas e conferir totais.
-- Comparar simulações, registrar premissas e preparar mensagens para WhatsApp.
-- Gerar recomendações que cruzam região, tipologia, entrega e dados financeiros informados.
-- Importar tabelas em PDF/imagem e colar imagens de simulações PRICE/GPM para extração local e revisão.
-- Exportar e restaurar backups JSON.
-- Opcionalmente, sincronizar o espaço de trabalho privado entre dispositivos com Google e Firebase.
+- **Perfis de clientes organizados**: manter dados pessoais, renda, capacidade, FGTS, preferências e referências de PRICE/GPM com histórico de simulações vinculadas.
+- **Catálogo de empreendimentos**: consultar, filtrar, ordenar (A–Z, preço, entrega), comparar até 5 unidades e versionar tabelas.
+- **Simulador de fluxo completo**: montar fluxos Caixa e Tabela Direta, editar ato, mensais manuais e anuais, revisar datas e conferir totais em tempo real.
+- **Comunicação flexível**: escolher modalidade no WhatsApp (`Ambas`, `Só Caixa` ou `Só Direta`), editar o texto livremente antes de enviar e assinar com seu perfil de corretor configurável (nome, CRECI e telefone).
+- **Comparador acionável e Impressão / PDF**: comparar simulações lado a lado com filtro por cliente, copiar resumo comparativo para WhatsApp e imprimir/salvar proposta limpa em PDF.
+- **Gestão de simulações**: buscar, filtrar rascunhos de lead, duplicar cenários e excluir simulações diretamente no painel.
+- **Recomendações inteligentes**: cruzar região, tipologia, entrega e dados financeiros informados.
+- **Importação local de tabelas e GPM**: extrair texto/OCR de PDFs e imagens raster no navegador com revisão obrigatória.
+- **Portabilidade e nuvem privada**: exportar/restaurar backups JSON, contar com cópias automáticas locais e sincronizar opcionalmente entre dispositivos com Google e Firebase.
 
 ## Privacidade e sincronização
 
-Sem conexão com Firebase, o espaço de trabalho permanece no armazenamento local do navegador. Ao conectar uma conta Google em uma implantação configurada, os dados são gravados no Cloud Firestore sob `users/{uid}/workspaces/main`. As regras de [Firestore](firestore.rules) permitem leitura e gravação somente quando o UID autenticado corresponde ao UID do documento. O catálogo e os arquivos de código são públicos; os dados dos clientes não são publicados no repositório.
+Sem conexão com Firebase, o espaço de trabalho permanece 100% no armazenamento local do navegador (inclusive offline). Ao conectar uma conta Google em uma implantação configurada, os dados são gravados no Cloud Firestore sob `users/{uid}/workspaces/main`. As regras de [Firestore](firestore.rules) restringem leitura e gravação somente ao documento `main` do UID autenticado e validam a estrutura permitida. O catálogo e os arquivos de código são públicos; os dados dos clientes não são publicados no repositório.
 
-A configuração do Firebase está no cliente Web (`client/src/lib/firebase.ts`); os valores usados ali são próprios para apps Web e não são chaves de servidor. As regras do Firestore, e não a ocultação desses valores, protegem os dados. Restrinja a chave de API ao domínio do app no Google Cloud e mantenha as regras publicadas. O Firestore tem limites por documento; esta aplicação interrompe a sincronização quando o espaço de trabalho ultrapassa 900 KB. PDFs e imagens originais não são enviados nem guardados no Firestore.
+A configuração do Firebase está no cliente Web (`client/src/lib/firebase.ts`); os valores usados ali são próprios para apps Web e não são chaves de servidor. As regras do Firestore, e não a ocultação desses valores, protegem os dados. Restrinja a chave de API ao domínio do app no Google Cloud e mantenha as regras publicadas. O Firestore tem limites por documento; esta aplicação trunca textos brutos de OCR na sincronização e interrompe o envio quando o espaço de trabalho ultrapassa 900 KB. PDFs e imagens originais não são enviados nem guardados no Firestore.
 
 ## Configurar a sincronização Firebase
 
@@ -35,9 +36,7 @@ A configuração do Firebase está no cliente Web (`client/src/lib/firebase.ts`)
 4. A configuração do app Web já está vinculada no código. Se trocar de projeto, atualize os valores em `client/src/lib/firebase.ts`; alternativamente, o workflow aceita os valores equivalentes em variáveis `VITE_FIREBASE_*` do GitHub Actions.
 5. No simulador, abra **Dados e backup** e conecte a conta Google. Na primeira conexão, confirme se deseja enviar os dados locais ou carregar/substituir os dados da nuvem.
 
-Para desenvolvimento local, copie `.env.example` para `.env.local`, preencha as mesmas quatro variáveis e execute `pnpm dev`. O arquivo `.env.local` não deve ser commitado. Uma nova conta começa usando os dados deste navegador; quando já houver dados na nuvem, o app pergunta antes de substituir o espaço local.
-
-O Firestore oferece uma cota sem custo para projetos elegíveis, sujeita aos limites e às condições atuais do Google. Veja [preços e cotas do Firestore](https://firebase.google.com/docs/firestore/pricing). Autenticação Google: [documentação oficial](https://firebase.google.com/docs/auth/web/google-signin).
+Para desenvolvimento local, copie `.env.example` para `.env.local`, preencha as mesmas quatro variáveis e execute `pnpm dev`. O arquivo `.env.local` não deve ser commitado.
 
 ## Sobre cálculos e referências
 
@@ -52,6 +51,13 @@ Requisitos: Node.js 24 ou mais recente e pnpm 11.25.0.
 ```bash
 pnpm install --frozen-lockfile
 pnpm dev
+```
+
+Verificação de tipos e testes automatizados:
+
+```bash
+pnpm typecheck
+pnpm test
 ```
 
 Para gerar a versão do GitHub Pages:
@@ -69,12 +75,13 @@ O workflow em `.github/workflows/pages.yml` constrói e publica `dist/` quando h
 
 ```text
 client/src/
-├── components/   # telas e componentes
+├── components/   # telas e componentes (carregamento sob demanda)
 ├── data/         # catálogo inicial
-├── lib/          # cálculos, armazenamento, importação e Firebase
-├── pages/        # aplicação principal
-└── cury.css       # identidade visual e temas claro/escuro
-firestore.rules   # acesso privado por conta autenticada
+├── lib/          # motor financeiro, cronograma, parsers, armazenamento e Firebase
+│   └── __tests__/# suíte de testes unitários (Vitest)
+├── pages/        # aplicação principal (shell, navegação, sincronização e configurações)
+└── cury.css      # identidade visual, temas claro/escuro e folha de impressão/PDF
+firestore.rules   # acesso privado por conta autenticada com validação de schema
 ```
 
 ## Licença
